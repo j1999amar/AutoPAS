@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "AutoPASAPI": {
+      "commandName": "Project",
+      "launchUrl": "swagger",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:59363;http://localhost:59364"
+    }
+  }
+}
