@@ -60,6 +60,9 @@ namespace AutoPASSL
         public DbSet<RT_TheftFactor> RT_TheftFactor { get; set; }
         public DbSet<metadatatables> metadatatables { get; set; }
         public DbSet<supportingdocument> supportingdocuments { get; set; }
+
+        public DbSet<Master> Masters { get; set; }
+
         public void CallCreateTableStoredProcedure(string tableName, string column)
         {
             Database.ExecuteSqlRaw("call sp_CreateTableWithParams (@p0, @p1)", tableName, column);

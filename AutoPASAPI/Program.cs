@@ -66,6 +66,9 @@ public class Program
         container.Register<IInsuredContactService, InsuredContactService>();
         builder.Services.AddScoped<IInsuredContactService, InsuredContactService>();
 
+        container.Register<IMasterService, MasterService>();
+        builder.Services.AddScoped<IMasterService, MasterService>();
+
         container.Register<IModelService, ModelService>();
         builder.Services.AddScoped<IModelService, ModelService>();
 
@@ -144,6 +147,9 @@ public class Program
         container.Register<IInsuredContactRepo, InsuredContactRepo>();
         builder.Services.AddScoped<IInsuredContactRepo, InsuredContactRepo>();
 
+        container.Register<IMasterRepo, MasterRepo>();
+        builder.Services.AddScoped<IMasterRepo, MasterRepo>();
+
         container.Register<IMetaDataRepo, MetaDataRepo>();
         builder.Services.AddScoped<IMetaDataRepo, MetaDataRepo>();
 
@@ -197,6 +203,8 @@ public class Program
 
         container.Register<IVehicleTypeRepo, VehicleTypeRepo>();
         builder.Services.AddScoped<IVehicleTypeRepo, VehicleTypeRepo>();
+
+       
 
         builder.Services.AddScoped<ICSVService, CSVService>();
 

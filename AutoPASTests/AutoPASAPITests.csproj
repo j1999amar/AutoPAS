@@ -32,6 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AutoPASAL\AutoPASAL.csproj" />
+    <ProjectReference Include="..\AutoPASAPI\AutoPASAPI.csproj" />
+    <ProjectReference Include="..\AutoPASBL\AutoPASBL.csproj" />
+    <ProjectReference Include="..\AutoPASDML\AutoPASDML.csproj" />
     <ProjectReference Include="D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\AutoPASAPI.csproj" />
   </ItemGroup>
 
