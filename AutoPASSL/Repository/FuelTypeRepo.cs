@@ -33,5 +33,19 @@ namespace AutoPASSL.Repository
             if (fueltypes == null) return null;
             return fueltypes;
         }
+
+        public async Task<fueltype> AddFuelType(fueltype fuelType)
+        {
+            await _context.fueltype.AddAsync(fuelType);
+            var fuelTypeIsAdded = await _context.SaveChangesAsync();
+            return fuelTypeIsAdded > 0 ? fuelType : null;
+        }
+
+        public bool IsExists(int id)
+        {
+            return _context.fueltype.Any(x => x.FuelTypeId == id);
+        }
+
+ 
     }
 }

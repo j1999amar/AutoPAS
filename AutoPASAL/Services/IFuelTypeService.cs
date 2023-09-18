@@ -11,5 +11,7 @@ namespace AutoPASAL.Services
     {
         Task<List<fueltype>> GetFuelTypes(int ModelId);
         Task<List<fueltype>> GetAllFuelTypes();
+        Task<fueltype> AddFuelType(fueltype fuelType);
+        public bool IsExists(int id);
     }
 }

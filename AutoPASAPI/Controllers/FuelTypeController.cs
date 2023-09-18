@@ -3,6 +3,8 @@ using AutoPASAL.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AutoPASAL;
+using AutoPASDML;
 
 namespace AutoPASAPI.Controllers
 {
@@ -44,6 +46,31 @@ namespace AutoPASAPI.Controllers
             catch (Exception ex)
             {
                 _logger.LogInformation("Error in function GetAllFuelTypes");
+                return StatusCode(500, ex);
+            }
+
+        }
+
+        //Add FuelType 
+        [HttpPost("AddFuelType")]
+        public async Task<IActionResult> AddFuelType([FromBody] fueltype fuelType)
+        {
+            try
+            {
+
+                if (!_fueltypeService.IsExists(fuelType.FuelTypeId))
+                {
+                    return Ok(await _fueltypeService.AddFuelType(fuelType));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function AddFuelType Id is already exists");
+                    return StatusCode(500, "AddFuelType Id is already exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function AddFuelType");
                 return StatusCode(500, ex);
             }
 
