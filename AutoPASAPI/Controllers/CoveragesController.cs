@@ -100,5 +100,30 @@ namespace AutoPASAPI.Controllers
             }
 
         }
+
+        //Edit Coverage 
+        [HttpPut("EditCoverage")]
+        public async Task<IActionResult> EditCoverage([FromBody] coverages coverages)
+        {
+            try
+            {
+
+                if (_coverageService.IsExists(coverages.CoverageId))
+                {
+                    return Ok(await _coverageService.EditCoverage(coverages));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function Coverage. Id is not exists");
+                    return StatusCode(500, " Coverage Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Coverage");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace AutoPASAL.Services
         Task<List<Brands>> GetBrandByVehicleType(int Id);
         Task<List<Brands>> GetAllBrand();
         Task<Brands> AddBrands(Brands brands);
+        Task<Brands> EditBrands(Brands brands);
         public bool IsExists(int id);
         public bool vehicleTypeIdIsExists(int id);
     }

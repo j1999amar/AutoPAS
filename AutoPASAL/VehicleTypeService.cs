@@ -22,6 +22,11 @@ namespace AutoPASAL
             return _vehicleTypeRepo.AddVehicleType(vehicleType);
         }
 
+        public Task<vehicleType> EditVehicleType(vehicleType vehicleType)
+        {
+            return _vehicleTypeRepo.EditVehicleType(vehicleType);
+        }
+
         public Task<List<vehicleType>> GetAllVehicleType()
         {
             var veh=_vehicleTypeRepo.GetAllVehicleType();

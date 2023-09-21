@@ -11,6 +11,7 @@ namespace AutoPASAL.Services
     {
         Task<List<vehicleType>> GetAllVehicleType();
         Task<vehicleType> AddVehicleType(vehicleType vehicleType);
+        Task<vehicleType> EditVehicleType(vehicleType vehicleType);
         public bool IsExists(int id);
     }
 }

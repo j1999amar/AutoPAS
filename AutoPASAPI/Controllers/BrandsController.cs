@@ -82,5 +82,37 @@ namespace AutoPASAPI.Controllers
             }
 
         }
+
+        //Edit Brands 
+        [HttpPut("EditBrands")]
+        public async Task<IActionResult> EditBrands([FromBody] Brands brands)
+        {
+            try
+            {
+
+                if (_brandsService.IsExists(brands.BrandId))
+                {
+                    if (_brandsService.vehicleTypeIdIsExists(brands.VehicleTypeId))
+                    {
+                        return Ok(await _brandsService.EditBrands(brands));
+                    }
+                    else
+                    {
+                        _logger.LogInformation("Error in function  Vehicle Type Id is not exists");
+                        return StatusCode(500, " Vehicle Type Id is not exists");
+                    }
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  Brands Id is not exists");
+                    return StatusCode(500, " Brands Id is not exists ");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Brands");
+                return StatusCode(500, ex);
+            }
+        }
     }
 }

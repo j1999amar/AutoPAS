@@ -54,6 +54,9 @@ namespace AutoPASAL
             return _rtoRepo.IsExists(id);         
         }
 
-     
+        public Task<rto> EditRTO(rto rto)
+        {
+            return _rtoRepo.EditRTO(rto);
+        }
     }
 }

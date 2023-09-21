@@ -59,5 +59,29 @@ namespace AutoPASAPI.Controllers
 
         }
 
+
+        //Edit BodyType 
+        [HttpPut("EditBodyType")]
+        public async Task<IActionResult> EditBodyType([FromBody] bodyType bodyType)
+        {
+            try
+            {
+                if (_bodytypeService.IsExists(bodyType.BodyTypeId))
+                {
+                    return Ok(await _bodytypeService.EditBodyType(bodyType));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function BodyType Id is not exists");
+                    return StatusCode(500, "BodyType Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function BodyType");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

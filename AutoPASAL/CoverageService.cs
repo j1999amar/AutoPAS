@@ -19,6 +19,11 @@ namespace AutoPASAL
             return _coverageRepo.AddCoverages(coverages);
         }
 
+        public Task<coverages> EditCoverage(coverages coverages)
+        {
+            return _coverageRepo.EditCoverage(coverages);
+        }
+
         public Task<List<coverages>> GetAllCoverages()
         {
             var cov = _coverageRepo.GetAllCoverages();

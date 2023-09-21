@@ -39,9 +39,13 @@ namespace AutoPASSL.Repository
             await _context.bodyType.AddAsync(bodyType);
             var bodyTypeIsAdded = await _context.SaveChangesAsync();
             return bodyTypeIsAdded > 0 ? bodyType : null;
+        }
 
-
-
+        public async Task<bodyType> EditBodyType(bodyType bodyType)
+        {
+            _context.bodyType.Entry(bodyType).State = EntityState.Modified;
+            var change = await _context.SaveChangesAsync();
+            return change > 0 ? bodyType : null;
         }
     }
 }

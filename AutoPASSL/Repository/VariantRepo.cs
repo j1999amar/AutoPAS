@@ -1,6 +1,7 @@
 ﻿using AutoPASAL.IRepository;
 using AutoPASDML;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,13 @@ namespace AutoPASSL.Repository
             await _context.variant.AddAsync(variant);
             var variantIsAdded=await _context.SaveChangesAsync();
             return variantIsAdded > 0 ? variant : null;
+        }
+
+        public async Task<variant> EditVariant(variant variant)
+        {
+            _context.variant.Entry(variant).State = EntityState.Modified;
+            var change = await _context.SaveChangesAsync();
+            return change > 0 ? variant : null;
         }
 
         public async Task<List<variant>?> GetAllVariant()

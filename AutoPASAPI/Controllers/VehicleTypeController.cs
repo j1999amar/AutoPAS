@@ -61,5 +61,30 @@ namespace AutoPASAPI.Controllers
 
         }
 
+        //Edit VehicleType 
+        [HttpPut("EditVehicleType")]
+        public async Task<IActionResult> EditVehicleType([FromBody] vehicleType vehicleType)
+        {
+            try
+            {
+
+                if (_vehicletypeservice.IsExists(vehicleType.VehicleTypeId))
+                {
+                    return Ok(await _vehicletypeservice.EditVehicleType(vehicleType));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  Vehicle Type. Id is not exists");
+                    return StatusCode(500, " Vehicle type Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Edit Vehicle Type");
+                return StatusCode(500, ex);
+            }
+
+        }
+
     }
 }

@@ -81,5 +81,38 @@ namespace AutoPASAPI.Controllers
             }
 
         }
+
+        //Edit Model 
+        [HttpPut("EditModels")]
+        public async Task<IActionResult> EditModels([FromBody] model model)
+        {
+            try
+            {
+
+                if (_modelService.IsExists(model.ModelId))
+                {
+                    if (_modelService.brandIdIsExists(model.BrandId))
+                    {
+                        return Ok(await _modelService.EditModels(model));
+                    }
+                    else
+                    {
+                        _logger.LogInformation("Error in function model Id is not exists");
+                        return StatusCode(500, " Brand Id is not exists");
+                    }
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  model Id is not exists");
+                    return StatusCode(500, " Model Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Edit Model");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

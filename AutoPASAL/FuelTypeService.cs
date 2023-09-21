@@ -37,5 +37,10 @@ namespace AutoPASAL
         {
             return  _fuelTypeRepo.IsExists(id);
         }
+
+        public Task<fueltype> EditFuelType(fueltype fuelType)
+        {
+            return _fuelTypeRepo.EditFuelType(fuelType);
+        }
     }
 }

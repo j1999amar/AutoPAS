@@ -40,5 +40,10 @@ namespace AutoPASAL
         {
             return _brandRepo.vehicleTypeIdIsExists(id);
         }
+
+        public Task<Brands> EditBrands(Brands brands)
+        {
+            return _brandRepo.EditBrands(brands);
+        }
     }
 }

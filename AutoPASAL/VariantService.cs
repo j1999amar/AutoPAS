@@ -22,6 +22,12 @@ namespace AutoPASAL
             return _variantRepo.AddVariant(variant);
         }
 
+        public Task<variant> EditVariant(variant variant)
+        {
+            return _variantRepo.EditVariant(variant);
+
+        }
+
         public Task<List<variant>?> GetAllVariant()
         {
             var vari= _variantRepo.GetAllVariant();

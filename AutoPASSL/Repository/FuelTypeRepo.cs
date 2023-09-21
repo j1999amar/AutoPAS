@@ -8,6 +8,7 @@ using AutoPASBL;
 using AutoPASBL.Interface;
 using AutoPASDML;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AutoPASSL.Repository
 {
@@ -46,6 +47,11 @@ namespace AutoPASSL.Repository
             return _context.fueltype.Any(x => x.FuelTypeId == id);
         }
 
- 
+        public async Task<fueltype> EditFuelType(fueltype fuelType)
+        {
+            _context.fueltype.Entry(fuelType).State = EntityState.Modified;
+            var change = await _context.SaveChangesAsync();
+            return change > 0 ? fuelType : null;
+        }
     }
 }

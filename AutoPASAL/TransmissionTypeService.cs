@@ -22,6 +22,11 @@ namespace AutoPASAL
             return _transmissionTypeRepo.AddTransmissionType(transmissiontype);
         }
 
+        public Task<transmissiontype> EditTransmissionType(transmissiontype transmissiontype)
+        {
+            return _transmissionTypeRepo.EditTransmissionType(transmissiontype);
+        }
+
         public Task<List<transmissiontype>> GetAllTransmissionTypes()
         {
             var tran= _transmissionTypeRepo.GetAllTransmissionTypes();

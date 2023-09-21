@@ -75,5 +75,30 @@ namespace AutoPASAPI.Controllers
             }
 
         }
+
+        //Edit FuelType 
+        [HttpPut("EditFuelType")]
+        public async Task<IActionResult> EditFuelType([FromBody] fueltype fuelType)
+        {
+            try
+            {
+
+                if (_fueltypeService.IsExists(fuelType.FuelTypeId))
+                {
+                    return Ok(await _fueltypeService.EditFuelType(fuelType));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function FuelType Id is not exists");
+                    return StatusCode(500, "FuelType Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Edit FuelType");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

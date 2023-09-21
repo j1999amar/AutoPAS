@@ -73,5 +73,29 @@ namespace AutoPASAPI.Controllers
 
         }
 
+        //Edit Variant 
+        [HttpPut("EditVariant")]
+        public async Task<IActionResult> EditVariant([FromBody] variant variant)
+        {
+            try
+            {
+
+                if (_variantService.IsExists(variant.VariantId))
+                {
+                    return Ok(await _variantService.EditVariant(variant));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  variant Id is not exists");
+                    return StatusCode(500, " Variant Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Edit Variant");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

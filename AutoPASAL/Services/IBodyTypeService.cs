@@ -11,7 +11,8 @@ namespace AutoPASAL.Services
     {
         Task<List<bodyType>?> GetAllBodyType();
         Task<bodyType> AddBodyType(bodyType bodyType);
-        public  bool IsExists(int id);
+        Task<bodyType> EditBodyType(bodyType bodyType);
+        public bool IsExists(int id);
 
 
     }

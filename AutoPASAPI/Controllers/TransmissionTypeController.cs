@@ -75,5 +75,30 @@ namespace AutoPASAPI.Controllers
             }
 
         }
+
+        //Edit Transmission Type  
+        [HttpPut("EditTransmissionType")]
+        public async Task<IActionResult> EditTransmissionType([FromBody] transmissiontype transmissiontype)
+        {
+            try
+            {
+
+                if (_transmissionTypeService.IsExists(transmissiontype.TransmissionTypeId))
+                {
+                    return Ok(await _transmissionTypeService.EditTransmissionType(transmissiontype));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  transmission type Id is not exists");
+                    return StatusCode(500, "Transmission Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function edit transmission");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

@@ -7,6 +7,7 @@ using AutoPASAL;
 using AutoPASAL.IRepository;
 using AutoPASDML;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AutoPASSL.Repository
 {
@@ -50,6 +51,13 @@ namespace AutoPASSL.Repository
         public bool vehicleTypeIdIsExists(int id)
         {
             return _context.vehicleType.Any(x => x.VehicleTypeId == id);
+        }
+
+        public async Task<Brands> EditBrands(Brands brands)
+        {
+             _context.brand.Entry(brands).State = EntityState.Modified;
+            var change = await _context.SaveChangesAsync();
+            return change > 0 ? brands : null;
         }
     }
 }

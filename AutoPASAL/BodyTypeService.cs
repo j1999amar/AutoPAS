@@ -30,5 +30,9 @@ namespace AutoPASAL
             return  _bodyTypeRepo.IsExists(id);
         }
 
+        public Task<bodyType> EditBodyType(bodyType bodyType)
+        {
+            return _bodyTypeRepo.EditBodyType(bodyType);
+        }
     }
 }

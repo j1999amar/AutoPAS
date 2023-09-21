@@ -118,5 +118,30 @@ namespace AutoPASAPI.Controllers
 
         }
 
+        //Edit RTO 
+        [HttpPut("EditRTO")]
+        public async Task<IActionResult> EditRTO([FromBody] rto rto)
+        {
+            try
+            {
+
+                if (_rtoService.IsExists(rto.RTOId))
+                {
+                    return Ok(await _rtoService.EditRTO(rto));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  RTO Id is not exists");
+                    return StatusCode(500, " RTO Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Edit RTO");
+                return StatusCode(500, ex);
+            }
+
+        }
+
     }
 }
