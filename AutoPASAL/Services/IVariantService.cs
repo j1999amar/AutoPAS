@@ -11,5 +11,7 @@ namespace AutoPASAL.Services
     {
         Task<List<variant>?> GetAllVariant();
         Task<List<variant>?> GetVariant(int ModelId, int FuelId, int TransmissionId);
+        Task<variant> AddVariant(variant variant);
+        public bool IsExists(int id);
     }
 }

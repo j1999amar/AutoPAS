@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using AutoPASAL.Services;
 using AutoPASDML;
 using Microsoft.EntityFrameworkCore;
+using AutoPASAL;
 
 namespace AutoPASAPI.Controllers
 {
@@ -43,6 +44,39 @@ namespace AutoPASAPI.Controllers
             catch (Exception ex)
             {
                 _logger.LogInformation("Error in function GetAllModels");
+                return StatusCode(500, ex);
+            }
+
+        }
+
+        //Add Model 
+        [HttpPost("AddModels")]
+        public async Task<IActionResult> AddModels([FromBody] model model)
+        {
+            try
+            {
+
+                if (!_modelService.IsExists(model.ModelId))
+                {
+                    if (_modelService.brandIdIsExists(model.BrandId))
+                    {
+                        return Ok(await _modelService.AddModels(model));
+                    }
+                    else
+                    {
+                        _logger.LogInformation("Error in function  model Id is not exists");
+                        return StatusCode(500, " Brand Id is not exists");
+                    }
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function Add model Id is already exists");
+                    return StatusCode(500, "Add Model Id is already exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Add Model");
                 return StatusCode(500, ex);
             }
 

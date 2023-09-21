@@ -26,5 +26,19 @@ namespace AutoPASAL
         {
             return await _brandRepo.GetAllBrand();
         }
+        public async Task<Brands> AddBrands(Brands brands)
+        {
+            return await _brandRepo.AddBrands(brands);
+        }
+
+        public bool IsExists(int id)
+        {
+            return _brandRepo.IsExists(id);
+        }
+
+        public bool vehicleTypeIdIsExists(int id)
+        {
+            return _brandRepo.vehicleTypeIdIsExists(id);
+        }
     }
 }

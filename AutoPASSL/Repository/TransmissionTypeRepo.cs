@@ -34,5 +34,17 @@ namespace AutoPASSL.Repository
             if (transmissiontype == null) return null;
             return transmissiontype;
         }
+
+        public async Task<transmissiontype> AddTransmissionType(transmissiontype transmissiontype)
+        {
+            await _context.transmissiontype.AddAsync(transmissiontype);
+            var transmissionTypeIsAdded = await _context.SaveChangesAsync();
+            return transmissionTypeIsAdded>0?transmissiontype:null;
+        }
+
+        public bool IsExists(int id)
+        {
+            return _context.transmissiontype.Any(x=>x.TransmissionTypeId == id);
+        }
     }
 }

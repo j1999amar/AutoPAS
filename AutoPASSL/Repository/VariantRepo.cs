@@ -17,6 +17,14 @@ namespace AutoPASSL.Repository
         {
             _context = context;
         }
+
+        public async Task<variant> AddVariant(variant variant)
+        {
+            await _context.variant.AddAsync(variant);
+            var variantIsAdded=await _context.SaveChangesAsync();
+            return variantIsAdded > 0 ? variant : null;
+        }
+
         public async Task<List<variant>?> GetAllVariant()
         {
             List<variant> variant = new List<variant>();
@@ -34,6 +42,11 @@ namespace AutoPASSL.Repository
             variant = await _context.variant.Where(z => id2.Contains(z.VariantId)).ToListAsync();
             if (variant == null) return null;
             return variant;
+        }
+
+        public bool IsExists(int id)
+        {
+            return _context.variant.Any(x=>x.VariantId== id);
         }
     }
 }

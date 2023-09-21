@@ -16,6 +16,12 @@ namespace AutoPASAL
         {
             _transmissionTypeRepo = transmissionTypeRepo;
         }
+
+        public Task<transmissiontype> AddTransmissionType(transmissiontype transmissiontype)
+        {
+            return _transmissionTypeRepo.AddTransmissionType(transmissiontype);
+        }
+
         public Task<List<transmissiontype>> GetAllTransmissionTypes()
         {
             var tran= _transmissionTypeRepo.GetAllTransmissionTypes();
@@ -25,6 +31,11 @@ namespace AutoPASAL
         {
             var tran=_transmissionTypeRepo.GetTransmissionTypes(ModelId, FuelId);
             return tran;
+        }
+
+        public bool IsExists(int id)
+        {
+            return _transmissionTypeRepo.IsExists(id);
         }
     }
 }

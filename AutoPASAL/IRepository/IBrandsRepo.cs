@@ -11,5 +11,9 @@ namespace AutoPASAL.IRepository
     {
         Task<List<Brands>> GetBrandByVehicleType(int VehicleType);
         Task<List<Brands>> GetAllBrand();
+        Task<Brands> AddBrands(Brands brands);
+        public bool IsExists(int id);
+        public bool vehicleTypeIdIsExists(int id);
+
     }
 }

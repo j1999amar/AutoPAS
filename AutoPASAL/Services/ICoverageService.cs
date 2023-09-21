@@ -11,5 +11,7 @@ namespace AutoPASAL.Services
     {
         Task<PremiumRating> GetPremium();
         Task<List<coverages>> GetAllCoverages();
+        Task<coverages> AddCoverages(coverages coverages);
+        public bool IsExists(int id);
     }
 }

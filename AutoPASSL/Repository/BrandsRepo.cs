@@ -34,5 +34,22 @@ namespace AutoPASSL.Repository
             if (brand == null) return null;
             return brand;
         }
+
+        public async Task<Brands> AddBrands(Brands brands)
+        {
+            await _context.brand.AddAsync(brands);
+            var brandIsAdded= await _context.SaveChangesAsync();
+            return brandIsAdded>0?brands:null;
+        }
+
+        public bool IsExists(int id)
+        {
+            return _context.brand.Any(x=>x.BrandId == id);
+        }
+
+        public bool vehicleTypeIdIsExists(int id)
+        {
+            return _context.vehicleType.Any(x => x.VehicleTypeId == id);
+        }
     }
 }

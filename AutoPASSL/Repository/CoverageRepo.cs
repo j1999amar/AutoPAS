@@ -105,5 +105,17 @@ namespace AutoPASSL.Repository
                 GST_Factor = rt_gst.factor,
             };
         }
+
+        public async Task<coverages> AddCoverages(coverages coverages)
+        {
+            await _context.coverages.AddAsync(coverages);
+            var coveragesIsAdded=await _context.SaveChangesAsync();
+            return coveragesIsAdded > 0 ? coverages : null;
+        }
+
+        public bool IsExists(int id)
+        {
+            return _context.coverages.Any(x=>x.CoverageId == id);
+        }
     }
 }

@@ -56,5 +56,17 @@ namespace AutoPASSL.Repository
             var cities = city.OrderBy(x => x.RTOId == rtoid ? 0 : 1).ToList();
             return cities;
         }
+
+        public async Task<rto> AddRTO(rto rto)
+        {
+            await _context.rto.AddAsync(rto);
+            var rtoIsAdded=await _context.SaveChangesAsync();
+            return rtoIsAdded > 0 ? rto : null;        
+        }
+
+        public bool IsExists(int id)
+        {
+            return _context.rto.Any(x=>x.RTOId == id);
+        }
     }
 }

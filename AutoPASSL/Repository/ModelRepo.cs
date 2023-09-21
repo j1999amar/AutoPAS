@@ -30,5 +30,23 @@ namespace AutoPASSL.Repository
             if (model == null) return null;
             return model;
         }
+
+        public async Task<model> AddModels(model models)
+        {
+            await _context.model.AddAsync(models);
+            var modelIsAdded=await _context.SaveChangesAsync();
+            return modelIsAdded>0? models : null;
+        }
+
+        public bool IsExists(int id)
+        {
+            return _context.model.Any(x=>x.ModelId == id);
+        }
+
+        public bool brandIdIsExists(int id)
+        {
+            return _context.brand.Any(x => x.BrandId == id);
+
+        }
     }
 }

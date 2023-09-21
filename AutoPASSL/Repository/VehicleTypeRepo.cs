@@ -16,11 +16,25 @@ namespace AutoPASSL.Repository
         {
             _context = context;
         }
+
+        public async Task<vehicleType> AddVehicleType(vehicleType vehicleType)
+        {
+            await _context.vehicleType.AddAsync(vehicleType);
+            var vehicleTypeIsAdded=await _context.SaveChangesAsync();
+            return vehicleTypeIsAdded > 0 ? vehicleType : null;
+
+        }
+
         public async Task<List<vehicleType>> GetAllVehicleType()
         {
             var vehicletype = await _context.vehicleType.ToListAsync();
             if (vehicletype == null) return null;
             return vehicletype;
+        }
+
+        public bool IsExists(int id)
+        {
+            return _context.vehicleType.Any(x=>x.VehicleTypeId == id);
         }
     }
 }

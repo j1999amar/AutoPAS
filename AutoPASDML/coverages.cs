@@ -19,8 +19,7 @@ namespace AutoPASDML
         public DateTime ExpirationDt { get; set; }
         public int SortOrder { get; set; }         
         public string Description { get; set; }
-
-        public byte IsActive { get; set; }
+        public bool IsActive { get; set; }
 
 
 

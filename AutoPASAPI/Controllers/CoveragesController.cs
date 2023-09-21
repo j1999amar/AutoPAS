@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AutoPASAL.Services;
 using AutoPASDML;
 using Microsoft.EntityFrameworkCore;
+using AutoPASAL;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -73,6 +74,31 @@ namespace AutoPASAPI.Controllers
                 _logger.LogInformation("Error in function CalculatePremium");
                 return StatusCode(500, ex);
             }
+        }
+
+        //Add Coverage 
+        [HttpPost("AddCoverage")]
+        public async Task<IActionResult> AddCoverage([FromBody] coverages coverages)
+        {
+            try
+            {
+
+                if (!_coverageService.IsExists(coverages.CoverageId))
+                {
+                    return Ok(await _coverageService.AddCoverages(coverages));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function Add Coverage. Id is already exists");
+                    return StatusCode(500, "Add Coverage Id is already exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Add Coverage");
+                return StatusCode(500, ex);
+            }
+
         }
     }
 }

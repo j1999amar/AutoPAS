@@ -9,5 +9,7 @@ namespace AutoPASAL.IRepository
         Task<IEnumerable<PolicyCoverageDto>> GetPolicyCoverage(Guid policyId);
         Task<PremiumFactors> GetPremiumFactors();
         Task<PolicyVehicleDto> GetPolicyVehicleDetails(Guid PolicyId);
+        Task<coverages> AddCoverages(coverages coverages);
+        public bool IsExists(int id);
     }
 }

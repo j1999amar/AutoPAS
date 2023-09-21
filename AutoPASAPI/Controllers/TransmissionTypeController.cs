@@ -51,5 +51,29 @@ namespace AutoPASAPI.Controllers
             }
 
         }
+        //Add Transmission Type  
+        [HttpPost("AddTransmissionType")]
+        public async Task<IActionResult> AddTransmissionType([FromBody] transmissiontype transmissiontype)
+        {
+            try
+            {
+
+                if (!_transmissionTypeService.IsExists(transmissiontype.TransmissionTypeId))
+                {
+                    return Ok(await _transmissionTypeService.AddTransmissionType(transmissiontype));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function Add transmission type Id is already exists");
+                    return StatusCode(500, "Add transmission Id is already exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Add transmission");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

@@ -12,9 +12,7 @@ namespace AutoPASDML
         [Key]
         public int FuelTypeId { get; set; }
         public string FuelType { get; set; }
-
         public string Description { get; set; }
-
         public bool IsActive { get; set; }
     }
 }

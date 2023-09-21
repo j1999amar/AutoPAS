@@ -2,6 +2,8 @@
 using AutoPASAL.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AutoPASAL;
+using AutoPASDML;
 
 namespace AutoPASAPI.Controllers
 {
@@ -89,6 +91,31 @@ namespace AutoPASAPI.Controllers
                 _logger.LogInformation("Error in function GetAllRTOState");
                 return StatusCode(500, ex);
             }
+        }
+
+        //Add RTO 
+        [HttpPost("AddRTO")]
+        public async Task<IActionResult> AddRTO([FromBody] rto rto)
+        {
+            try
+            {
+
+                if (!_rtoService.IsExists(rto.RTOId))
+                {
+                    return Ok(await _rtoService.AddRTO(rto));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function Add RTO Id is already exists");
+                    return StatusCode(500, "Add RTO Id is already exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Add RTO");
+                return StatusCode(500, ex);
+            }
+
         }
 
     }

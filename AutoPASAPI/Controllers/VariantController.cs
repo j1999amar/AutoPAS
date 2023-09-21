@@ -1,5 +1,7 @@
-﻿using AutoPASAL.Services;
+﻿using AutoPASAL;
+using AutoPASAL.Services;
 using AutoPASBL.Interface;
+using AutoPASDML;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +46,31 @@ namespace AutoPASAPI.Controllers
                 _logger.LogInformation("Error in function GetAllVariant");
                 return StatusCode(500, ex);
             }
+        }
+
+        //Add Variant 
+        [HttpPost("AddVariant")]
+        public async Task<IActionResult> AddVariant([FromBody] variant variant)
+        {
+            try
+            {
+
+                if (!_variantService.IsExists(variant.VariantId))
+                {
+                    return Ok(await _variantService.AddVariant(variant));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function Add variant Id is already exists");
+                    return StatusCode(500, "Add Variant Id is already exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Add Variant");
+                return StatusCode(500, ex);
+            }
+
         }
 
     }

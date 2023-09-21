@@ -10,5 +10,7 @@ namespace AutoPASAL.Services
     public interface IVehicleTypeService
     {
         Task<List<vehicleType>> GetAllVehicleType();
+        Task<vehicleType> AddVehicleType(vehicleType vehicleType);
+        public bool IsExists(int id);
     }
 }
