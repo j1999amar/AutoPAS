@@ -34,5 +34,10 @@ namespace AutoPASAL
         {
             return _bodyTypeRepo.EditBodyType(bodyType);
         }
+
+        public bool DeleteBodyType(int id)
+        {
+            return _bodyTypeRepo.DeleteBodyType(id);
+        }
     }
 }

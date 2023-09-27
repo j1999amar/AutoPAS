@@ -10,22 +10,23 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoPASDML;
 using Microsoft.Extensions.Logging;
+using AutoPASAL.Services;
 
 namespace AutoPASAPI.Tests.Controllers
 {
     [TestFixture]
     public class BodyTypeControllerTests
     {
-        private Mock<IBodyTypeBL> _bodyTypeBLMock;
+        private Mock<IBodyTypeService> _bodyTypeMock;
         private Mock<ILogger<BodyTypeController>> _loggerMock;
         private BodyTypeController _bodyTypeController;
 
         [SetUp]
         public void Setup()
         {
-            _bodyTypeBLMock = new Mock<IBodyTypeBL>();
+            _bodyTypeMock = new Mock<IBodyTypeService>();
             _loggerMock = new Mock<ILogger<BodyTypeController>>();
-            _bodyTypeController = new BodyTypeController(_bodyTypeBLMock.Object, _loggerMock.Object);
+            _bodyTypeController = new BodyTypeController(_bodyTypeMock.Object, _loggerMock.Object);
         }
 
         [Test]
@@ -33,7 +34,7 @@ namespace AutoPASAPI.Tests.Controllers
         {
             //Arrange
             var bodyList = new List<bodyType>();
-            _bodyTypeBLMock.Setup(x => x.GetAllBodyType()).ReturnsAsync(bodyList);
+            _bodyTypeMock.Setup(x => x.GetAllBodyType()).ReturnsAsync(bodyList);
 
             //Act
             var result = await _bodyTypeController.GetAllBodyType();
@@ -48,7 +49,7 @@ namespace AutoPASAPI.Tests.Controllers
         public async Task GetAllBodyType_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
         {
             //Arrange
-            _bodyTypeBLMock.Setup(x => x.GetAllBodyType()).Throws(new Exception());
+            _bodyTypeMock.Setup(x => x.GetAllBodyType()).Throws(new Exception());
 
             //Act
             var result = await _bodyTypeController.GetAllBodyType();
@@ -64,7 +65,7 @@ namespace AutoPASAPI.Tests.Controllers
         {
             //Arrange
             var bodyList = new List<bodyType>(){null};
-            _bodyTypeBLMock.Setup(x => x.GetAllBodyType()).ReturnsAsync(bodyList);
+            _bodyTypeMock.Setup(x => x.GetAllBodyType()).ReturnsAsync(bodyList);
 
             //Act
             var result = await _bodyTypeController.GetAllBodyType();
@@ -74,6 +75,23 @@ namespace AutoPASAPI.Tests.Controllers
             var okResult = (OkObjectResult)result;
             Assert.AreEqual(bodyList, okResult.Value);
         }
+
+        [Test]
+        public async Task jkn()
+        {
+            //Arrange
+            var bodyList = new List<bodyType>() { null };
+            _bodyTypeMock.Setup(x => x.GetAllBodyType()).ReturnsAsync(bodyList);
+
+            //Act
+            var result = await _bodyTypeController.GetAllBodyType();
+
+            //Assert
+            Assert.IsInstanceOf<OkObjectResult>(result);
+            var okResult = (OkObjectResult)result;
+            Assert.AreEqual(bodyList, okResult.Value);
+        }
+
 
     }
 }

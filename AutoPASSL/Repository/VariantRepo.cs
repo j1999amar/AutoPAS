@@ -26,6 +26,14 @@ namespace AutoPASSL.Repository
             return variantIsAdded > 0 ? variant : null;
         }
 
+        public bool DeleteVariant(int id)
+        {
+            var variant=_context.variant.Find(id);
+            _context.variant.Remove(variant);
+            var change =  _context.SaveChanges();
+            return change > 0 ? true : false;
+        }
+
         public async Task<variant> EditVariant(variant variant)
         {
             _context.variant.Entry(variant).State = EntityState.Modified;

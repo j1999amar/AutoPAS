@@ -14,6 +14,7 @@ namespace AutoPASAL.Services
 
         Task<transmissiontype> AddTransmissionType(transmissiontype transmissiontype);
         Task<transmissiontype> EditTransmissionType(transmissiontype transmissiontype);
+        public bool DeleteTransmissionType(int id);
         public bool IsExists(int id);
     }
 }

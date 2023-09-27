@@ -13,6 +13,7 @@ namespace AutoPASAL.IRepository
         Task<List<fueltype>> GetAllFuelTypes();
         Task<fueltype> AddFuelType(fueltype fuelType);
         Task<fueltype> EditFuelType(fueltype fuelType);
+        public bool DeleteFuelType(int id);
         public bool IsExists(int id);
     }
 }

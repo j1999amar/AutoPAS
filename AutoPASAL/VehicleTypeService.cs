@@ -22,6 +22,11 @@ namespace AutoPASAL
             return _vehicleTypeRepo.AddVehicleType(vehicleType);
         }
 
+        public bool DeleteVehicleType(int id)
+        {
+            return _vehicleTypeRepo.DeleteVehicleType(id);
+        }
+
         public Task<vehicleType> EditVehicleType(vehicleType vehicleType)
         {
             return _vehicleTypeRepo.EditVehicleType(vehicleType);

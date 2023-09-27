@@ -26,17 +26,17 @@ namespace AutoPASAL
             var veh = _vehicleRepo.GetVehicleById(Id);
             return veh;
         }
-        public Task<List<rto>?> GetAllRTOState()
+        public Task<List<RTO>?> GetAllRTOState()
         {
             var rto= _vehicleRepo.GetAllRTOState();
             return rto;
         }
-        public Task<List<rto>?> GetRTOCityByState(string state)
+        public Task<List<RTO>?> GetRTOCityByState(string state)
         {
             var rto = _vehicleRepo.GetRTOCityByState(state);
             return rto;
         }
-        public Task<List<rto>?> GetRTONameByCity(string city)
+        public Task<List<RTO>?> GetRTONameByCity(string city)
         {
             var rto = _vehicleRepo.GetRTONameByCity(city);
             return rto;

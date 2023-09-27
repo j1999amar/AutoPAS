@@ -59,5 +59,13 @@ namespace AutoPASSL.Repository
             var change = await _context.SaveChangesAsync();
             return change > 0 ? brands : null;
         }
+
+        public bool DeleteBrand(int id)
+        {
+            var brands = _context.brand.Find(id);
+            _context.brand.Remove(brands);
+            var change = _context.SaveChanges();
+            return change > 0 ? true : false;
+        }
     }
 }

@@ -22,6 +22,12 @@ namespace AutoPASAL
             return _variantRepo.AddVariant(variant);
         }
 
+        public bool DeleteVariant(int id)
+        {
+            return _variantRepo.DeleteVariant(id);
+
+        }
+
         public Task<variant> EditVariant(variant variant)
         {
             return _variantRepo.EditVariant(variant);

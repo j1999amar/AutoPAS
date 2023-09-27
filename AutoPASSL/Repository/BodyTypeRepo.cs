@@ -47,5 +47,13 @@ namespace AutoPASSL.Repository
             var change = await _context.SaveChangesAsync();
             return change > 0 ? bodyType : null;
         }
+
+        public  bool DeleteBodyType(int id)
+        {
+            var bodyType=_context.bodyType.Find(id);
+            _context.bodyType.Remove(bodyType);
+            var change= _context.SaveChanges();
+            return change > 0 ? true : false;
+        }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AutoPASDML
 {
-    public class rto
+    public class RTO
     {
         [Key]
         public int RTOId { get; set; }

@@ -13,6 +13,8 @@ namespace AutoPASAL.IRepository
         Task<List<transmissiontype>> GetTransmissionTypes(int ModelId, int FuelId);
         Task<transmissiontype> AddTransmissionType(transmissiontype transmissiontype);
         Task<transmissiontype> EditTransmissionType(transmissiontype transmissiontype);
+        public bool DeleteTransmissionType(int id);
+
         public bool IsExists(int id);
     }
 }

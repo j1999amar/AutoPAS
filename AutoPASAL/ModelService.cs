@@ -47,5 +47,11 @@ namespace AutoPASAL
         {
             return _modelRepo.EditModels(models);
         }
+
+        public bool DeleteModels(int id)
+        {
+            return _modelRepo.DeleteModels(id);
+
+        }
     }
 }

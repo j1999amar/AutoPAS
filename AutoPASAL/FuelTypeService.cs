@@ -42,5 +42,10 @@ namespace AutoPASAL
         {
             return _fuelTypeRepo.EditFuelType(fuelType);
         }
+
+        public bool DeleteFuelType(int id)
+        {
+            return _fuelTypeRepo.DeleteFuelType(id);
+        }
     }
 }

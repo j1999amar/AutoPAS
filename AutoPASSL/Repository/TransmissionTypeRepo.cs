@@ -54,5 +54,13 @@ namespace AutoPASSL.Repository
             var change = await _context.SaveChangesAsync();
             return change > 0 ? transmissiontype : null;
         }
+
+        public bool DeleteTransmissionType(int id)
+        {
+            var transmissiontype = _context.transmissiontype.Find(id);
+            _context.transmissiontype.Remove(transmissiontype);
+            var change =  _context.SaveChanges();
+            return change > 0 ? true : false;
+        }
     }
 }

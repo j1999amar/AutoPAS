@@ -19,6 +19,11 @@ namespace AutoPASAL
             return _coverageRepo.AddCoverages(coverages);
         }
 
+        public bool DeleteCoverage(int id)
+        {
+            return _coverageRepo.DeleteCoverage(id);
+        }
+
         public Task<coverages> EditCoverage(coverages coverages)
         {
             return _coverageRepo.EditCoverage(coverages);

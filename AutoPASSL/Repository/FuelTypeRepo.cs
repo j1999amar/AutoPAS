@@ -53,5 +53,13 @@ namespace AutoPASSL.Repository
             var change = await _context.SaveChangesAsync();
             return change > 0 ? fuelType : null;
         }
+
+        public bool DeleteFuelType(int id)
+        {
+            var fuelType = _context.fueltype.Find(id);
+            _context.fueltype.Remove(fuelType);
+            var change =  _context.SaveChanges();
+            return change > 0 ? true : false;
+        }
     }
 }

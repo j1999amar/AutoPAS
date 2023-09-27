@@ -97,5 +97,29 @@ namespace AutoPASAPI.Controllers
             }
 
         }
+        //Delete Variant 
+        [HttpDelete("DeleteVariant/{id}")]
+        public IActionResult DeleteVariant([FromRoute] int id)
+        {
+            try
+            {
+
+                if (_variantService.IsExists(id))
+                {
+                    return Ok( _variantService.DeleteVariant(id));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  variant Id is not exists");
+                    return StatusCode(500, " Variant Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Edit Variant");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

@@ -18,25 +18,25 @@ namespace AutoPASSL.Repository
         {
             _context = context;
         }
-        public async Task<List<rto>?> GetAllRTOState()
+        public async Task<List<RTO>?> GetAllRTOState()
         {
             var rtos = await _context.rto.GroupBy(x => x.State).Select(g => g.OrderBy(x => x.State).FirstOrDefault()).ToListAsync();
             if (rtos == null) return null;
             return rtos;
         }
-        public async Task<List<rto>?> GetRTOCityByState(string state)
+        public async Task<List<RTO>?> GetRTOCityByState(string state)
         {
             var rtos = await _context.rto.Where(x => x.State.ToLower() == state.ToLower()).GroupBy(x => x.City).Select(g => g.OrderBy(x => x.City).FirstOrDefault()).ToListAsync();
             if (rtos == null) return null;
             return rtos;
         }
-        public async Task<List<rto>?> GetRTONameByCity(string city)
+        public async Task<List<RTO>?> GetRTONameByCity(string city)
         {
             var rtos = await _context.rto.Where(x => x.City.ToLower() == city.ToLower()).ToListAsync();
             if (rtos == null) return null;
             return rtos;
         }
-        public async Task<List<rto>?> GetAllRTO(Guid Id)
+        public async Task<List<RTO>?> GetAllRTO(Guid Id)
         {
             var vehicle = await _context.PolicyVehicle.FirstOrDefaultAsync(x => x.PolicyId == Id);
             var vehicleid = vehicle.VehicleId;
@@ -45,7 +45,7 @@ namespace AutoPASSL.Repository
             var rtos = await _context.rto.Where(x => x.RTOId == rtoid).ToListAsync();
             return rtos;
         }
-        public async Task<List<rto>?> GetCity(Guid Id)
+        public async Task<List<RTO>?> GetCity(Guid Id)
         {
             var vehicle = await _context.PolicyVehicle.FirstOrDefaultAsync(x => x.PolicyId == Id);
             var vehicleid = vehicle.VehicleId;
@@ -58,7 +58,7 @@ namespace AutoPASSL.Repository
             return cities;
         }
 
-        public async Task<rto> AddRTO(rto rto)
+        public async Task<RTO> AddRTO(RTO rto)
         {
             await _context.rto.AddAsync(rto);
             var rtoIsAdded=await _context.SaveChangesAsync();
@@ -70,11 +70,19 @@ namespace AutoPASSL.Repository
             return _context.rto.Any(x=>x.RTOId == id);
         }
 
-        public async Task<rto> EditRTO(rto rto)
+        public async Task<RTO> EditRTO(RTO rto)
         {
             _context.rto.Entry(rto).State = EntityState.Modified;
             var change = await _context.SaveChangesAsync();
             return change > 0 ? rto : null;
+        }
+
+        public bool DeleteRTO(int id)
+        {
+            var rto = _context.rto.Find(id);
+            _context.rto.Remove(rto);
+            var change =  _context.SaveChanges();
+            return change > 0 ? true : false;
         }
     }
 }

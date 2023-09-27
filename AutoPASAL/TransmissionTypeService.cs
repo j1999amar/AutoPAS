@@ -22,6 +22,11 @@ namespace AutoPASAL
             return _transmissionTypeRepo.AddTransmissionType(transmissiontype);
         }
 
+        public bool DeleteTransmissionType(int id)
+        {
+            return _transmissionTypeRepo.DeleteTransmissionType(id);
+        }
+
         public Task<transmissiontype> EditTransmissionType(transmissiontype transmissiontype)
         {
             return _transmissionTypeRepo.EditTransmissionType(transmissiontype);

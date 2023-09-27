@@ -100,5 +100,29 @@ namespace AutoPASAPI.Controllers
             }
 
         }
+        //Delete Transmission Type  
+        [HttpDelete("DeleteTransmissionType/{id}")]
+        public IActionResult DeleteTransmissionType([FromRoute] int id)
+        {
+            try
+            {
+
+                if (_transmissionTypeService.IsExists(id))
+                {
+                    return Ok( _transmissionTypeService.DeleteTransmissionType(id));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  transmission type Id is not exists");
+                    return StatusCode(500, "Transmission Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function edit transmission");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

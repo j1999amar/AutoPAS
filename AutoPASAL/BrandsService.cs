@@ -45,5 +45,10 @@ namespace AutoPASAL
         {
             return _brandRepo.EditBrands(brands);
         }
+
+        public bool DeleteBrand(int id)
+        {
+            return _brandRepo.DeleteBrand(id);
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace AutoPASSL
 
         public DbSet<insuredContact> insuredcontact { get; set; }
 
-        public DbSet<rto> rto { get; set; }
+        public DbSet<RTO> rto { get; set; }
 
         public DbSet<vehicle> vehicle { get; set; }
 

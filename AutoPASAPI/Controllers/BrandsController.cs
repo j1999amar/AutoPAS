@@ -21,7 +21,7 @@ namespace AutoPASAPI.Controllers
         }
 
 
-        
+
         [HttpGet("GetBrandByVehicleType{VehicleType}")]
         public async Task<IActionResult> GetBrandByVehicleType(int VehicleType)
         {
@@ -114,5 +114,35 @@ namespace AutoPASAPI.Controllers
                 return StatusCode(500, ex);
             }
         }
+
+
+        //Delete Brands 
+        [HttpDelete("DeleteBrands/{id}")]
+        public  IActionResult DeleteBrands([FromRoute] int id)
+        {
+            try
+            {
+
+                if (_brandsService.IsExists(id))
+                {
+                    
+                        return Ok(_brandsService.DeleteBrand(id));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  Brands Id is not exists");
+                    return StatusCode(500, " Brands Id is not exists ");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Brands");
+                return StatusCode(500, ex);
+            }
+        }
     }
+
+   
+
 }
+

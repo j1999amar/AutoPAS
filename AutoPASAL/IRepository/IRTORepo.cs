@@ -9,13 +9,14 @@ namespace AutoPASAL.IRepository
 {
     public interface IRTORepo
     {
-        Task<List<rto>?> GetAllRTOState();
-        Task<List<rto>?> GetRTOCityByState(string state);
-        Task<List<rto>?> GetRTONameByCity(string city);
-        Task<List<rto>?> GetAllRTO(Guid Id);
-        Task<List<rto>?> GetCity(Guid Id);
-        Task<rto> AddRTO(rto rto);
-        Task<rto> EditRTO(rto rto);
+        Task<List<RTO>?> GetAllRTOState();
+        Task<List<RTO>?> GetRTOCityByState(string state);
+        Task<List<RTO>?> GetRTONameByCity(string city);
+        Task<List<RTO>?> GetAllRTO(Guid Id);
+        Task<List<RTO>?> GetCity(Guid Id);
+        Task<RTO> AddRTO(RTO rto);
+        Task<RTO> EditRTO(RTO rto);
+        public bool DeleteRTO(int id);
         public bool IsExists(int id);
     }
 }

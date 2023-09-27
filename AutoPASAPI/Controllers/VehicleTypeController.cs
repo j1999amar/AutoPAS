@@ -85,6 +85,30 @@ namespace AutoPASAPI.Controllers
             }
 
         }
+        //Delete VehicleType 
+        [HttpDelete("DeleteVehicleType/{id}")]
+        public IActionResult DeleteVehicleType([FromRoute] int id)
+        {
+            try
+            {
+
+                if (_vehicletypeservice.IsExists(id))
+                {
+                    return Ok( _vehicletypeservice.DeleteVehicleType(id));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  Vehicle Type. Id is not exists");
+                    return StatusCode(500, " Vehicle type Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function  Vehicle Type");
+                return StatusCode(500, "Data is not deleteable due to constraints");
+            }
+
+        }
 
     }
 }

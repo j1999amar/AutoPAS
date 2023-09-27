@@ -56,5 +56,16 @@ namespace AutoPASSL.Repository
             var change = await _context.SaveChangesAsync();
             return change > 0 ? models : null;
         }
+
+        public bool DeleteModels(int id)
+        {
+                var models = _context.model.Find(id);
+                _context.model.Remove(models);
+                var change = _context.SaveChanges();
+                return change > 0 ? true : false;
+        
+          
+            
+        }
     }
 }

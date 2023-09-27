@@ -100,5 +100,30 @@ namespace AutoPASAPI.Controllers
             }
 
         }
+
+        //Delete FuelType 
+        [HttpDelete("DeleteFuelType/{id}")]
+        public IActionResult DeleteFuelType([FromRoute] int id)
+        {
+            try
+            {
+
+                if (_fueltypeService.IsExists(id))
+                {
+                    return Ok( _fueltypeService.DeleteFuelType(id));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function FuelType Id is not exists");
+                    return StatusCode(500, "FuelType Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Edit FuelType");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

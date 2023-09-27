@@ -83,5 +83,30 @@ namespace AutoPASAPI.Controllers
             }
 
         }
+
+
+        //Delete BodyType 
+        [HttpDelete("DeleteBodyType/{id}")]
+        public async Task<IActionResult> DeleteBodyType([FromRoute] int id)
+        {
+            try
+            {
+                if (_bodytypeService.IsExists(id))
+                {
+                    return Ok( _bodytypeService.DeleteBodyType(id));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function BodyType Id is not exists");
+                    return StatusCode(500, "BodyType Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function BodyType");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

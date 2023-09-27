@@ -32,7 +32,7 @@ namespace AutoPASAPI.Tests.Controllers
         public async Task GetAllRTOState_Returns_OkResult()
         {
             //Arrange
-            var rtoList = new List<rto>();
+            var rtoList = new List<RTO>();
             _rtoBLMock.Setup(x => x.GetAllRTOState()).ReturnsAsync(rtoList);
 
             //Act
@@ -63,7 +63,7 @@ namespace AutoPASAPI.Tests.Controllers
         public async Task GetRTOCityByState_Returns_OkResult()
         {
             //Arrange
-            var rtoList = new List<rto>();
+            var rtoList = new List<RTO>();
             var state = "SomeState";
             _rtoBLMock.Setup(x => x.GetRTOCityByState(state)).ReturnsAsync(rtoList);
 
@@ -96,7 +96,7 @@ namespace AutoPASAPI.Tests.Controllers
         public async Task GetRTONameByCity_Returns_OkResult()
         {
             //Arrange
-            var rtoList = new List<rto>();
+            var rtoList = new List<RTO>();
             var city = "SomeCity";
             _rtoBLMock.Setup(x => x.GetRTONameByCity(city)).ReturnsAsync(rtoList);
 
@@ -128,7 +128,7 @@ namespace AutoPASAPI.Tests.Controllers
         public async Task GetAllRTO_Returns_OkResult()
         {
             //Arrange
-            var rtoList = new List<rto>();
+            var rtoList = new List<RTO>();
             var id = new Guid();
             _rtoBLMock.Setup(x => x.GetAllRTO(id)).ReturnsAsync(rtoList);
 
@@ -161,7 +161,7 @@ namespace AutoPASAPI.Tests.Controllers
         public async Task GetCity_Returns_OkResult()
         {
             //Arrange
-            var rtoList = new List<rto>();
+            var rtoList = new List<RTO>();
             var id = new Guid();
             _rtoBLMock.Setup(x => x.GetCity(id)).ReturnsAsync(rtoList);
 

@@ -33,19 +33,19 @@ namespace AutoPASSL.Repository
             var veh = await _context.vehicle.Where(x => x.VehicleId == vehicleid).ToListAsync();
             return veh;
         }
-        public async Task<List<rto>?> GetAllRTOState()
+        public async Task<List<RTO>?> GetAllRTOState()
         {
             var rtos = await _context.rto.GroupBy(x => x.State).Select(g => g.OrderBy(x => x.State).FirstOrDefault()).ToListAsync();
             if (rtos == null) return null;
             return rtos;
         }
-        public async Task<List<rto>?> GetRTOCityByState(string state)
+        public async Task<List<RTO>?> GetRTOCityByState(string state)
         {
             var rtos = await _context.rto.Where(x => x.State.ToLower() == state.ToLower()).GroupBy(x => x.City).Select(g => g.OrderBy(x => x.City).FirstOrDefault()).ToListAsync();
             if (rtos == null) return null;
             return rtos;
         }
-        public async Task<List<rto>?> GetRTONameByCity(string city)
+        public async Task<List<RTO>?> GetRTONameByCity(string city)
         {
             var rtos = await _context.rto.Where(x => x.City.ToLower() == city.ToLower()).ToListAsync();
             if (rtos == null) return null;

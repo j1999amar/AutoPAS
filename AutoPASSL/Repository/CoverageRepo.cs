@@ -125,5 +125,13 @@ namespace AutoPASSL.Repository
             var change = await _context.SaveChangesAsync();
             return change > 0 ? coverages : null;
         }
+
+        public bool DeleteCoverage(int id)
+        {
+            var coverages = _context.coverages.Find(id);
+            _context.coverages.Remove(coverages);
+            var change =  _context.SaveChanges();
+            return change > 0 ? true : false;
+        }
     }
 }

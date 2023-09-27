@@ -95,7 +95,7 @@ namespace AutoPASAPI.Controllers
 
         //Add RTO 
         [HttpPost("AddRTO")]
-        public async Task<IActionResult> AddRTO([FromBody] rto rto)
+        public async Task<IActionResult> AddRTO([FromBody] RTO rto)
         {
             try
             {
@@ -120,7 +120,7 @@ namespace AutoPASAPI.Controllers
 
         //Edit RTO 
         [HttpPut("EditRTO")]
-        public async Task<IActionResult> EditRTO([FromBody] rto rto)
+        public async Task<IActionResult> EditRTO([FromBody] RTO rto)
         {
             try
             {
@@ -143,5 +143,29 @@ namespace AutoPASAPI.Controllers
 
         }
 
+        //Delete RTO 
+        [HttpDelete("DeleteRTO/{id}")]
+        public IActionResult DeleteRTO([FromRoute] int id)
+        {
+            try
+            {
+
+                if (_rtoService.IsExists(id))
+                {
+                    return Ok( _rtoService.DeleteRTO(id));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  RTO Id is not exists");
+                    return StatusCode(500, " RTO Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Edit RTO");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

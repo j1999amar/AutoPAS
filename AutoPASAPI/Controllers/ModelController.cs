@@ -114,5 +114,31 @@ namespace AutoPASAPI.Controllers
             }
 
         }
+
+        //Delete Model 
+        [HttpDelete("DeleteModels/{id}")]
+        public  IActionResult DeleteModels([FromRoute] int id)
+        {
+            try
+            {
+
+                if (_modelService.IsExists(id))
+                {
+                        return Ok( _modelService.DeleteModels(id));
+                  
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  model Id is not exists");
+                    return StatusCode(500, " Model Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function  Model");
+                return StatusCode(500, "Data is not deleteable due to constraints");
+            }
+
+        }
     }
 }
