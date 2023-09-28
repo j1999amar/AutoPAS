@@ -93,5 +93,33 @@ namespace AutoPASSL.Repository
             }
             return con;
         }
+        public async Task<object> GetInsuredContactByPolicyNumber(string policynumber)
+        {
+
+            var result = await (from p in _context.policy
+                                join pi in _context.PolicyInsured on p.PolicyId.ToString() equals pi.PolicyId
+                                join i in _context.insured on pi.InsuredId equals i.InsuredId.ToString()
+                                join ct in _context.contact on i.ContactId equals ct.ContactId
+                                where p.PolicyNumber.ToString() == policynumber
+                                select new
+                                {
+                                    p.PolicyNumber,
+                                    p.PolicyEffectiveDt,
+                                    p.PolicyExpirationDt,
+                                    p.PaymentType,
+                                    p.EligibleForNCB,
+                                    i.FirstName,
+                                    i.LastName,
+                                    i.AadharNumber,
+                                    i.AccountNumber,
+                                    ct.AddressLine1,
+                                    ct.AddressLine2,
+                                    ct.City,
+                                    ct.State,
+                                    ct.Pincode
+                                }).ToListAsync();
+            return result;
+
+        }
     }
 }

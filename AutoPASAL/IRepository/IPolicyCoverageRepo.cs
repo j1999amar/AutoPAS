@@ -12,5 +12,6 @@ namespace AutoPASAL.IRepository
         Task<policycoverage> AddPolicyCoverage(List<int> coverageID);
         Task<policycoverage> EditPolicyCoverage(Guid Id, List<int> coverageID);
         Task<List<policycoverage>?> GetPolicyCoverageById(Guid Id);
+        Task<List<coverages>?> GetPolicyCoverageByPolicyNumber(int PolicyNumber);
     }
 }

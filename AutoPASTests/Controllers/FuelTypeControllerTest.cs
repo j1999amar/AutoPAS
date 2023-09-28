@@ -10,87 +10,149 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoPASDML;
 using Microsoft.Extensions.Logging;
+using AutoPASAL.IRepository;
+using AutoPASAL.Services;
+using AutoPASAL;
+using AutoPASAPITests.MockRepository;
+using AutoPASSL.Repository;
 
 namespace AutoPASAPI.Tests.Controllers
 {
     [TestFixture]
     public class FuelTypeControllerTests
     {
-        private Mock<IFuelTypeBL> _fuelTypeBLMock;
-        private Mock<ILogger<FuelTypeController>> _loggerMock;
-        private FuelTypeController _fuelTypeController;
+        private FuelTypeController _controller;
+        private Mock<IFuelTypeService> _mockFuelTypeService;
+        private Mock<ILogger<FuelTypeController>> _mockLogger;
+        private FuelTypeMockRepo _mockFuelTypeRepo;
+        private FuelTypeService _FuelTypeService;
+        private Mock<IFuelTypeRepo> _IFuelTypeRepo;
 
         [SetUp]
         public void Setup()
         {
-            _fuelTypeBLMock = new Mock<IFuelTypeBL>();
-            _loggerMock = new Mock<ILogger<FuelTypeController>>();
-            _fuelTypeController = new FuelTypeController(_fuelTypeBLMock.Object, _loggerMock.Object);
+            _IFuelTypeRepo = new Mock<IFuelTypeRepo>();
+            _FuelTypeService = new FuelTypeService(_IFuelTypeRepo.Object);
+            _mockFuelTypeRepo = new FuelTypeMockRepo();
+            _mockFuelTypeService = new Mock<IFuelTypeService>();
+            _mockLogger = new Mock<ILogger<FuelTypeController>>();
+            _controller = new FuelTypeController(_mockFuelTypeService.Object, _mockLogger.Object);
         }
 
         [Test]
-        public async Task GetFuelTypes_Returns_OkResult()
+        public async Task GetAllFuelType_ReturnsData()
         {
-            //Arrange
-            var fuelList = new List<fueltype>();
-            var ModelId = 1;
-            _fuelTypeBLMock.Setup(x => x.GetFuelTypes(ModelId)).ReturnsAsync(fuelList);
+            // Arrange
+            var fuelType = new List<fueltype> { };
+            _mockFuelTypeService.Setup(service => service.GetAllFuelTypes()).Returns(_FuelTypeService.GetAllFuelTypes);
+            _IFuelTypeRepo.Setup(repo => repo.GetAllFuelTypes()).Returns(_mockFuelTypeRepo.ReturnsFuelTypes);
 
-            //Act
-            var result = await _fuelTypeController.GetFuelTypes(ModelId);
+            // Act
+            var result = await _controller.GetAllFuelTypes() as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(fuelList, okResult.Value);
+            // Assert
+            Assert.AreEqual(fuelType, result.Value);
         }
 
         [Test]
-        public async Task GetFuelTypes_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetAllFuelType_ReturnsNull()
         {
-            //Arrange
-            var ModelId = 0;
-            _fuelTypeBLMock.Setup(x => x.GetFuelTypes(ModelId)).Throws(new Exception());
+            // Arrange
+            _mockFuelTypeService.Setup(service => service.GetAllFuelTypes()).Returns(_FuelTypeService.GetAllFuelTypes);
+            _IFuelTypeRepo.Setup(repo => repo.GetAllFuelTypes()).Returns(_mockFuelTypeRepo.ReturnsNull);
 
-            //Act
-            var result = await _fuelTypeController.GetFuelTypes(ModelId);
+            // Act
+            var result = await _controller.GetAllFuelTypes() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
         [Test]
-        public async Task GetAllFuelTypes_Returns_OkResult()
+        public async Task GetAllFuelType_WhenServiceThrowsException()
         {
-            //Arrange
-            var fuelList = new List<fueltype>();
-            _fuelTypeBLMock.Setup(x => x.GetAllFuelTypes()).ReturnsAsync(fuelList);
+            // Arrange
+            _mockFuelTypeService.Setup(service => service.GetAllFuelTypes()).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _fuelTypeController.GetAllFuelTypes();
+            // Act
+            var result = await _controller.GetAllFuelTypes() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(fuelList, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetAllFuelType_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            _mockFuelTypeService.Setup(service => service.GetAllFuelTypes()).Returns(_FuelTypeService.GetAllFuelTypes);
+            _IFuelTypeRepo.Setup(repo => repo.GetAllFuelTypes()).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetAllFuelTypes() as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
 
         [Test]
-        public async Task GetAllFuelTypes_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetFuelTypes_ReturnsData()
         {
-            //Arrange
-            var ModelId = 0;
-            _fuelTypeBLMock.Setup(x => x.GetAllFuelTypes()).Throws(new Exception());
+            // Arrange
+            var fuelType = new List<fueltype> { };
+            int ModelId = 0;
+            _mockFuelTypeService.Setup(service => service.GetFuelTypes(ModelId)).Returns(_FuelTypeService.GetFuelTypes);
+            _IFuelTypeRepo.Setup(repo => repo.GetFuelTypes(ModelId)).Returns(_mockFuelTypeRepo.ReturnsFuelTypes);
 
-            //Act
-            var result = await _fuelTypeController.GetAllFuelTypes();
+            // Act
+            var result = await _controller.GetFuelTypes(ModelId) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual(fuelType, result.Value);
         }
 
+        [Test]
+        public async Task GetFuelTypes_ReturnsNull()
+        {
+            // Arrange
+            int ModelId = 0;
+            _mockFuelTypeService.Setup(service => service.GetFuelTypes(ModelId)).Returns(_FuelTypeService.GetFuelTypes);
+            _IFuelTypeRepo.Setup(repo => repo.GetFuelTypes(ModelId)).Returns(_mockFuelTypeRepo.ReturnsNull);
+
+            // Act
+            var result = await _controller.GetFuelTypes(ModelId) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+        [Test]
+        public async Task GetFuelTypes_WhenServiceThrowsException()
+        {
+            // Arrange
+            int ModelId = 0;
+            _mockFuelTypeService.Setup(service => service.GetFuelTypes(ModelId)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetFuelTypes(ModelId) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetFuelTypes_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            int ModelId = 0;
+            _mockFuelTypeService.Setup(service => service.GetFuelTypes(ModelId)).Returns(_FuelTypeService.GetFuelTypes);
+            _IFuelTypeRepo.Setup(repo => repo.GetFuelTypes(ModelId)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetFuelTypes(ModelId) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
     }
 }

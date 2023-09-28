@@ -2,154 +2,247 @@
 using AutoPASAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using AutoPASDML;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using AutoPASSL;
+using AutoPASAL.IRepository;
+using AutoPASAL.Services;
+using AutoPASAL;
+using AutoPASAPITests.MockRepository;
+using AutoPASAPITests.MockBL;
 
 namespace AutoPASAPI.Tests.Controllers
 {
     [TestFixture]
     public class SupportingDocumentControllerTests
     {
-        private Mock<ISupportingDocumentBL> _supportingDocumentBLMock;
-        private Mock<ILogger<SupportingDocumentController>> _loggerMock;
-        private SupportingDocumentController _supportingDocumentController;
-        private Mock<APASDBContext> _context;
+        private SupportingDocumentController _controller;
+        private Mock<ISupportingDocumentService> _mockSupportingDocumentService;
+        private Mock<ILogger<SupportingDocumentController>> _mockLogger;
+        private SupportingDocumentMockRepo _mockSupportingDocumentRepo;
+        private SupportingDocumentMockBL _mocksupportingDocumentMockBL;
+        private SupportingDocumentService _SupportingDocumentService;
+        private Mock<ISupportingDocumentRepo> _ISupportingDocumentRepo;
+        private Mock<ISupportingDocumentBL> _ISupportingDocumentBL;
 
         [SetUp]
         public void Setup()
         {
-            _supportingDocumentBLMock = new Mock<ISupportingDocumentBL>();
-            _loggerMock = new Mock<ILogger<SupportingDocumentController>>();
-            _context = new Mock<APASDBContext>();
-            _supportingDocumentController = new SupportingDocumentController(_loggerMock.Object,_supportingDocumentBLMock.Object,_context.Object);
+            _ISupportingDocumentRepo = new Mock<ISupportingDocumentRepo>();
+            _ISupportingDocumentBL = new Mock<ISupportingDocumentBL> ();
+            _SupportingDocumentService = new SupportingDocumentService(_ISupportingDocumentRepo.Object,_ISupportingDocumentBL.Object);
+            _mockSupportingDocumentRepo = new SupportingDocumentMockRepo();
+            _mocksupportingDocumentMockBL = new  SupportingDocumentMockBL ();
+            _mockSupportingDocumentService = new Mock<ISupportingDocumentService>();
+            _mockLogger = new Mock<ILogger<SupportingDocumentController>>();
         }
 
+        //[Test]
+        //public async Task GetAllSupportingDocument_ReturnsData()
+        //{
+        //    // Arrange
+        //    string Id="id";
+        //    string filename= "filename";
+        //    string docname = Id + "_" + filename;
+        //    string fileName = Id + "_" + filename;
+        //    string docloc = "D:\\AutoPASAPI\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\00000000-0000-0000-0000-000000000000_gst.csv";
+        //    var fileStream = new FileStream(docloc, FileMode.Open, FileAccess.Read);
+        //    string doctype = "application/octet-stream";
+        //    var SupportingDocuments = new FileStreamResult(fileStream, doctype)
+        //    {
+        //        FileDownloadName = filename
+        //    };
+        //    _mockSupportingDocumentService.Setup(service => service.GetDocumentById(Id,filename)).Returns(_SupportingDocumentService.GetDocumentById);
+        //    _mockSupportingDocumentService.Setup(service => service.GetContentTypeForFile(Id, filename)).Returns(_SupportingDocumentService.GetContentTypeForFile);
+        //    _ISupportingDocumentRepo.Setup(repo => repo.GetDocumentById(docname)).Returns(_mockSupportingDocumentRepo.ReturnsSupportingDocument);
+        //    _ISupportingDocumentBL.Setup(bl => bl.GetDocument(docloc)).Returns(_mocksupportingDocumentMockBL.ReturnsFileStream);
+        //    _ISupportingDocumentBL.Setup(bl => bl.GetContentTypeForFile(fileName)).Returns(_mocksupportingDocumentMockBL.ReturnsContentType);
+
+        //    // Act
+        //    var result = await _controller.GetDocumentById(Id, filename) as FileStreamResult;
+
+        //    // Assert
+        //    Assert.AreEqual(SupportingDocuments.FileDownloadName, result.FileDownloadName);
+        //    Assert.AreEqual(SupportingDocuments.ContentType, result.ContentType);
+        //}
         [Test]
-        public async Task AddDocument_Returns_OkResult()
+        public async Task GetAllSupportingDocument_ReturnsNullFileStream()
         {
             // Arrange
-            var formFile1 = new FormFile(Stream.Null, 0, 1, "file1.cs", "file.cs");
-            var formFile2 = new FormFile(Stream.Null, 0, 1, "file2.cs", "file.cs");
-            var fileslist = new List<IFormFile>();
-            fileslist.Add(formFile1);
-            fileslist.Add(formFile2);
-            var file = new MultipleFile {files=fileslist};
-            _supportingDocumentBLMock.Setup(x => x.AddDocument(It.IsAny<IFormFile>())).Returns(Task.CompletedTask);
-
-
-            // Act
-            var result = await _supportingDocumentController.AddDocument(file);
-
-            // Assert
-            Assert.IsInstanceOf<OkResult>(result);
-            
-        }
-
-        [Test]
-        public async Task AddDocument_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
-        {
-            // Arrange
-            var formFile1 = new FormFile(Stream.Null, 0, 1, "file1.cs", "file.cs");
-            var formFile2 = new FormFile(Stream.Null, 0, 1, "file2.cs", "file.cs");
-            var fileslist = new List<IFormFile>
+            string Id = "id";
+            string filename = "filename";
+            string docname = Id + "_" + filename;
+            string fileName = Id + "_" + filename;
+            string docloc = "D:\\AutoPASAPI\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\00000000-0000-0000-0000-000000000000_gst.csv";
+            var fileStream = new FileStream(docloc, FileMode.Open, FileAccess.Read);
+            string doctype = "application/octet-stream";
+            var SupportingDocuments = new FileStreamResult(fileStream, doctype)
             {
-                formFile1,
-                formFile2
+                FileDownloadName = filename
             };
-            var file = new MultipleFile { files = fileslist };
-            _supportingDocumentBLMock.Setup(x => x.AddDocument(It.IsAny<IFormFile>())).Throws(new Exception());
-
+            _mockSupportingDocumentService.Setup(service => service.GetDocumentById(Id, filename)).Returns(_SupportingDocumentService.GetDocumentById);
+            _mockSupportingDocumentService.Setup(service => service.GetContentTypeForFile(Id, filename)).Returns(_SupportingDocumentService.GetContentTypeForFile);
+            _ISupportingDocumentRepo.Setup(repo => repo.GetDocumentById(docname)).Returns(_mockSupportingDocumentRepo.ReturnsSupportingDocument);
+            _ISupportingDocumentBL.Setup(bl => bl.GetDocument(docloc)).Returns(_mocksupportingDocumentMockBL.ReturnsFileStreamNull);
             // Act
-            var result = await _supportingDocumentController.AddDocument(file);
+            var result = await _controller.GetDocumentById(Id, filename) as ObjectResult;
 
             // Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(StatusCodes.Status500InternalServerError, objectResult.StatusCode);
+            Assert.AreEqual("Returns Null", result.Value);
         }
-
-
-
         [Test]
-        public async Task UpdateDocument_Returns_OkResult()
+        public async Task GetAllSupportingDocument_ReturnsNullDoc()
         {
             // Arrange
-            var formFile1 = new FormFile(Stream.Null, 0, 1, "file1.cs", "file.cs");
-            var formFile2 = new FormFile(Stream.Null, 0, 1, "file2.cs", "file.cs");
-            var fileslist = new List<IFormFile>();
-            fileslist.Add(formFile1);
-            fileslist.Add(formFile2);
-            var file = new MultipleFile { files = fileslist };
-            _supportingDocumentBLMock.Setup(x => x.UpdateDocument(It.IsAny<IFormFile>())).Returns(Task.CompletedTask);
-
-            // Act
-            var result = await _supportingDocumentController.UpdateDocument(file);
-
-            // Assert
-            Assert.IsInstanceOf<OkResult>(result);
-        }
-
-        [Test]
-        public async Task UpdateDocument_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
-        {
-            // Arrange
-            var formFile1 = new FormFile(Stream.Null, 0, 1, "file1.cs", "file.cs");
-            var formFile2 = new FormFile(Stream.Null, 0, 1, "file2.cs", "file.cs");
-            var fileslist = new List<IFormFile>();
-            fileslist.Add(formFile1);
-            fileslist.Add(formFile2);
-            var file = new MultipleFile { files = fileslist };
-            _supportingDocumentBLMock.Setup(x => x.UpdateDocument(It.IsAny<IFormFile>())).Throws(new Exception());
-
-            // Act
-            var result = await _supportingDocumentController.UpdateDocument(file);
-
-            // Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(StatusCodes.Status500InternalServerError, objectResult.StatusCode);
-        }
-        [Test]
-        public async Task GetDocumentById_Returns_OkResult()
-        {
-            string policyId = "somePolicyId";
-            var supportingDocuments = new List<supportingdocument>
-        {
-            new supportingdocument
+            string Id = "id";
+            string filename = "filename";
+            string docname = Id + "_" + filename;
+            string fileName = Id + "_" + filename;
+            string docloc = "D:\\AutoPASAPI\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\00000000-0000-0000-0000-000000000000_gst.csv";
+            var fileStream = new FileStream(docloc, FileMode.Open, FileAccess.Read);
+            string doctype = "application/octet-stream";
+            var SupportingDocuments = new FileStreamResult(fileStream, doctype)
             {
-                // Mock supportingdocument properties here
-                PolicyId = policyId,
-                DocumentLocation = "path/to/your/file.pdf",
-                DocumentName = "file.pdf"
-            }
-        };
-
-            // Mocking DbSet with supportingDocuments data
-            var mockDbSet = new Mock<DbSet<supportingdocument>>();
-            mockDbSet.As<IQueryable<supportingdocument>>().Setup(x => x.Provider).Returns(supportingDocuments.AsQueryable().Provider);
-            mockDbSet.As<IQueryable<supportingdocument>>().Setup(x => x.Expression).Returns(supportingDocuments.AsQueryable().Expression);
-            mockDbSet.As<IQueryable<supportingdocument>>().Setup(x => x.ElementType).Returns(supportingDocuments.AsQueryable().ElementType);
-            mockDbSet.As<IQueryable<supportingdocument>>().Setup(x => x.GetEnumerator()).Returns(supportingDocuments.AsQueryable().GetEnumerator());
-
-            // Mocking supportingdocuments DbSet in the DbContext
-            _context.Setup(x => x.supportingdocuments).Returns(mockDbSet.Object);
-
+                FileDownloadName = filename
+            };
+            _mockSupportingDocumentService.Setup(service => service.GetDocumentById(Id, filename)).Returns(_SupportingDocumentService.GetDocumentById);
+            _mockSupportingDocumentService.Setup(service => service.GetContentTypeForFile(Id, filename)).Returns(_SupportingDocumentService.GetContentTypeForFile);
+            _ISupportingDocumentRepo.Setup(repo => repo.GetDocumentById(docname)).Returns(_mockSupportingDocumentRepo.ReturnsNull);
             // Act
-            //var result = await _supportingDocumentController.GetDocumentById(policyId);
+            var result = await _controller.GetDocumentById(Id, filename) as ObjectResult;
 
             // Assert
-           // Assert.IsInstanceOf<OkObjectResult>(result.Result);
-
-            //var okResult = result.Result as OkObjectResult;
-            //Assert.IsInstanceOf<MultipleFile>(okResult.Value);
-
-            //var multipleFile = okResult.Value as MultipleFile;
-            //Assert.IsNotNull(multipleFile);
-            //Assert.AreEqual(1, multipleFile.files.Count);
+            Assert.AreEqual("Returns Null", result.Value);
         }
+        [Test]
+        public async Task GetDocumentById_WhenServiceThrowsException()
+        {
+            // Arrange
+            string Id = "id";
+            string filename = "filename";
+            string docname = Id + "_" + filename;
+            string fileName = Id + "_" + filename;
+            string docloc = "D:\\AutoPASAPI\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\00000000-0000-0000-0000-000000000000_gst.csv";
+            var fileStream = new FileStream(docloc, FileMode.Open, FileAccess.Read);
+            string doctype = "application/octet-stream";
+            var SupportingDocuments = new FileStreamResult(fileStream, doctype)
+            {
+                FileDownloadName = filename
+            };
+            _mockSupportingDocumentService.Setup(service => service.GetDocumentById(Id, filename)).ThrowsAsync(new Exception());
 
+            // Act
+            var result = await _controller.GetDocumentById(Id, filename) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetContentTypeForFile_WhenServiceThrowsException()
+        {
+            // Arrange
+            string Id = "id";
+            string filename = "filename";
+            string docname = Id + "_" + filename;
+            string fileName = Id + "_" + filename;
+            string docloc = "D:\\AutoPASAPI\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\00000000-0000-0000-0000-000000000000_gst.csv";
+            var fileStream = new FileStream(docloc, FileMode.Open, FileAccess.Read);
+            string doctype = "application/octet-stream";
+            var SupportingDocuments = new FileStreamResult(fileStream, doctype)
+            {
+                FileDownloadName = filename
+            };
+            _mockSupportingDocumentService.Setup(service => service.GetDocumentById(Id, filename)).Returns(_SupportingDocumentService.GetDocumentById);
+            _ISupportingDocumentRepo.Setup(repo => repo.GetDocumentById(docname)).Returns(_mockSupportingDocumentRepo.ReturnsSupportingDocument);
+            _ISupportingDocumentBL.Setup(bl => bl.GetDocument(docloc)).Returns(_mocksupportingDocumentMockBL.ReturnsFileStream);
+            _mockSupportingDocumentService.Setup(service => service.GetContentTypeForFile(Id, filename)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetDocumentById(Id, filename) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetDocumentById_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            string Id = "id";
+            string filename = "filename";
+            string docname = Id + "_" + filename;
+            string fileName = Id + "_" + filename;
+            string docloc = "D:\\AutoPASAPI\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\00000000-0000-0000-0000-000000000000_gst.csv";
+            var fileStream = new FileStream(docloc, FileMode.Open, FileAccess.Read);
+            string doctype = "application/octet-stream";
+            var SupportingDocuments = new FileStreamResult(fileStream, doctype)
+            {
+                FileDownloadName = filename
+            };
+            _mockSupportingDocumentService.Setup(service => service.GetDocumentById(Id, filename)).Returns(_SupportingDocumentService.GetDocumentById);
+            _mockSupportingDocumentService.Setup(service => service.GetContentTypeForFile(Id, filename)).Returns(_SupportingDocumentService.GetContentTypeForFile);
+            _ISupportingDocumentRepo.Setup(repo => repo.GetDocumentById(docname)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetDocumentById(Id, filename) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetDocument_WhenBLThrowsException()
+        {
+            // Arrange
+            string Id = "id";
+            string filename = "filename";
+            string docname = Id + "_" + filename;
+            string fileName = Id + "_" + filename;
+            string docloc = "D:\\AutoPASAPI\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\00000000-0000-0000-0000-000000000000_gst.csv";
+            var fileStream = new FileStream(docloc, FileMode.Open, FileAccess.Read);
+            string doctype = "application/octet-stream";
+            var SupportingDocuments = new FileStreamResult(fileStream, doctype)
+            {
+                FileDownloadName = filename
+            };
+            _mockSupportingDocumentService.Setup(service => service.GetDocumentById(Id, filename)).Returns(_SupportingDocumentService.GetDocumentById);
+            _mockSupportingDocumentService.Setup(service => service.GetContentTypeForFile(Id, filename)).Returns(_SupportingDocumentService.GetContentTypeForFile);
+            _ISupportingDocumentRepo.Setup(repo => repo.GetDocumentById(docname)).Returns(_mockSupportingDocumentRepo.ReturnsSupportingDocument);
+            _ISupportingDocumentBL.Setup(bl => bl.GetDocument(docloc)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetDocumentById(Id, filename) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetContentTypeForFile_WhenBLThrowsException()
+        {
+            // Arrange
+            string Id = "id";
+            string filename = "filename";
+            string docname = Id + "_" + filename;
+            string fileName = Id + "_" + filename;
+            string docloc = "D:\\AutoPASAPI\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\00000000-0000-0000-0000-000000000000_gst.csv";
+            var fileStream = new FileStream(docloc, FileMode.Open, FileAccess.Read);
+            string doctype = "application/octet-stream";
+            var SupportingDocuments = new FileStreamResult(fileStream, doctype)
+            {
+                FileDownloadName = filename
+            };
+            _mockSupportingDocumentService.Setup(service => service.GetDocumentById(Id, filename)).Returns(_SupportingDocumentService.GetDocumentById);
+            _mockSupportingDocumentService.Setup(service => service.GetContentTypeForFile(Id, filename)).Returns(_SupportingDocumentService.GetContentTypeForFile);
+            _ISupportingDocumentRepo.Setup(repo => repo.GetDocumentById(docname)).Returns(_mockSupportingDocumentRepo.ReturnsSupportingDocument);
+            _ISupportingDocumentBL.Setup(bl => bl.GetDocument(docloc)).Returns(_mocksupportingDocumentMockBL.ReturnsFileStream);
+            _ISupportingDocumentBL.Setup(bl => bl.GetContentTypeForFile(fileName)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetDocumentById(Id, filename) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
     }
 }

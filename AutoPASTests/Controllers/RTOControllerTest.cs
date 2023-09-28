@@ -10,184 +10,329 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoPASDML;
 using Microsoft.Extensions.Logging;
+using AutoPASAL.IRepository;
+using AutoPASAL.Services;
+using AutoPASAL;
+using AutoPASAPITests.MockRepository;
 
 namespace AutoPASAPI.Tests.Controllers
 {
     [TestFixture]
     public class RTOControllerTests
     {
-        private Mock<IRTOBL> _rtoBLMock;
-        private Mock<ILogger<RTOController>> _loggerMock;
-        private RTOController _rtoController;
+        private RTOController _controller;
+        private Mock<IRTOService> _mockRTOService;
+        private Mock<ILogger<RTOController>> _mockLogger;
+        private RTOMockRepo _mockRTORepo;
+        private RTOService _RTOService;
+        private Mock<IRTORepo> _IRTORepo;
 
         [SetUp]
         public void Setup()
         {
-            _rtoBLMock = new Mock<IRTOBL>();
-            _loggerMock = new Mock<ILogger<RTOController>>();
-            _rtoController = new RTOController(_rtoBLMock.Object,_loggerMock.Object);
+            _IRTORepo = new Mock<IRTORepo>();
+            _RTOService = new RTOService(_IRTORepo.Object);
+            _mockRTORepo = new RTOMockRepo();
+            _mockRTOService = new Mock<IRTOService>();
+            _mockLogger = new Mock<ILogger<RTOController>>();
+            _controller = new RTOController(_mockRTOService.Object, _mockLogger.Object);
         }
 
         [Test]
-        public async Task GetAllRTOState_Returns_OkResult()
+        public async Task GetAllRTO_ReturnsData()
         {
-            //Arrange
-            var rtoList = new List<RTO>();
-            _rtoBLMock.Setup(x => x.GetAllRTOState()).ReturnsAsync(rtoList);
+            // Arrange
+            var rtos = new List<rto> { };
+            Guid id = new Guid();
+            _mockRTOService.Setup(service => service.GetAllRTO(id)).Returns(_RTOService.GetAllRTO);
+            _IRTORepo.Setup(repo => repo.GetAllRTO(id)).Returns(_mockRTORepo.ReturnsRTO);
 
-            //Act
-            var result = await _rtoController.GetAllRTOState();
+            // Act
+            var result = await _controller.GetAllRTO(id) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(rtoList, okResult.Value);
+            // Assert
+            Assert.AreEqual(rtos, result.Value);
         }
 
         [Test]
-        public async Task GetAllRTOState_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetAllRTO_ReturnsNull()
         {
-            //Arrange
-            _rtoBLMock.Setup(x => x.GetAllRTOState()).Throws(new Exception());
+            // Arrange
+            Guid id = new Guid();
+            _mockRTOService.Setup(service => service.GetAllRTO(id)).Returns(_RTOService.GetAllRTO);
+            _IRTORepo.Setup(service => service.GetAllRTO(id)).Returns(_mockRTORepo.ReturnsNull);
 
-            //Act
-            var result = await _rtoController.GetAllRTOState();
+            // Act
+            var result = await _controller.GetAllRTO(id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
-        }
-        
-        [Test]
-        public async Task GetRTOCityByState_Returns_OkResult()
-        {
-            //Arrange
-            var rtoList = new List<RTO>();
-            var state = "SomeState";
-            _rtoBLMock.Setup(x => x.GetRTOCityByState(state)).ReturnsAsync(rtoList);
-
-            //Act
-            var result = await _rtoController.GetRTOCityByState(state);
-
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(rtoList, okResult.Value);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
 
         [Test]
-        public async Task GetRTOCityByState_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetAllRTO_WhenServiceThrowsException()
         {
-            //Arrange
-            var state = "SomeState";
-            _rtoBLMock.Setup(x => x.GetRTOCityByState(state)).Throws(new Exception());
+            // Arrange
+            Guid id = new Guid();
+            _mockRTOService.Setup(service => service.GetAllRTO(id)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _rtoController.GetRTOCityByState(state);
+            // Act
+            var result = await _controller.GetAllRTO(id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetAllRTO_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            Guid id = new Guid();
+            _mockRTOService.Setup(service => service.GetAllRTO(id)).Returns(_RTOService.GetAllRTO);
+            _IRTORepo.Setup(service => service.GetAllRTO(id)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetAllRTO(id) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetAllRTOState_ReturnsData()
+        {
+            // Arrange
+            var rtos = new List<rto> { };
+            _mockRTOService.Setup(service => service.GetAllRTOState()).Returns(_RTOService.GetAllRTOState);
+            _IRTORepo.Setup(repo => repo.GetAllRTOState()).Returns(_mockRTORepo.ReturnsRTO);
+
+            // Act
+            var result = await _controller.GetAllRTOState() as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(rtos, result.Value);
         }
 
         [Test]
-        public async Task GetRTONameByCity_Returns_OkResult()
+        public async Task GetAllRTOState_ReturnsNull()
         {
-            //Arrange
-            var rtoList = new List<RTO>();
-            var city = "SomeCity";
-            _rtoBLMock.Setup(x => x.GetRTONameByCity(city)).ReturnsAsync(rtoList);
+            // Arrange
+            _mockRTOService.Setup(service => service.GetAllRTOState()).Returns(_RTOService.GetAllRTOState);
+            _IRTORepo.Setup(service => service.GetAllRTOState()).Returns(_mockRTORepo.ReturnsNull);
 
-            //Act
-            var result = await _rtoController.GetRTONameByCity(city);
+            // Act
+            var result = await _controller.GetAllRTOState() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(rtoList, okResult.Value);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
 
         [Test]
-        public async Task GetRTONameByCity_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetAllRTOState_WhenServiceThrowsException()
         {
-            //Arrange
-            var city = "SomeCity";
-            _rtoBLMock.Setup(x => x.GetRTONameByCity(city)).Throws(new Exception());
+            // Arrange
+            _mockRTOService.Setup(service => service.GetAllRTOState()).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _rtoController.GetRTONameByCity(city);
+            // Act
+            var result = await _controller.GetAllRTOState() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
         [Test]
-        public async Task GetAllRTO_Returns_OkResult()
+        public async Task GetAllRTOState_WhenRepositoryThrowsException()
         {
-            //Arrange
-            var rtoList = new List<RTO>();
-            var id = new Guid();
-            _rtoBLMock.Setup(x => x.GetAllRTO(id)).ReturnsAsync(rtoList);
+            // Arrange
+            _mockRTOService.Setup(service => service.GetAllRTOState()).Returns(_RTOService.GetAllRTOState);
+            _IRTORepo.Setup(service => service.GetAllRTOState()).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _rtoController.GetAllRTO(id);
+            // Act
+            var result = await _controller.GetAllRTOState() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(rtoList, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetRTOCityByState_ReturnsData()
+        {
+            // Arrange
+            var rtos = new List<rto> { };
+            string test = "";
+            _mockRTOService.Setup(service => service.GetRTOCityByState(test)).Returns(_RTOService.GetRTOCityByState);
+            _IRTORepo.Setup(repo => repo.GetRTOCityByState(test)).Returns(_mockRTORepo.ReturnsRTO);
+
+            // Act
+            var result = await _controller.GetRTOCityByState(test) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(rtos, result.Value);
         }
 
         [Test]
-        public async Task GetAllRTO_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetRTOCityByState_ReturnsNull()
         {
-            //Arrange
-            var id = new Guid();
-            _rtoBLMock.Setup(x => x.GetAllRTO(id)).Throws(new Exception());
+            // Arrange
+            string test = "";
+            _mockRTOService.Setup(service => service.GetRTOCityByState(test)).Returns(_RTOService.GetRTOCityByState);
+            _IRTORepo.Setup(service => service.GetRTOCityByState(test)).Returns(_mockRTORepo.ReturnsNull);
 
-            //Act
-            var result = await _rtoController.GetAllRTO(id);
+            // Act
+            var result = await _controller.GetRTOCityByState(test) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
-        
+
         [Test]
-        public async Task GetCity_Returns_OkResult()
+        public async Task GetRTOCityByState_WhenServiceThrowsException()
         {
-            //Arrange
-            var rtoList = new List<RTO>();
-            var id = new Guid();
-            _rtoBLMock.Setup(x => x.GetCity(id)).ReturnsAsync(rtoList);
+            // Arrange
+            string test = "";
+            _mockRTOService.Setup(service => service.GetRTOCityByState(test)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _rtoController.GetCity(id);
+            // Act
+            var result = await _controller.GetRTOCityByState(test) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(rtoList, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
         [Test]
-        public async Task GetCity_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetRTOCityByState_WhenRepositoryThrowsException()
         {
-            //Arrange
-            var id = new Guid();
-            _rtoBLMock.Setup(x => x.GetCity(id)).Throws(new Exception());
+            // Arrange
+            string test = "";
+            _mockRTOService.Setup(service => service.GetRTOCityByState(test)).Returns(_RTOService.GetAllRTO);
+            _IRTORepo.Setup(service => service.GetRTOCityByState(test)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _rtoController.GetCity(id);
+            // Act
+            var result = await _controller.GetRTOCityByState(test) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetRTONameByCity_ReturnsData()
+        {
+            // Arrange
+            var rtos = new List<rto> { };
+            string test = "";
+            _mockRTOService.Setup(service => service.GetRTONameByCity(test)).Returns(_RTOService.GetRTONameByCity);
+            _IRTORepo.Setup(repo => repo.GetRTONameByCity(test)).Returns(_mockRTORepo.ReturnsRTO);
+
+            // Act
+            var result = await _controller.GetRTONameByCity(test) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(rtos, result.Value);
         }
 
+        [Test]
+        public async Task GetRTONameByCity_ReturnsNull()
+        {
+            // Arrange
+            string test = "";
+            _mockRTOService.Setup(service => service.GetRTONameByCity(test)).Returns(_RTOService.GetRTONameByCity);
+            _IRTORepo.Setup(service => service.GetRTONameByCity(test)).Returns(_mockRTORepo.ReturnsNull);
+
+            // Act
+            var result = await _controller.GetRTONameByCity(test) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+
+        [Test]
+        public async Task GetRTONameByCity_WhenServiceThrowsException()
+        {
+            // Arrange
+            string test = "";
+            _mockRTOService.Setup(service => service.GetRTONameByCity(test)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetRTONameByCity(test) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetRTONameByCity_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            string test = "";
+            _mockRTOService.Setup(service => service.GetRTONameByCity(test)).Returns(_RTOService.GetAllRTO);
+            _IRTORepo.Setup(service => service.GetRTONameByCity(test)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetRTONameByCity(test) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetCity_ReturnsData()
+        {
+            // Arrange
+            var rtos = new List<rto> { };
+            Guid id = new Guid();
+            _mockRTOService.Setup(service => service.GetCity(id)).Returns(_RTOService.GetCity);
+            _IRTORepo.Setup(repo => repo.GetCity(id)).Returns(_mockRTORepo.ReturnsRTO);
+
+            // Act
+            var result = await _controller.GetCity(id) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(rtos, result.Value);
+        }
+
+        [Test]
+        public async Task GetCity_ReturnsNull()
+        {
+            // Arrange
+            Guid id = new Guid();
+            _mockRTOService.Setup(service => service.GetCity(id)).Returns(_RTOService.GetCity);
+            _IRTORepo.Setup(service => service.GetCity(id)).Returns(_mockRTORepo.ReturnsNull);
+
+            // Act
+            var result = await _controller.GetCity(id) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+
+        [Test]
+        public async Task GetCity_WhenServiceThrowsException()
+        {
+            // Arrange
+            Guid id = new Guid();
+            _mockRTOService.Setup(service => service.GetCity(id)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetCity(id) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetCity_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            Guid id = new Guid();
+            _mockRTOService.Setup(service => service.GetCity(id)).Returns(_RTOService.GetCity);
+            _IRTORepo.Setup(service => service.GetCity(id)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetCity(id) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
     }
 }

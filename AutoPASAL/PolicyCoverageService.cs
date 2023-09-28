@@ -31,5 +31,10 @@ namespace AutoPASAL
             var polcov = _policyCoverageRepo.GetPolicyCoverageById(Id);
             return polcov;
         }
+        public Task<List<coverages>?> GetPolicyCoverageByPolicyNumber(int PolicyNumber)
+        {
+            var policyCoverageDetails = _policyCoverageRepo.GetPolicyCoverageByPolicyNumber(PolicyNumber);
+            return policyCoverageDetails;
+        }
     }
 }

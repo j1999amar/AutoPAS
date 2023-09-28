@@ -1,4 +1,5 @@
-﻿using AutoPASAL.Services;
+﻿using AutoPASAL.DTO_Model;
+using AutoPASAL.Services;
 using AutoPASBL;
 using AutoPASBL.Interface;
 using AutoPASDML;
@@ -14,6 +15,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AutoPASAPI.Controllers
@@ -33,7 +35,7 @@ namespace AutoPASAPI.Controllers
             //_tableDynamicController = tableDynamicController;
         }
 
-        [HttpPost("AddTables/{filename}")]
+        [HttpPost("UploadTables/{filename}")]
         public async Task<IActionResult> AddRateTables([FromForm] UploadFile file,string filename)
          {
             try
@@ -52,13 +54,30 @@ namespace AutoPASAPI.Controllers
                 return StatusCode(500, ex);
             }
         }
+        [HttpPost("CreateTable/{filename}")]
+        public async Task<IActionResult> CreateTables([FromBody] JsonElement filedata, string filename)
+        {
+            try
+            {
+                return Ok(await _uploadService.CreateTables(filedata, filename));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
 
-       [HttpGet("GetTableList")]
+        [HttpGet("GetTableList")]
         public async Task<IActionResult> GetTableList()
         {
             try
             {
-               return Ok(await _uploadService.GetTableList());
+               var meta = await _uploadService.GetTableList();
+                if (meta == null)
+                {
+                    return BadRequest("Returns Null");
+                }
+                return Ok(meta);
             }
             catch (Exception ex)
             {
@@ -71,7 +90,12 @@ namespace AutoPASAPI.Controllers
         {
             try
             {
-                return Ok(await _uploadService.GetTableListById(id));
+                var meta = await _uploadService.GetTableListById(id);
+                if (meta == null)
+                {
+                    return BadRequest("Returns Null");
+                }
+                return Ok(meta);
             }
             catch (Exception ex)
             {

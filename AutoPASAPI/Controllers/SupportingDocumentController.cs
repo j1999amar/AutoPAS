@@ -14,13 +14,11 @@ namespace AutoPASAPI.Controllers
     {
         private readonly ISupportingDocumentService _supportingDocumentService;
         private readonly ILogger<SupportingDocumentController> _logger;
-        private readonly APASDBContext _context;
 
-        public SupportingDocumentController(ILogger<SupportingDocumentController> logger, ISupportingDocumentService supportingDocumentService, APASDBContext context)
+        public SupportingDocumentController(ILogger<SupportingDocumentController> logger, ISupportingDocumentService supportingDocumentService)
         {
             _logger = logger;
             _supportingDocumentService = supportingDocumentService;
-            _context = context;
         }
 
         [HttpPost("AddDocument")]
@@ -85,7 +83,7 @@ namespace AutoPASAPI.Controllers
                 var fileStream = await _supportingDocumentService.GetDocumentById(Id,filename);
                 if (fileStream == null)
                 {
-                    return null;
+                    return BadRequest("Returns Null");
                 }
                 string doctype = await _supportingDocumentService.GetContentTypeForFile(Id,filename);
                 return File(fileStream, doctype, filename);

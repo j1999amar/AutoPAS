@@ -95,7 +95,7 @@ namespace AutoPASAPI.Controllers
 
         //Add RTO 
         [HttpPost("AddRTO")]
-        public async Task<IActionResult> AddRTO([FromBody] RTO rto)
+        public async Task<IActionResult> AddRTO([FromBody] rto rto)
         {
             try
             {
@@ -120,7 +120,7 @@ namespace AutoPASAPI.Controllers
 
         //Edit RTO 
         [HttpPut("EditRTO")]
-        public async Task<IActionResult> EditRTO([FromBody] RTO rto)
+        public async Task<IActionResult> EditRTO([FromBody] rto rto)
         {
             try
             {

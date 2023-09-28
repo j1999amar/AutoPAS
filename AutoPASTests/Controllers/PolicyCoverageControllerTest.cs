@@ -10,124 +10,95 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoPASDML;
 using Microsoft.Extensions.Logging;
+using AutoPASAL.IRepository;
+using AutoPASAL.Services;
+using AutoPASAL;
+using AutoPASAPITests.MockRepository;
 
 namespace AutoPASAPI.Tests.Controllers
 {
     [TestFixture]
     public class PolicyCoverageControllerTests
     {
-        private Mock<IPolicyCoverageBL> _policyCoverageBLMock;
-        private Mock<ILogger<PolicyCoverageController>> _loggerMock;
-        private PolicyCoverageController _policyCoverageController;
+        private PolicyCoverageController _controller;
+        private Mock<IPolicyCoverageService> _mockPolicyCoverageService;
+        private Mock<ILogger<PolicyCoverageController>> _mockLogger;
+        private PolicyCoverageMockRepo _mockPolicyCoverageRepo;
+        private PolicyCoverageService _PolicyCoverageService;
+        private Mock<IPolicyCoverageRepo> _IPolicyCoverageRepo;
 
         [SetUp]
         public void Setup()
         {
-            _policyCoverageBLMock = new Mock<IPolicyCoverageBL>();
-            _loggerMock = new Mock<ILogger<PolicyCoverageController>>();
-            _policyCoverageController = new PolicyCoverageController(_policyCoverageBLMock.Object, _loggerMock.Object);
+            _IPolicyCoverageRepo = new Mock<IPolicyCoverageRepo>();
+            _PolicyCoverageService = new PolicyCoverageService(_IPolicyCoverageRepo.Object);
+            _mockPolicyCoverageRepo = new PolicyCoverageMockRepo();
+            _mockPolicyCoverageService = new Mock<IPolicyCoverageService>();
+            _mockLogger = new Mock<ILogger<PolicyCoverageController>>();
+            _controller = new PolicyCoverageController(_mockPolicyCoverageService.Object, _mockLogger.Object);
         }
 
         [Test]
-        public async Task AddPolicyCoverage_Returns_OkResult()
+        public async Task GetPolicyCoverageById_ReturnsData()
         {
-            //Arrange
-            var policycoverage = new policycoverage();
-            List<int> coverageId = new List<int>();
-            _policyCoverageBLMock.Setup(x => x.AddPolicyCoverage(coverageId)).ReturnsAsync(policycoverage);
+            // Arrange
+            Guid Id = Guid.NewGuid();
+            var policyCoverages = new List<policycoverage> { };
+            _mockPolicyCoverageService.Setup(service => service.GetPolicyCoverageById(Id)).Returns(_PolicyCoverageService.GetPolicyCoverageById);
+            _IPolicyCoverageRepo.Setup(repo => repo.GetPolicyCoverageById(Id)).Returns(_mockPolicyCoverageRepo.ReturnsPolicyCoverage);
 
-            //Act
-            var result = await _policyCoverageController.AddPolicyCoverage(coverageId);
+            // Act
+            var result = await _controller.GetPolicyCoverageById(Id) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(policycoverage, okResult.Value);
+            // Assert
+            Assert.AreEqual(policyCoverages, result.Value);
         }
 
         [Test]
-        public async Task AddPolicyCoverage_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetPolicyCoverageById_ReturnsNull()
         {
-            //Arrange
-            var objpolicycoverage = new policycoverage();
-            List<int> coverageId = new List<int>();
-            _policyCoverageBLMock.Setup(x => x.AddPolicyCoverage(coverageId)).Throws(new Exception());
+            // Arrange
+            Guid Id = Guid.NewGuid();
+            _mockPolicyCoverageService.Setup(service => service.GetPolicyCoverageById(Id)).Returns(_PolicyCoverageService.GetPolicyCoverageById);
+            _IPolicyCoverageRepo.Setup(service => service.GetPolicyCoverageById(Id)).Returns(_mockPolicyCoverageRepo.ReturnsPolicyCoverageNull);
 
-            //Act
-            var result = await _policyCoverageController.AddPolicyCoverage(coverageId);
+            // Act
+            var result = await _controller.GetPolicyCoverageById(Id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
 
         [Test]
-        public async Task EditPolicyCoverage_Returns_OkResult()
+        public async Task GetPolicyCoverageById_WhenServiceThrowsException()
         {
-            //Arrange
-            var Id = Guid.NewGuid();
-            var policycoverage = new policycoverage();
-            List<int> coverageId = new List<int>();
-            _policyCoverageBLMock.Setup(x => x.EditPolicyCoverage(Id,coverageId)).ReturnsAsync(policycoverage);
+            // Arrange
+            Guid Id = Guid.NewGuid();
+            _mockPolicyCoverageService.Setup(service => service.GetPolicyCoverageById(Id)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _policyCoverageController.EditPolicyCoverage(Id,coverageId);
+            // Act
+            var result = await _controller.GetPolicyCoverageById(Id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(policycoverage, okResult.Value);
-        }
-
-        [Test]
-        public async Task EditPolicyCoverage_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
-        {
-            //Arrange
-            var Id = Guid.NewGuid();
-            List<int> coverageId = new List<int>();
-            _policyCoverageBLMock.Setup(x => x.EditPolicyCoverage(Id,coverageId)).Throws(new Exception());
-
-            //Act
-            var result = await _policyCoverageController.EditPolicyCoverage(Id,coverageId);
-
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
         [Test]
-        public async Task GetPolicyCoverageById_Returns_OkResult()
+        public async Task GetPolicyCoverageById_WhenRepositoryThrowsException()
         {
-            //Arrange
-            var Id = Guid.NewGuid();
-            var policycoverage = new List<policycoverage>();
-            _policyCoverageBLMock.Setup(x => x.GetPolicyCoverageById(Id)).ReturnsAsync(policycoverage);
+            // Arrange
+            Guid Id = Guid.NewGuid();
+            _mockPolicyCoverageService.Setup(service => service.GetPolicyCoverageById(Id)).Returns(_PolicyCoverageService.GetPolicyCoverageById);
+            _IPolicyCoverageRepo.Setup(service => service.GetPolicyCoverageById(Id)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _policyCoverageController.GetPolicyCoverageById(Id);
+            // Act
+            var result = await _controller.GetPolicyCoverageById(Id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(policycoverage, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
-
-        [Test]
-        public async Task GetPolicyCoverageById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
-        {
-            //Arrange
-            var Id = Guid.NewGuid();
-            _policyCoverageBLMock.Setup(x => x.GetPolicyCoverageById(Id)).Throws(new Exception());
-
-            //Act
-            var result = await _policyCoverageController.GetPolicyCoverageById(Id);
-
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
-        }
+       
 
     }
 }

@@ -1,0 +1,77 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\FilesRateTables\\gst.csv",
+      "PackagePath": "staticwebassets\\FilesRateTables\\gst.csv"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\FilesRateTables\\ncb.csv",
+      "PackagePath": "staticwebassets\\FilesRateTables\\ncb.csv"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\00000000-0000-0000-0000-000000000000_gst.csv",
+      "PackagePath": "staticwebassets\\Upload\\00000000-0000-0000-0000-000000000000_gst.csv"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\08db997a-2e65-44c8-8b28-d612acb23481_Adhar.txt",
+      "PackagePath": "staticwebassets\\Upload\\08db997a-2e65-44c8-8b28-d612acb23481_Adhar.txt"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\08db997a-2e65-44c8-8b28-d612acb23481_RC.txt",
+      "PackagePath": "staticwebassets\\Upload\\08db997a-2e65-44c8-8b28-d612acb23481_RC.txt"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\08db9e27-bf67-4602-8cde-1a95b450e6b2_Adhar.csv",
+      "PackagePath": "staticwebassets\\Upload\\08db9e27-bf67-4602-8cde-1a95b450e6b2_Adhar.csv"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\08db9e27-bf67-4602-8cde-1a95b450e6b2_RC.docx",
+      "PackagePath": "staticwebassets\\Upload\\08db9e27-bf67-4602-8cde-1a95b450e6b2_RC.docx"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\08dbad0d-9592-4942-821f-64da00295e8f_Adhar.csv",
+      "PackagePath": "staticwebassets\\Upload\\08dbad0d-9592-4942-821f-64da00295e8f_Adhar.csv"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\08dbad0d-9592-4942-821f-64da00295e8f_License.csv",
+      "PackagePath": "staticwebassets\\Upload\\08dbad0d-9592-4942-821f-64da00295e8f_License.csv"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\08dbad0d-9592-4942-821f-64da00295e8f_RC.csv",
+      "PackagePath": "staticwebassets\\Upload\\08dbad0d-9592-4942-821f-64da00295e8f_RC.csv"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\08dbad2b-7776-4d4e-8489-f2bb529d57e4_Adhar.csv",
+      "PackagePath": "staticwebassets\\Upload\\08dbad2b-7776-4d4e-8489-f2bb529d57e4_Adhar.csv"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\08dbad2b-7776-4d4e-8489-f2bb529d57e4_RC.csv",
+      "PackagePath": "staticwebassets\\Upload\\08dbad2b-7776-4d4e-8489-f2bb529d57e4_RC.csv"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\08dbad2c-ecef-478e-84e6-f3017325654d_Adhar.csv",
+      "PackagePath": "staticwebassets\\Upload\\08dbad2c-ecef-478e-84e6-f3017325654d_Adhar.csv"
+    },
+    {
+      "Id": "C:\\Users\\amarnath.CHN\\Downloads\\autopasapi (3)\\autopasapi\\AutoPAS\\AutoPASAPI\\wwwroot\\Upload\\08dbad2c-ecef-478e-84e6-f3017325654d_RC.csv",
+      "PackagePath": "staticwebassets\\Upload\\08dbad2c-ecef-478e-84e6-f3017325654d_RC.csv"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.AutoPASAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.AutoPASAPI.props",
+      "PackagePath": "build\\AutoPASAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.AutoPASAPI.props",
+      "PackagePath": "buildMultiTargeting\\AutoPASAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.AutoPASAPI.props",
+      "PackagePath": "buildTransitive\\AutoPASAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

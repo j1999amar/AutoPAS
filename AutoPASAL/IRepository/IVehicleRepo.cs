@@ -11,11 +11,15 @@ namespace AutoPASAL.IRepository
     {
         Task<List<vehicle>> GetAllVehicles();
         Task<List<vehicle>?> GetVehicleById(Guid Id);
-        Task<List<RTO>?> GetAllRTOState();
-        Task<List<RTO>?> GetRTOCityByState(string state);
-        Task<List<RTO>?> GetRTONameByCity(string city);
+        Task<List<rto>?> GetAllRTOState();
+        Task<List<rto>?> GetRTOCityByState(string state);
+        Task<List<rto>?> GetRTONameByCity(string city);
         Task<List<Brands>> GetBrandByVehicleType(int Id);
         Task<vehicle> AddVehicle(vehicle objVehicle);
         Task<vehicle> UpdateVehicleById(Guid Id, vehicle objVehicle);
+
+
+        //Customer Portal:
+        Task<object> GetVehicleDetailsByPolicyNumber(int policyNumber);
     }
 }

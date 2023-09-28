@@ -1,0 +1,5 @@
+2023-09-22 12:13:32,779 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: https://localhost:59363
+2023-09-22 12:13:32,825 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:59364
+2023-09-22 12:13:32,845 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2023-09-22 12:13:32,851 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2023-09-22 12:13:32,855 [1] INFO Microsoft.Hosting.Lifetime - Content root path: D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\

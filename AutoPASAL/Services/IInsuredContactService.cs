@@ -13,5 +13,6 @@ namespace AutoPASAL.Services
         Task<insuredContact> EditInsuredContact(Guid Id, insuredContact objInsuredContact);
         Task<List<insured>?> GetInsuredById(Guid Id);
         Task<List<contact>?> GetContactById(Guid Id);
+        Task<object> GetInsuredContactByPolicyNumber(string policynumber);
     }
 }

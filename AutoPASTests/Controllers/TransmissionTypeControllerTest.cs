@@ -11,87 +11,153 @@ using System.Threading.Tasks;
 using AutoPASDML;
 using Microsoft.Extensions.Logging;
 using System.Web.Razor.Parser.SyntaxTree;
+using AutoPASAL.IRepository;
+using AutoPASAL.Services;
+using AutoPASAL;
+using AutoPASAPITests.MockRepository;
+using AutoPASSL.Repository;
 
 namespace AutoPASAPI.Tests.Controllers
 {
     [TestFixture]
     public class TransmissionTypeControllerTests
     {
-        private Mock<ITransmissionTypeBL> _transmissionTypeBLMock;
-        private Mock<ILogger<TransmissionTypeController>> _loggerMock;
-        private TransmissionTypeController _transmissionTypeController;
+        private TransmissionTypeController _controller;
+        private Mock<ITransmissionTypeService> _mockTransmissionTypeService;
+        private Mock<ILogger<TransmissionTypeController>> _mockLogger;
+        private TransmissionTypeMockRepo _mockTransmissionTypeRepo;
+        private TransmissionTypeService _TransmissionTypeService;
+        private Mock<ITransmissionTypeRepo> _ITransmissionTypeRepo;
 
         [SetUp]
         public void Setup()
         {
-            _transmissionTypeBLMock = new Mock<ITransmissionTypeBL>();
-            _loggerMock = new Mock<ILogger<TransmissionTypeController>>();
-            _transmissionTypeController = new TransmissionTypeController(_transmissionTypeBLMock.Object, _loggerMock.Object);
+            _ITransmissionTypeRepo = new Mock<ITransmissionTypeRepo>();
+            _TransmissionTypeService = new TransmissionTypeService(_ITransmissionTypeRepo.Object);
+            _mockTransmissionTypeRepo = new TransmissionTypeMockRepo();
+            _mockTransmissionTypeService = new Mock<ITransmissionTypeService>();
+            _mockLogger = new Mock<ILogger<TransmissionTypeController>>();
+            _controller = new TransmissionTypeController(_mockTransmissionTypeService.Object, _mockLogger.Object);
         }
 
         [Test]
-        public async Task GetTransmissionTypes_Returns_OkResult()
+        public async Task GetAllTransmissionType_ReturnsData()
         {
-            //Arrange
-            var transmissionList = new List<transmissiontype>();
-            var ModelId = 0;
-            var FuelId = 0;
-            _transmissionTypeBLMock.Setup(x => x.GetTransmissionTypes(ModelId, FuelId)).ReturnsAsync(transmissionList);
+            // Arrange
+            var TransmissionType = new List<transmissiontype> { };
+            _mockTransmissionTypeService.Setup(service => service.GetAllTransmissionTypes()).Returns(_TransmissionTypeService.GetAllTransmissionTypes);
+            _ITransmissionTypeRepo.Setup(repo => repo.GetAllTransmissionTypes()).Returns(_mockTransmissionTypeRepo.ReturnsTransmissionTypes);
 
-            //Act
-            var result = await _transmissionTypeController.GetTransmissionTypes(ModelId, FuelId);
+            // Act
+            var result = await _controller.GetAllTransmissionTypes() as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(transmissionList, okResult.Value);
+            // Assert
+            Assert.AreEqual(TransmissionType, result.Value);
         }
 
         [Test]
-        public async Task GetTransmissionTypes_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetAllTransmissionType_ReturnsNull()
         {
-            //Arrange
-            var ModelId = 0;
-            var FuelId = 0;
-            _transmissionTypeBLMock.Setup(x => x.GetTransmissionTypes(ModelId, FuelId)).Throws(new Exception());
+            // Arrange
+            _mockTransmissionTypeService.Setup(service => service.GetAllTransmissionTypes()).Returns(_TransmissionTypeService.GetAllTransmissionTypes);
+            _ITransmissionTypeRepo.Setup(repo => repo.GetAllTransmissionTypes()).Returns(_mockTransmissionTypeRepo.ReturnsNull);
 
-            //Act
-            var result = await _transmissionTypeController.GetTransmissionTypes(ModelId, FuelId);
+            // Act
+            var result = await _controller.GetAllTransmissionTypes() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
         [Test]
-        public async Task GetAllTransmissionTypes_Returns_OkResult()
+        public async Task GetAllTransmissionType_WhenServiceThrowsException()
         {
-            //Arrange
-            var transmissionList = new List<transmissiontype>();
-            _transmissionTypeBLMock.Setup(x => x.GetAllTransmissionTypes()).ReturnsAsync(transmissionList);
+            // Arrange
+            _mockTransmissionTypeService.Setup(service => service.GetAllTransmissionTypes()).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _transmissionTypeController.GetAllTransmissionTypes();
+            // Act
+            var result = await _controller.GetAllTransmissionTypes() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(transmissionList, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetAllTransmissionType_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            _mockTransmissionTypeService.Setup(service => service.GetAllTransmissionTypes()).Returns(_TransmissionTypeService.GetAllTransmissionTypes);
+            _ITransmissionTypeRepo.Setup(repo => repo.GetAllTransmissionTypes()).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetAllTransmissionTypes() as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
 
         [Test]
-        public async Task GetAllTransmissionTypes_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetTransmissionTypeByBrand_ReturnsData()
         {
-            //Arrange
-            _transmissionTypeBLMock.Setup(x => x.GetAllTransmissionTypes()).Throws(new Exception());
+            // Arrange
+            var TransmissionType = new List<transmissiontype> { };
+            int ModelId = 0;
+            int FuelId = 0;
+            _mockTransmissionTypeService.Setup(service => service.GetTransmissionTypes(ModelId, FuelId)).Returns(_TransmissionTypeService.GetTransmissionTypes);
+            _ITransmissionTypeRepo.Setup(repo => repo.GetTransmissionTypes(ModelId, FuelId)).Returns(_mockTransmissionTypeRepo.ReturnsTransmissionTypes);
 
-            //Act
-            var result = await _transmissionTypeController.GetAllTransmissionTypes();
+            // Act
+            var result = await _controller.GetTransmissionTypes(ModelId, FuelId) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual(TransmissionType, result.Value);
+        }
+
+        [Test]
+        public async Task GetTransmissionTypeByBrand_ReturnsNull()
+        {
+            // Arrange
+            int ModelId = 0;
+            int FuelId = 0;
+            _mockTransmissionTypeService.Setup(service => service.GetTransmissionTypes(ModelId, FuelId)).Returns(_TransmissionTypeService.GetTransmissionTypes);
+            _ITransmissionTypeRepo.Setup(repo => repo.GetTransmissionTypes(ModelId, FuelId)).Returns(_mockTransmissionTypeRepo.ReturnsNull);
+
+            // Act
+            var result = await _controller.GetTransmissionTypes(ModelId, FuelId) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+        [Test]
+        public async Task GetTransmissionTypeByBrand_WhenServiceThrowsException()
+        {
+            // Arrange
+            int ModelId = 0;
+            int FuelId = 0;
+            _mockTransmissionTypeService.Setup(service => service.GetTransmissionTypes(ModelId, FuelId)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetTransmissionTypes(ModelId, FuelId) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetTransmissionTypeByBrand_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            int ModelId = 0;
+            int FuelId = 0;
+            _mockTransmissionTypeService.Setup(service => service.GetTransmissionTypes(ModelId, FuelId)).Returns(_TransmissionTypeService.GetTransmissionTypes);
+            _ITransmissionTypeRepo.Setup(repo => repo.GetTransmissionTypes(ModelId, FuelId)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetTransmissionTypes(ModelId, FuelId) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
 
     }

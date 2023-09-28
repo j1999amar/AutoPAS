@@ -26,17 +26,17 @@ namespace AutoPASAL
             var veh = _vehicleRepo.GetVehicleById(Id);
             return veh;
         }
-        public Task<List<RTO>?> GetAllRTOState()
+        public Task<List<rto>?> GetAllRTOState()
         {
             var rto= _vehicleRepo.GetAllRTOState();
             return rto;
         }
-        public Task<List<RTO>?> GetRTOCityByState(string state)
+        public Task<List<rto>?> GetRTOCityByState(string state)
         {
             var rto = _vehicleRepo.GetRTOCityByState(state);
             return rto;
         }
-        public Task<List<RTO>?> GetRTONameByCity(string city)
+        public Task<List<rto>?> GetRTONameByCity(string city)
         {
             var rto = _vehicleRepo.GetRTONameByCity(city);
             return rto;
@@ -54,6 +54,13 @@ namespace AutoPASAL
         public Task<vehicle> UpdateVehicleById(Guid Id, vehicle objVehicle)
         {
             var obj = _vehicleRepo.UpdateVehicleById(Id, objVehicle);
+            return obj;
+        }
+
+        //Customer Portal:
+        public Task<object> GetVehicleDetailsByPolicyNumber(int policyNumber)
+        {
+            var obj = _vehicleRepo.GetVehicleDetailsByPolicyNumber(policyNumber);
             return obj;
         }
     }

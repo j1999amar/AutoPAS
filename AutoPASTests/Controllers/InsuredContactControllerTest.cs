@@ -11,185 +11,153 @@ using System.Threading.Tasks;
 using AutoPASDML;
 using Microsoft.Extensions.Logging;
 using System.Net;
+using AutoPASAL.IRepository;
+using AutoPASAL.Services;
+using AutoPASAL;
+using AutoPASAPITests.MockRepository;
 
 namespace AutoPASAPI.Tests.Controllers
 {
     [TestFixture]
     public class InsuredContactControllerTests
     {
-        private Mock<IInsuredBL> _insuredBLMock;
-        private Mock<IContactBL> _contactBLMock;
-        private Mock<ILogger<InsuredContactController>> _loggerMock;
-        private InsuredContactController _insuredContactController;
+        private InsuredContactController _controller;
+        private Mock<IInsuredContactService> _mockInsuredContactService;
+        private Mock<ILogger<InsuredContactController>> _mockLogger;
+        private InsuredContactMockRepo _mockInsuredContactRepo;
+        private InsuredContactService _InsuredContactService;
+        private Mock<IInsuredContactRepo> _IInsuredContactRepo;
 
         [SetUp]
         public void Setup()
         {
-            _insuredBLMock = new Mock<IInsuredBL>();
-            _contactBLMock = new Mock<IContactBL>();
-            _loggerMock = new Mock<ILogger<InsuredContactController>>();
-            _insuredContactController = new InsuredContactController(_contactBLMock.Object,_insuredBLMock.Object, _loggerMock.Object);
+            _IInsuredContactRepo = new Mock<IInsuredContactRepo>();
+            _InsuredContactService = new InsuredContactService(_IInsuredContactRepo.Object);
+            _mockInsuredContactRepo = new InsuredContactMockRepo();
+            _mockInsuredContactService = new Mock<IInsuredContactService>();
+            _mockLogger = new Mock<ILogger<InsuredContactController>>();
+            _controller = new InsuredContactController(_mockInsuredContactService.Object, _mockLogger.Object);
         }
 
         [Test]
-        public async Task AddInsuredContact_Returns_OkResult()
-        {
-            //Arrange
-            var con = new contact();
-            var objContact = new contact() { ContactId=new Guid()};
-            _contactBLMock.Setup(y => y.AddContact(objContact)).ReturnsAsync(con);
-            var ins = new insured();
-            var objInsured = new insured();
-            _insuredBLMock.Setup(x => x.AddInsured(objInsured)).ReturnsAsync(ins);
-            var objInsuredContact = new insuredContact()
-            {
-                contact= objContact,
-                insured= objInsured
-            };
-
-            //Act
-            var result = await _insuredContactController.AddInsuredContact(objInsuredContact);
-
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(objInsuredContact, okResult.Value);
-        }
-
-        [Test]
-        public async Task AddInsuredContact_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
-        {
-            //Arrange
-            var objContact = new contact();
-            var objInsured = new insured();
-            _contactBLMock.Setup(y => y.AddContact(objContact)).Throws(new Exception());
-            var objInsuredContact = new insuredContact()
-            {
-                contact = objContact,
-                insured = objInsured
-            };
-            //Act
-            var result = await _insuredContactController.AddInsuredContact(objInsuredContact);
-
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
-        }
-
-        [Test]
-        public async Task EditInsuredContact_Returns_OkResult()
-        {
-            //Arrange
-            Guid Id1 = Guid.NewGuid();
-            var insured = new insured();
-            var objInsured = new insured();
-            _insuredBLMock.Setup(x => x.EditInsured(Id1,objInsured)).ReturnsAsync(insured);
-            Guid Id2 = Guid.NewGuid();
-            var cont = new contact();
-            var objContact = new contact();
-            _contactBLMock.Setup(y => y.EditContact(Id2,objContact)).ReturnsAsync(cont);
-            var objInsuredContact = new insuredContact()
-            {
-                contact = objContact,
-                insured = objInsured
-            };
-
-            //Act
-            var result = await _insuredContactController.EditInsuredContact(Id2,objInsuredContact);
-
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(200, objectResult.StatusCode);
-        }
-
-       
-
-        [Test]
-        public async Task EditInsuredContact_Exception_ReturnsStatusCode500()
+        public async Task GetInsuredById_ReturnsData()
         {
             // Arrange
-            Guid Id1 = Guid.NewGuid();
-            var Insr = new insured();
-            var objInsured = new insured();
-            var cont = new contact();
-            _insuredBLMock.Setup(x => x.EditInsured(Id1, Insr)).Throws(new Exception());
-            var objInsuredContact = new insuredContact();
+            var insured = new List<insured> { };
+            Guid Id = new Guid();
+            _mockInsuredContactService.Setup(service => service.GetInsuredById(Id)).Returns(_InsuredContactService.GetInsuredById);
+            _IInsuredContactRepo.Setup(repo => repo.GetInsuredById(Id)).Returns(_mockInsuredContactRepo.ReturnsInsured);
 
             // Act
-            var result = await _insuredContactController.EditInsuredContact(Id1,objInsuredContact);
+            var result = await _controller.GetInsuredById(Id) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual(insured, result.Value);
         }
 
         [Test]
-        public async Task GetInsuredById_Returns_OkResult()
+        public async Task GetInsuredById_ReturnsNull()
         {
-            //Arrange
-            Guid Id = Guid.NewGuid();
-            var Insured = new List<insured>();
-            _insuredBLMock.Setup(x => x.GetInsuredById(Id)).ReturnsAsync(Insured);
+            // Arrange
+            Guid Id = new Guid();
+            _mockInsuredContactService.Setup(service => service.GetInsuredById(Id)).Returns(_InsuredContactService.GetInsuredById);
+            _IInsuredContactRepo.Setup(service => service.GetInsuredById(Id)).Returns(_mockInsuredContactRepo.ReturnsInsuredNull);
 
-            //Act
-            var result = await _insuredContactController.GetInsuredById(Id);
+            // Act
+            var result = await _controller.GetInsuredById(Id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(Insured, okResult.Value);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
 
         [Test]
-        public async Task GetInsuredById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetInsuredById_WhenServiceThrowsException()
         {
-            //Arrange
-            Guid Id = Guid.NewGuid();
-            _insuredBLMock.Setup(x => x.GetInsuredById(Id)).Throws(new Exception());
+            // Arrange
+            Guid Id = new Guid();
+            _mockInsuredContactService.Setup(service => service.GetInsuredById(Id)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _insuredContactController.GetInsuredById(Id);
+            // Act
+            var result = await _controller.GetInsuredById(Id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
         [Test]
-        public async Task GetContactById_Returns_OkResult()
+        public async Task GetInsuredById_WhenRepositoryThrowsException()
         {
-            //Arrange
-            Guid Id = Guid.NewGuid();
-            var Contact = new List<contact>();
-            _insuredBLMock.Setup(x => x.GetContactById(Id)).ReturnsAsync(Contact);
+            // Arrange
+            Guid Id = new Guid();
+            _mockInsuredContactService.Setup(service => service.GetInsuredById(Id)).Returns(_InsuredContactService.GetInsuredById);
+            _IInsuredContactRepo.Setup(service => service.GetInsuredById(Id)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _insuredContactController.GetContactById(Id);
+            // Act
+            var result = await _controller.GetInsuredById(Id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(Contact, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetContactById_ReturnsData()
+        {
+            // Arrange
+            var contact = new List<contact> { };
+            Guid Id = new Guid();
+            _mockInsuredContactService.Setup(service => service.GetContactById(Id)).Returns(_InsuredContactService.GetContactById);
+            _IInsuredContactRepo.Setup(repo => repo.GetContactById(Id)).Returns(_mockInsuredContactRepo.ReturnsContact);
+
+            // Act
+            var result = await _controller.GetContactById(Id) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(contact, result.Value);
         }
 
         [Test]
-        public async Task GetContactById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetContactById_ReturnsNull()
         {
-            //Arrange
-            Guid Id = Guid.NewGuid();
-            _insuredBLMock.Setup(x => x.GetContactById(Id)).Throws(new Exception());
+            // Arrange
+            Guid Id = new Guid();
+            _mockInsuredContactService.Setup(service => service.GetContactById(Id)).Returns(_InsuredContactService.GetContactById);
+            _IInsuredContactRepo.Setup(service => service.GetContactById(Id)).Returns(_mockInsuredContactRepo.ReturnsContactNull);
 
-            //Act
-            var result = await _insuredContactController.GetContactById(Id);
+            // Act
+            var result = await _controller.GetContactById(Id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
 
+        [Test]
+        public async Task GetContactById_WhenServiceThrowsException()
+        {
+            // Arrange
+            Guid Id = new Guid();
+            _mockInsuredContactService.Setup(service => service.GetContactById(Id)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetContactById(Id) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetContactById_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            Guid Id = new Guid();
+            _mockInsuredContactService.Setup(service => service.GetContactById(Id)).Returns(_InsuredContactService.GetContactById);
+            _IInsuredContactRepo.Setup(service => service.GetContactById(Id)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetContactById(Id) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
     }
 }

@@ -28,7 +28,15 @@ namespace AutoPASAPI.Controllers
         {
             try
             {
-                return Ok(await _policyService.GetAllPolicies());
+                var pol = await _policyService.GetAllPolicies();
+                if (pol != null)
+                {
+                    return Ok(pol);
+                }
+                else
+                {
+                    return BadRequest("Returns Null");
+                }
             }
             catch (Exception ex)
             {
@@ -42,8 +50,15 @@ namespace AutoPASAPI.Controllers
         {
             try
             {
-                
-                return Ok(await _policyService.GetPoliciesInRange(startIndex,count));
+                var pol = await _policyService.GetPoliciesInRange(startIndex,count);
+                if (pol != null)
+                {
+                    return Ok(pol);
+                }
+                else
+                {
+                    return BadRequest("Returns Null");
+                }
             }
             catch (Exception ex)
             {
@@ -57,8 +72,15 @@ namespace AutoPASAPI.Controllers
         {
             try
             {
-
-                return Ok(await _policyService.GetPolicyCount());
+                var count = await _policyService.GetPolicyCount();
+                if (count > 0)
+                {
+                    return Ok(count);
+                }
+                else
+                {
+                    return BadRequest("No Policy");
+                }
             }
             catch (Exception ex)
             {
@@ -74,7 +96,15 @@ namespace AutoPASAPI.Controllers
         {
             try
             {
-                return Ok(await _policyService.GetPolicyById(Id));
+                var pol = await _policyService.GetPolicyById(Id);
+                if (pol != null)
+                {
+                    return Ok(pol);
+                }
+                else
+                {
+                    return BadRequest("Returns Null");
+                }
             }
             catch (Exception ex)
             {
@@ -130,11 +160,37 @@ namespace AutoPASAPI.Controllers
         {
             try
             {
-                return Ok(await _policyService.GetNCBById(Id));
+                var ncb = await _policyService.GetNCBById(Id);
+                if (ncb == 0 || ncb == 1)
+                {
+                    return Ok(ncb);
+                }
+                else
+                {
+                    return BadRequest("No NCB");
+                }
             }
             catch (Exception ex)
             {
                 _logger.LogInformation("Error in function GetPolicyId");
+                return StatusCode(500, ex);
+            }
+        }
+        //Get policy details
+        [HttpGet("GetPolicyByPolicyNumber/{policynumber}")]
+        public async Task<IActionResult> GetPolicyByPolicyNumber(string policynumber)
+        {
+            try
+            {
+                var pol = await _policyService.GetPolicyByPolicyNumber(policynumber);
+                if (pol == null)
+                {
+                    return BadRequest("Returns Null");
+                }
+                return Ok(pol);
+            }
+            catch (Exception ex)
+            {
                 return StatusCode(500, ex);
             }
         }

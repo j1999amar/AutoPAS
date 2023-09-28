@@ -11,6 +11,6 @@ namespace AutoPASDML
         public int VariantId { get; set; }
         public string? Variant { get; set; }
         public string? Description { get; set; }
-        public bool IsActive { get; set; }
+        public int IsActive { get; set; }
     }
 }

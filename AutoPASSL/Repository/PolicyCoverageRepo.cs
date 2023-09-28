@@ -1,6 +1,7 @@
 ﻿using AutoPASAL.IRepository;
 using AutoPASDML;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +66,28 @@ namespace AutoPASSL.Repository
         public async Task<List<policycoverage>?> GetPolicyCoverageById(Guid Id)
         {
             var pol = await _context.policycoverage.Where(x => x.PolicyId == Id && x.Limit == 1).ToListAsync();
+            if (pol == null) return null;
             return pol;
+        }
+        public async Task<List<coverages>?> GetPolicyCoverageByPolicyNumber(int PolicyNumber)
+        {
+            var covDetails = await (from c in _context.coverages
+                                    join pc in _context.policycoverage on c.CoverageId equals pc.CoverageId
+                                    join p in _context.policy on pc.PolicyId equals p.PolicyId
+                                    where p.PolicyNumber == PolicyNumber
+                                    select new coverages()
+                                    {
+                                        CoverageId = c.CoverageId,
+                                        CoverageName = c.CoverageName,
+                                        CovCd = c.CovCd,
+                                        EffectiveDt = c.EffectiveDt,
+                                        ExpirationDt = c.ExpirationDt,
+                                        SortOrder = c.SortOrder,
+                                        Description = c.Description,
+                                        IsActive = c.IsActive
+                                    }).ToListAsync();
+            if (covDetails == null) return null;
+            return covDetails;
         }
     }
 }

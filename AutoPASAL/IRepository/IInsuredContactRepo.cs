@@ -15,5 +15,6 @@ namespace AutoPASAL.IRepository
         Task<List<contact>?> GetContactById(Guid Id);
         Task<contact> AddContact(contact objcontact);
         Task<contact> EditContact(Guid ContId, contact objcontact);
+        Task<object> GetInsuredContactByPolicyNumber(string policynumber);
     }
 }

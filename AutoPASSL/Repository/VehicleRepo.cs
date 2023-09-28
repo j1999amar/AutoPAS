@@ -33,19 +33,19 @@ namespace AutoPASSL.Repository
             var veh = await _context.vehicle.Where(x => x.VehicleId == vehicleid).ToListAsync();
             return veh;
         }
-        public async Task<List<RTO>?> GetAllRTOState()
+        public async Task<List<rto>?> GetAllRTOState()
         {
             var rtos = await _context.rto.GroupBy(x => x.State).Select(g => g.OrderBy(x => x.State).FirstOrDefault()).ToListAsync();
             if (rtos == null) return null;
             return rtos;
         }
-        public async Task<List<RTO>?> GetRTOCityByState(string state)
+        public async Task<List<rto>?> GetRTOCityByState(string state)
         {
             var rtos = await _context.rto.Where(x => x.State.ToLower() == state.ToLower()).GroupBy(x => x.City).Select(g => g.OrderBy(x => x.City).FirstOrDefault()).ToListAsync();
             if (rtos == null) return null;
             return rtos;
         }
-        public async Task<List<RTO>?> GetRTONameByCity(string city)
+        public async Task<List<rto>?> GetRTONameByCity(string city)
         {
             var rtos = await _context.rto.Where(x => x.City.ToLower() == city.ToLower()).ToListAsync();
             if (rtos == null) return null;
@@ -101,6 +101,50 @@ namespace AutoPASSL.Repository
                 await _context.SaveChangesAsync();
             }
             return veh;
+        }
+
+        //Customer Portal:
+        public async Task<object> GetVehicleDetailsByPolicyNumber(int policyNumber)
+        {
+            var result = await (from p in _context.policy
+                                join pv in _context.PolicyVehicle on p.PolicyId equals pv.PolicyId
+                                join v in _context.vehicle on pv.VehicleId equals v.VehicleId
+                                join vt in _context.vehicleType on v.VehicleTypeid equals vt.VehicleTypeId
+                                join r in _context.rto on v.RTOId equals r.RTOId
+                                join b in _context.brand on v.BrandId equals b.BrandId
+                                join m in _context.model on v.ModelId equals m.ModelId
+                                join va in _context.variant on v.VariantId equals va.VariantId
+                                join bt in _context.bodyType on v.BodyTypeId equals bt.BodyTypeId
+                                join ft in _context.fueltype on v.FuelTypeId equals ft.FuelTypeId
+                                join tt in _context.transmissiontype on v.TransmissionTypeId equals tt.TransmissionTypeId
+                                where p.PolicyNumber == policyNumber
+                                select new
+                                {
+                                    //p, pv,v,
+                                    p.PolicyNumber,
+                                    vt.VehicleType,
+                                    r.RTOName,
+                                    r.City,
+                                    r.State,
+                                    v.RegistrationNumber,
+                                    v.DateOfPurchase,
+                                    b.Brand,
+                                    m.ModelName,
+                                    va.Variant,
+                                    bt.BodyType,
+                                    ft.FuelType,
+                                    tt.TransmissionType,
+                                    v.Color,
+                                    v.ChasisNumber,
+                                    v.EngineNumber,
+                                    v.CubicCapacity,
+                                    v.SeatingCapacity,
+                                    v.YearOfManufacture,
+                                    v.IDV,
+                                    v.ExShowroomPrice,
+                                }).ToListAsync();
+            return result;
+
         }
     }
 }

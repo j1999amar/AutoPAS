@@ -17,33 +17,33 @@ namespace AutoPASAL
             _rtoRepo = rtoRepo;
         }
 
-        public Task<List<RTO>?> GetAllRTOState()
+        public Task<List<rto>?> GetAllRTOState()
         {
             var rto = _rtoRepo.GetAllRTOState();
             return rto;
         }
-        public Task<List<RTO>?> GetRTOCityByState(string state)
+        public Task<List<rto>?> GetRTOCityByState(string state)
         {
             var rto = _rtoRepo.GetRTOCityByState(state);
             return rto;
         }
-        public Task<List<RTO>?> GetRTONameByCity(string city)
+        public Task<List<rto>?> GetRTONameByCity(string city)
         {
             var rto = _rtoRepo.GetRTONameByCity(city);
             return rto;
         }
-        public Task<List<RTO>?> GetAllRTO(Guid Id)
+        public Task<List<rto>?> GetAllRTO(Guid Id)
         {
             var rto = _rtoRepo.GetAllRTO(Id);
             return rto;
         }
-        public Task<List<RTO>?> GetCity(Guid Id)
+        public Task<List<rto>?> GetCity(Guid Id)
         {
             var city = _rtoRepo.GetCity(Id);
             return city;
         }
 
-        public Task<RTO> AddRTO(RTO rto)
+        public Task<rto> AddRTO(rto rto)
         {
             return _rtoRepo.AddRTO(rto);
         
@@ -54,7 +54,7 @@ namespace AutoPASAL
             return _rtoRepo.IsExists(id);         
         }
 
-        public Task<RTO> EditRTO(RTO rto)
+        public Task<rto> EditRTO(rto rto)
         {
             return _rtoRepo.EditRTO(rto);
         }

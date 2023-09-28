@@ -18,7 +18,27 @@ using System.Threading.Tasks;
 
 namespace AutoPASAL.Dynamic
 {
-    public class DynamicRateTableService
+    public interface IDynamicRateTableService 
+    {
+        Task DynamicModelCreation(string[] csvHeaders, string filename);
+        Task DynamicContextEditing(string filename);
+        Task DynamicRepositoryCreation(string[] csvHeaders, string filename);
+        Task DynamicIRepositoryCreation(string filename);
+        Task DynamicIServiceCreation(string filename);
+        Task DynamicServiceCreation(string filename);
+        Task DynamicControllerCreation(string filename);
+        Task DynamicRatingServiceEditing(string filename);
+        Task DynamicProgramFileEditing(string filename);
+        Task DynamicModelEditing(string[] csvHeaders, string filename);
+        Task DynamicRepoEditing(string[] csvHeaders, string filename);
+        Task DynamicMetadataTableEditing(string[] csvHeaders, string filename);
+        Task DynamicMetadataTableAdd(string[] csvHeaders, string filename);
+        Task DynamicTableCreation(HeaderRow headerRow, string filename);
+        Task DynamicTableAlteration(string[] csvHeaders, HeaderRow headerRow, string filename);
+
+
+    }
+    public class DynamicRateTableService:IDynamicRateTableService
     {
 
         private readonly IMetaDataRepo _metaDataRepo;
@@ -498,7 +518,7 @@ namespace AutoPASAL.Dynamic
             return;
         }
 
-        public async Task DynamicTableAlteration(string[] csvHeaders, HeaderRow headerRow, UploadFile file, string filename)
+        public async Task DynamicTableAlteration(string[] csvHeaders, HeaderRow headerRow, string filename)
         {
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string relativePath = $"..\\..\\..\\..\\AutoPASDML";

@@ -10,282 +10,336 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoPASDML;
 using Microsoft.Extensions.Logging;
+using AutoPASAL.IRepository;
+using AutoPASAL.Services;
+using AutoPASAL;
+using AutoPASAPITests.MockRepository;
 
 namespace AutoPASAPI.Tests.Controllers
 {
     [TestFixture]
     public class PolicyControllerTests
     {
-        private Mock<IPolicyBL> _policyBLMock;
-        private Mock<ILogger<PolicyController>> _loggerMock;
-        private PolicyController _policyController;
+        private PolicyController _controller;
+        private Mock<IPolicyService> _mockPolicyService;
+        private Mock<ILogger<PolicyController>> _mockLogger;
+        private PolicyMockRepo _mockPolicyRepo;
+        private PolicyService _PolicyService;
+        private Mock<IPolicyRepo> _IPolicyRepo;
 
         [SetUp]
         public void Setup()
         {
-            _policyBLMock = new Mock<IPolicyBL>();
-            _loggerMock = new Mock<ILogger<PolicyController>>();
-            _policyController = new PolicyController(_policyBLMock.Object, _loggerMock.Object);
+            _IPolicyRepo = new Mock<IPolicyRepo>();
+            _PolicyService = new PolicyService(_IPolicyRepo.Object);
+            _mockPolicyRepo = new PolicyMockRepo();
+            _mockPolicyService = new Mock<IPolicyService>();
+            _mockLogger = new Mock<ILogger<PolicyController>>();
+            _controller = new PolicyController(_mockPolicyService.Object, _mockLogger.Object);
         }
 
         [Test]
-        public async Task GetAllPolicies_Returns_OkResult()
+        public async Task GetAllPolicy_ReturnsData()
         {
-            //Arrange
-            var policyList = new List<policy>();
-            _policyBLMock.Setup(x => x.GetAllPolicies()).ReturnsAsync(policyList);
+            // Arrange
+            var policy = new List<policy> { };
+            _mockPolicyService.Setup(service => service.GetAllPolicies()).Returns(_PolicyService.GetAllPolicies);
+            _IPolicyRepo.Setup(repo => repo.GetAllPolicies()).Returns(_mockPolicyRepo.ReturnsPolicy);
 
-            //Act
-            var result = await _policyController.GetAllPolicies();
+            // Act
+            var result = await _controller.GetAllPolicies() as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(policyList, okResult.Value);
+            // Assert
+            Assert.AreEqual(policy, result.Value);
         }
 
         [Test]
-        public async Task GetAllPolicies_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetAllPolicy_ReturnsNull()
         {
-            //Arrange
-            _policyBLMock.Setup(x => x.GetAllPolicies()).Throws(new Exception());
+            // Arrange
+            _mockPolicyService.Setup(service => service.GetAllPolicies()).Returns(_PolicyService.GetAllPolicies);
+            _IPolicyRepo.Setup(service => service.GetAllPolicies()).Returns(_mockPolicyRepo.ReturnsNullPolicy);
 
-            //Act
-            var result = await _policyController.GetAllPolicies();
+            // Act
+            var result = await _controller.GetAllPolicies() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
-        }
-        [Test]
-        public async Task GetPoliciesInRange_Returns_OkResult()
-        {
-            //Arrange
-            var startIndex= 0;
-            var count= 0;
-            var policyList = new List<policy>();
-            _policyBLMock.Setup(x => x.GetPoliciesInRange(startIndex,count)).ReturnsAsync(policyList);
-
-            //Act
-            var result = await _policyController.GetPoliciesInRange(startIndex,count);
-
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(policyList, okResult.Value);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
 
         [Test]
-        public async Task GetPoliciesInRange_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetAllPolicy_WhenServiceThrowsException()
         {
-            //Arrange
-            var startIndex = 0;
-            var count = 0;
-            _policyBLMock.Setup(x => x.GetPoliciesInRange(startIndex, count)).Throws(new Exception());
+            // Arrange
+            _mockPolicyService.Setup(service => service.GetAllPolicies()).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _policyController.GetPoliciesInRange(startIndex, count);
+            // Act
+            var result = await _controller.GetAllPolicies() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
         [Test]
-        public async Task GetPolicyCount_Returns_OkResult()
+        public async Task GetAllPolicy_WhenRepositoryThrowsException()
         {
-            //Arrange
-            var count = 0;
-            _policyBLMock.Setup(x => x.GetPolicyCount()).ReturnsAsync(count);
+            // Arrange
+            _mockPolicyService.Setup(service => service.GetAllPolicies()).Returns(_PolicyService.GetAllPolicies);
+            _IPolicyRepo.Setup(service => service.GetAllPolicies()).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _policyController.GetPolicyCount();
+            // Act
+            var result = await _controller.GetAllPolicies() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(count, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetPoliciesInRange_ReturnsData()
+        {
+            // Arrange
+            var policy = new List<policy> { };
+            int startIndex = 0;
+            int count = 5;
+            _mockPolicyService.Setup(service => service.GetPoliciesInRange(startIndex,count)).Returns(_PolicyService.GetPoliciesInRange);
+            _IPolicyRepo.Setup(repo => repo.GetPoliciesInRange(startIndex, count)).Returns(_mockPolicyRepo.ReturnsPolicy);
+
+            // Act
+            var result = await _controller.GetPoliciesInRange(startIndex, count) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(policy, result.Value);
         }
 
         [Test]
-        public async Task GetPolicyCount_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetPoliciesInRange_ReturnsNull()
         {
-            //Arrange
-            _policyBLMock.Setup(x => x.GetPolicyCount()).Throws(new Exception());
+            // Arrange
+            int startIndex = 0;
+            int count = 5;
+            _mockPolicyService.Setup(service => service.GetPoliciesInRange(startIndex, count)).Returns(_PolicyService.GetPoliciesInRange);
+            _IPolicyRepo.Setup(service => service.GetPoliciesInRange(startIndex, count)).Returns(_mockPolicyRepo.ReturnsNullPolicy);
 
-            //Act
-            var result = await _policyController.GetPolicyCount();
+            // Act
+            var result = await _controller.GetPoliciesInRange(startIndex, count) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+
+        [Test]
+        public async Task GetPoliciesInRange_WhenServiceThrowsException()
+        {
+            // Arrange
+            int startIndex = 0;
+            int count = 5;
+            _mockPolicyService.Setup(service => service.GetPoliciesInRange(startIndex, count)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetPoliciesInRange(startIndex, count) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
         [Test]
-        public async Task GetPolicyById_Returns_OkResult()
+        public async Task GetPoliciesInRange_WhenRepositoryThrowsException()
         {
-            //Arrange
-            var policyList = new List<policy>();
+            // Arrange
+            int startIndex = 0;
+            int count = 5;
+            _mockPolicyService.Setup(service => service.GetPoliciesInRange(startIndex, count)).Returns(_PolicyService.GetPoliciesInRange);
+            _IPolicyRepo.Setup(service => service.GetPoliciesInRange(startIndex, count)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetPoliciesInRange(startIndex, count) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetPolicyById_ReturnsData()
+        {
+            // Arrange
+            var policy = new List<policy> { };
             Guid Id = Guid.NewGuid();
-            _policyBLMock.Setup(x => x.GetPolicyById(Id)).ReturnsAsync(policyList);
+            _mockPolicyService.Setup(service => service.GetPolicyById(Id)).Returns(_PolicyService.GetPolicyById);
+            _IPolicyRepo.Setup(repo => repo.GetPolicyById(Id)).Returns(_mockPolicyRepo.ReturnsPolicy);
 
-            //Act
-            var result = await _policyController.GetPolicyById(Id);
+            // Act
+            var result = await _controller.GetPolicyById(Id) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(policyList, okResult.Value);
+            // Assert
+            Assert.AreEqual(policy, result.Value);
         }
 
         [Test]
-        public async Task GetPolicyById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetPolicyById_ReturnsNull()
         {
-            //Arrange
+            // Arrange
             Guid Id = Guid.NewGuid();
-            _policyBLMock.Setup(x => x.GetPolicyById(Id)).Throws(new Exception());
+            _mockPolicyService.Setup(service => service.GetPolicyById(Id)).Returns(_PolicyService.GetPolicyById);
+            _IPolicyRepo.Setup(service => service.GetPolicyById(Id)).Returns(_mockPolicyRepo.ReturnsNullPolicy);
 
-            //Act
-            var result = await _policyController.GetPolicyById(Id);
+            // Act
+            var result = await _controller.GetPolicyById(Id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
 
         [Test]
-        public async Task AddPolicy_Returns_OkResult()
+        public async Task GetPolicyById_WhenServiceThrowsException()
         {
-            //Arrange
-            var policy = new policy();
-            var objPolicy = new policy();
-            _policyBLMock.Setup(x => x.AddPolicy(objPolicy)).ReturnsAsync(policy);
-
-            //Act
-            var result = await _policyController.AddPolicy(objPolicy);
-
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(policy, okResult.Value);
-        }
-
-        [Test]
-        public async Task AddPolicy_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
-        {
-            //Arrange
-            var objPolicy = new policy();
-            _policyBLMock.Setup(x => x.AddPolicy(objPolicy)).Throws(new Exception());
-
-            //Act
-            var result = await _policyController.AddPolicy(objPolicy);
-
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
-        }
-
-        [Test]
-        public async Task UpdatePolicyNCB_Returns_OkResult()
-        {
-            //Arrange
-            var policy = new policy();
-            int Ncb = 0;
-            _policyBLMock.Setup(x => x.UpdatePolicyNCB(Ncb)).ReturnsAsync(policy);
-
-            //Act
-            var result = await _policyController.UpdatePolicyNCB(Ncb);
-
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(policy, okResult.Value);
-        }
-
-        [Test]
-        public async Task UpdatePolicyNCB_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
-        {
-            //Arrange
-            int Ncb = 0;
-            _policyBLMock.Setup(x => x.UpdatePolicyNCB(Ncb)).Throws(new Exception());
-
-            //Act
-            var result = await _policyController.UpdatePolicyNCB(Ncb);
-
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
-        }
-
-        [Test]
-        public async Task UpdatePolicyById_Returns_OkResult()
-        {
-            //Arrange
-            var policy = new policy();
+            // Arrange
             Guid Id = Guid.NewGuid();
-            var objPolicy = new policy();
-            _policyBLMock.Setup(x => x.UpdatePolicyById(Id, objPolicy)).ReturnsAsync(policy);
+            _mockPolicyService.Setup(service => service.GetPolicyById(Id)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _policyController.UpdatePolicyById(Id, objPolicy);
+            // Act
+            var result = await _controller.GetPolicyById(Id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(policy, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetPolicyById_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            Guid Id = Guid.NewGuid();
+            _mockPolicyService.Setup(service => service.GetPolicyById(Id)).Returns(_PolicyService.GetPolicyById);
+            _IPolicyRepo.Setup(service => service.GetPolicyById(Id)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetPolicyById(Id) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+    
+
+      
+      
+        [Test]
+        public async Task GetPolicyCount_ReturnsData()
+        {
+            // Arrange
+            int count = 1;
+            _mockPolicyService.Setup(service => service.GetPolicyCount()).Returns(_PolicyService.GetPolicyCount);
+            _IPolicyRepo.Setup(repo => repo.GetPolicyCount()).Returns(_mockPolicyRepo.ReturnsONE);
+
+            // Act
+            var result = await _controller.GetPolicyCount() as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(count, result.Value);
         }
 
         [Test]
-        public async Task UpdatePolicyById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetPolicyCount_ReturnsNull()
         {
-            //Arrange
-            Guid Id = Guid.NewGuid();
-            var objPolicy = new policy();
-            _policyBLMock.Setup(x => x.UpdatePolicyById(Id,objPolicy)).Throws(new Exception());
+            // Arrange
+            string policynumber = "";
+            _mockPolicyService.Setup(service => service.GetPolicyCount()).Returns(_PolicyService.GetPolicyCount);
+            _IPolicyRepo.Setup(service => service.GetPolicyCount()).Returns(_mockPolicyRepo.ReturnsZERO);
 
-            //Act
-            var result = await _policyController.UpdatePolicyById(Id, objPolicy);
+            // Act
+            var result = await _controller.GetPolicyCount() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
-        }
-        [Test]
-        public async Task GetNCBById_Returns_OkResult()
-        {
-            //Arrange
-            Guid Id = Guid.NewGuid();
-            var NCB = 0;
-            _policyBLMock.Setup(x => x.GetNCBById(Id)).ReturnsAsync(NCB);
-
-            //Act
-            var result = await _policyController.GetNCBById(Id);
-
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(NCB, okResult.Value);
+            // Assert
+            Assert.AreEqual("No Policy", result.Value);
         }
 
         [Test]
-        public async Task GetNCBById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetPolicyCount_WhenServiceThrowsException()
         {
-            //Arrange
+            // Arrange
+            string policynumber = "";
+            _mockPolicyService.Setup(service => service.GetPolicyCount()).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetPolicyCount() as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetPolicyCount_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            string policynumber = "";
+            _mockPolicyService.Setup(service => service.GetPolicyCount()).Returns(_PolicyService.GetPolicyCount);
+            _IPolicyRepo.Setup(service => service.GetPolicyCount()).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetPolicyCount() as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetNCBById_ReturnsData()
+        {
+            // Arrange
+            int ncb = 1;
             Guid Id = Guid.NewGuid();
-            _policyBLMock.Setup(x => x.GetNCBById(Id)).Throws(new Exception());
+            _mockPolicyService.Setup(service => service.GetNCBById(Id)).Returns(_PolicyService.GetNCBById);
+            _IPolicyRepo.Setup(repo => repo.GetNCBById(Id)).Returns(_mockPolicyRepo.ReturnsONE);
 
-            //Act
-            var result = await _policyController.GetNCBById(Id);
+            // Act
+            var result = await _controller.GetNCBById(Id) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual(ncb, result.Value);
+        }
+
+        [Test]
+        public async Task GetNCBById_ReturnsNull()
+        {
+            // Arrange
+            Guid Id = Guid.NewGuid();
+            _mockPolicyService.Setup(service => service.GetNCBById(Id)).Returns(_PolicyService.GetNCBById);
+            _IPolicyRepo.Setup(service => service.GetNCBById(Id)).Returns(_mockPolicyRepo.ReturnsTWO);
+
+            // Act
+            var result = await _controller.GetNCBById(Id) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual("No NCB", result.Value);
+        }
+
+        [Test]
+        public async Task GetNCBById_WhenServiceThrowsException()
+        {
+            // Arrange
+            Guid Id = Guid.NewGuid();
+            _mockPolicyService.Setup(service => service.GetNCBById(Id)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetNCBById(Id) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetNCBById_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            Guid Id = Guid.NewGuid();
+            _mockPolicyService.Setup(service => service.GetNCBById(Id)).Returns(_PolicyService.GetNCBById);
+            _IPolicyRepo.Setup(service => service.GetNCBById(Id)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetNCBById(Id) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
     }
 }

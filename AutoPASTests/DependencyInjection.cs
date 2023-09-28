@@ -50,47 +50,47 @@ namespace AutoPASTests
             container.Register<APASDBContext>();
             builder.Services.AddScoped<APASDBContext>();
 
-            container.Register<IPolicyBL, PolicyBL>();
-            builder.Services.AddScoped<IPolicyBL, PolicyBL>();
+            //container.Register<IPolicyBL, PolicyBL>();
+            //builder.Services.AddScoped<IPolicyBL, PolicyBL>();
 
-            container.Register<IInsuredContactBL, InsuredContactBL>();
-            builder.Services.AddScoped<IInsuredContactBL, InsuredContactBL>();
+            //container.Register<IInsuredContactBL, InsuredContactBL>();
+            //builder.Services.AddScoped<IInsuredContactBL, InsuredContactBL>();
 
-            container.Register<IContactBL, ContactBL>();
-            builder.Services.AddScoped<IContactBL, ContactBL>();
+            //container.Register<IContactBL, ContactBL>();
+            //builder.Services.AddScoped<IContactBL, ContactBL>();
 
-            container.Register<IInsuredBL, InsuredBL>();
-            builder.Services.AddScoped<IInsuredBL, InsuredBL>();
+            //container.Register<IInsuredBL, InsuredBL>();
+            //builder.Services.AddScoped<IInsuredBL, InsuredBL>();
 
-            container.Register<IRTOBL, RTOBL>();
-            builder.Services.AddScoped<IRTOBL, RTOBL>();
+            //container.Register<IRTOBL, RTOBL>();
+            //builder.Services.AddScoped<IRTOBL, RTOBL>();
 
-            container.Register<IVehicleBL, VehicleBL>();
-            builder.Services.AddScoped<IVehicleBL, VehicleBL>();
+            //container.Register<IVehicleBL, VehicleBL>();
+            //builder.Services.AddScoped<IVehicleBL, VehicleBL>();
 
-            container.Register<IVehicleTypeBL, VehicleTypeBL>();
-            builder.Services.AddScoped<IVehicleTypeBL, VehicleTypeBL>();
+            //container.Register<IVehicleTypeBL, VehicleTypeBL>();
+            //builder.Services.AddScoped<IVehicleTypeBL, VehicleTypeBL>();
 
-            container.Register<IVariantBL, VariantBL>();
-            builder.Services.AddScoped<IVariantBL, VariantBL>();
+            //container.Register<IVariantBL, VariantBL>();
+            //builder.Services.AddScoped<IVariantBL, VariantBL>();
 
-            container.Register<IBodyTypeBL, BodyTypeBL>();
-            builder.Services.AddScoped<IBodyTypeBL, BodyTypeBL>();
+            //container.Register<IBodyTypeBL, BodyTypeBL>();
+            //builder.Services.AddScoped<IBodyTypeBL, BodyTypeBL>();
 
-            container.Register<IModelBL, ModelBL>();
-            builder.Services.AddScoped<IModelBL, ModelBL>();
+            //container.Register<IModelBL, ModelBL>();
+            //builder.Services.AddScoped<IModelBL, ModelBL>();
 
-            container.Register<ICoveragesBL, CoveragesBL>();
-            builder.Services.AddScoped<ICoveragesBL, CoveragesBL>();
+            //container.Register<ICoveragesBL, CoveragesBL>();
+            //builder.Services.AddScoped<ICoveragesBL, CoveragesBL>();
 
-            container.Register<IPolicyCoverageBL, PolicyCoverageBL>();
-            builder.Services.AddScoped<IPolicyCoverageBL, PolicyCoverageBL>();
+            //container.Register<IPolicyCoverageBL, PolicyCoverageBL>();
+            //builder.Services.AddScoped<IPolicyCoverageBL, PolicyCoverageBL>();
 
-            container.Register<ITransmissionTypeBL, TransmissionTypeBL>();
-            builder.Services.AddScoped<ITransmissionTypeBL, TransmissionTypeBL>();
+            //container.Register<ITransmissionTypeBL, TransmissionTypeBL>();
+            //builder.Services.AddScoped<ITransmissionTypeBL, TransmissionTypeBL>();
 
-            container.Register<IFuelTypeBL, FuelTypeBL>();
-            builder.Services.AddScoped<IFuelTypeBL, FuelTypeBL>();
+            //container.Register<IFuelTypeBL, FuelTypeBL>();
+            //builder.Services.AddScoped<IFuelTypeBL, FuelTypeBL>();
 
 
             return container;

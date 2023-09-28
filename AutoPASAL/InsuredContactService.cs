@@ -48,5 +48,10 @@ namespace AutoPASAL
             var con = _insuredContactRepo.GetContactById(Id);
             return con;
         }
+        public Task<object> GetInsuredContactByPolicyNumber(string policynumber)
+        {
+            var con = _insuredContactRepo.GetInsuredContactByPolicyNumber(policynumber);
+            return con;
+        }
     }
 }

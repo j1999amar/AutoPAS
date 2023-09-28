@@ -11,469 +11,641 @@ using System.Threading.Tasks;
 using AutoPASDML;
 using Microsoft.Extensions.Logging;
 using System.Web.Razor.Parser.SyntaxTree;
+using AutoPASAL.IRepository;
+using AutoPASAL.Services;
+using AutoPASAL;
+using AutoPASAPITests.MockRepository;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AutoPASAPI.Tests.Controllers
 {
     [TestFixture]
     public class RatingControllerTests
     {
-        private Mock<IRT_NCBFactorBL> _NCBFactorBLMock;
-        private Mock<IRT_OwnDamageFactorBL> _OwnDamageFactorBLMock;
-        private Mock<IRT_LegalLiabilityPremiumBL> _LegalLiabilityPremiumBLMock;
-        private Mock<IRT_ThirdPartyCoverPremiumBL> _ThirdPartyCoverPremiumBLMock;
-        private Mock<IRT_TheftFactorBL> _TheftFactorBLMock;
-        private Mock<IRT_GSTFactorBL> _GSTFactorBLMock;
-        private Mock<IRT_NCBBL> _NCBBLMock;
-        private Mock<IRT_ODPBL> _ODPBLMock;
-        private Mock<IRT_TPCBL> _TPCBLMock;
-        private Mock<IRT_LLPBL> _LLPBLMock;
-        private Mock<IRT_THEFTBL> _TheftBLMock;
-        private Mock<IRT_GSTBL> _GstBLMock;
-        private Mock<ILogger<RatingController>> _loggerMock;
-        private RatingController _ratingController;
+        private RatingController _controller;
+        private Mock<IRatingService> _mockRatingService;
+        private Mock<ILogger<RatingController>> _mockLogger;
+        private RT_THEFTMockRepo _mockRT_THEFTRepo;
+        private RT_GSTMockRepo _mockRT_GSTRepo;
+        private RT_NCBMockRepo _mockRT_NCBRepo;
+        private RT_TPCMockRepo _mockRT_TPCRepo;
+        private RT_ODPMockRepo _mockRT_ODPRepo;
+        private RT_LLPMockRepo _mockRT_LLPRepo;
+        private RatingService _RatingService;
+        private Mock<IRT_GSTRepo> _IRT_GSTRepo;
+        private Mock<IRT_NCBRepo> _IRT_NCBRepo;
+        private Mock<IRT_LLPRepo> _IRT_LLPRepo;
+        private Mock<IRT_TPCRepo> _IRT_TPCRepo;
+        private Mock<IRT_THEFTRepo> _IRT_THEFTRepo;
+        private Mock<IRT_ODPRepo> _IRT_ODPRepo;
 
         [SetUp]
         public void Setup()
         {
-            _NCBFactorBLMock = new Mock<IRT_NCBFactorBL>();
-            _OwnDamageFactorBLMock = new Mock<IRT_OwnDamageFactorBL>();
-            _LegalLiabilityPremiumBLMock = new Mock<IRT_LegalLiabilityPremiumBL>();
-            _ThirdPartyCoverPremiumBLMock = new Mock<IRT_ThirdPartyCoverPremiumBL>();
-            _TheftFactorBLMock = new Mock<IRT_TheftFactorBL>();
-            _GSTFactorBLMock = new Mock<IRT_GSTFactorBL>();
-            _NCBBLMock = new Mock<IRT_NCBBL>();
-            _ODPBLMock = new Mock<IRT_ODPBL>();
-            _TPCBLMock= new Mock<IRT_TPCBL> ();
-            _LLPBLMock= new Mock<IRT_LLPBL> ();
-            _TheftBLMock = new Mock<IRT_THEFTBL>();
-            _GstBLMock = new Mock<IRT_GSTBL>();
-            _loggerMock = new Mock<ILogger<RatingController>>();
-            _ratingController = new RatingController(_NCBFactorBLMock.Object,_OwnDamageFactorBLMock.Object,_LegalLiabilityPremiumBLMock.Object,_ThirdPartyCoverPremiumBLMock.Object,_TheftFactorBLMock.Object,_GSTFactorBLMock.Object, _NCBBLMock.Object, _ODPBLMock.Object, _TPCBLMock.Object, _LLPBLMock.Object, _TheftBLMock.Object, _GstBLMock.Object, _loggerMock.Object);
+            _IRT_GSTRepo = new Mock<IRT_GSTRepo>();
+            _IRT_NCBRepo = new Mock<IRT_NCBRepo>();
+            _IRT_ODPRepo = new Mock<IRT_ODPRepo>();
+            _IRT_THEFTRepo = new Mock<IRT_THEFTRepo>();
+            _IRT_LLPRepo = new Mock<IRT_LLPRepo>();
+            _IRT_TPCRepo = new Mock<IRT_TPCRepo>();
+            _mockRT_THEFTRepo = new RT_THEFTMockRepo();
+            _mockRT_THEFTRepo = new RT_THEFTMockRepo(); 
+            _mockRT_GSTRepo = new RT_GSTMockRepo();
+            _mockRT_NCBRepo = new RT_NCBMockRepo();
+            _mockRT_TPCRepo = new RT_TPCMockRepo();
+            _mockRT_ODPRepo= new RT_ODPMockRepo();
+            _mockRT_LLPRepo = new RT_LLPMockRepo();
+            _mockRatingService = new Mock<IRatingService>();
+            _mockLogger = new Mock<ILogger<RatingController>>();
         }
 
         [Test]
-        public async Task GetNCBFactors_Returns_OkResult()
+        public async Task GetTableByName_ReturnsRT_GST()
         {
-            //Arrange
-            var NCBList = new List<RT_NCB>();
-            _NCBBLMock.Setup(x => x.GetRT_NCB()).ReturnsAsync(NCBList);
+            // Arrange
+            var data = new List<RT_GST> { };
+            string tablename = "RT_GST";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_GSTRepo.Setup(repo => repo.GetRT_GST()).Returns(_mockRT_GSTRepo.ReturnsData);
 
-            //Act
-            var result = await _ratingController.GetNCBFactors();
+            // Act
+            var result = await _controller.GetTableByName(tablename) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(NCBList, okResult.Value);
+            // Assert
+            Assert.AreEqual(data, result.Value);
         }
 
         [Test]
-        public async Task GetNCBFactors_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetTableByName_ReturnsRT_GSTNull()
         {
-            //Arrange
-            _NCBBLMock.Setup(x => x.GetRT_NCB()).Throws(new Exception());
+            // Arrange
+            string tablename = "RT_GST";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_GSTRepo.Setup(repo => repo.GetRT_GST()).Returns(_mockRT_GSTRepo.ReturnsNull);
 
-            //Act
-            var result = await _ratingController.GetNCBFactors();
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+        [Test]
+        public async Task GetTableByName_WhenRT_GSTRepositoryThrowsException()
+        {
+            // Arrange
+            string tablename = "RT_GST";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_GSTRepo.Setup(repo => repo.GetRT_GST()).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetTableByName_ReturnsRT_NCB()
+        {
+            // Arrange
+            var data = new List<RT_NCB> { };
+            string tablename = "RT_NCB";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_NCBRepo.Setup(repo => repo.GetRT_NCB()).Returns(_mockRT_NCBRepo.ReturnsData);
+
+            // Act
+            var result = await _controller.GetTableByName(tablename) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(data, result.Value);
         }
 
         [Test]
-        public async Task GetRateTableById_Returns_OkResult()
+        public async Task GetTableByName_ReturnsRT_NCBNull()
         {
-            //Arrange
-            int Id = 1;
-            var NCBList = new List<RT_NCB>();
-            _NCBBLMock.Setup(x => x.GetRT_NCBById(Id)).ReturnsAsync(NCBList);
+            // Arrange
+            string tablename = "RT_NCB";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_NCBRepo.Setup(repo => repo.GetRT_NCB()).Returns(_mockRT_NCBRepo.ReturnsNull);
 
-            //Act
-            var result = await _ratingController.GetRateTableById(Id);
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(NCBList, okResult.Value);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+        [Test]
+        public async Task GetTableByName_WhenRT_NCBRepositoryThrowsException()
+        {
+            // Arrange
+            string tablename = "RT_NCB";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_NCBRepo.Setup(repo => repo.GetRT_NCB()).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetTableByName_ReturnsRT_LLP()
+        {
+            // Arrange
+            var data = new List<RT_LLP> { };
+            string tablename = "RT_LLP";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_LLPRepo.Setup(repo => repo.GetRT_LLP()).Returns(_mockRT_LLPRepo.ReturnsData);
+
+            // Act
+            var result = await _controller.GetTableByName(tablename) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(data, result.Value);
         }
 
         [Test]
-        public async Task GetRateTableById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetTableByName_ReturnsRT_LLPNull()
         {
-            //Arrange
-            int Id = 1;
-            _NCBBLMock.Setup(x => x.GetRT_NCBById(Id)).Throws(new Exception());
+            // Arrange
+            string tablename = "RT_LLP";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_LLPRepo.Setup(repo => repo.GetRT_LLP()).Returns(_mockRT_LLPRepo.ReturnsNull);
 
-            //Act
-            var result = await _ratingController.GetRateTableById(Id);
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
         [Test]
-        public async Task UpdateNCBById_Returns_OkResult()
+        public async Task GetTableByName_WhenRT_LLPRepositoryThrowsException()
         {
-            //Arrange
-            var NCBL = new RT_NCB();
-            int id = 1;
-            decimal factor = new decimal();
-            _NCBBLMock.Setup(x => x.UpdateRT_NCBById(id, factor)).ReturnsAsync(NCBL);
+            // Arrange
+            string tablename = "RT_LLP";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_LLPRepo.Setup(repo => repo.GetRT_LLP()).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _ratingController.UpdateNCBById(id, factor);
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(NCBL, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
-
         [Test]
-        public async Task UpdateNCBById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetTableByName_ReturnsRT_ODP()
         {
-            //Arrange
-            int id = 1;
-            decimal factor = new decimal();
-            _NCBBLMock.Setup(x => x.UpdateRT_NCBById(id, factor)).Throws(new Exception());
+            // Arrange
+            var data = new List<RT_ODP> { };
+            string tablename = "RT_ODP";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_ODPRepo.Setup(repo => repo.GetRT_ODP()).Returns(_mockRT_ODPRepo.ReturnsData);
 
-            //Act
-            var result = await _ratingController.UpdateNCBById(id, factor);
+            // Act
+            var result = await _controller.GetTableByName(tablename) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual(data, result.Value);
         }
 
         [Test]
-        public async Task GetODFactors_Returns_OkResult()
+        public async Task GetTableByName_ReturnsRT_ODPNull()
         {
-            //Arrange
-            var ODList = new List<RT_ODP>();
-            _ODPBLMock.Setup(x => x.GetRT_ODP()).ReturnsAsync(ODList);
+            // Arrange
+            string tablename = "RT_ODP";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_ODPRepo.Setup(repo => repo.GetRT_ODP()).Returns(_mockRT_ODPRepo.ReturnsNull);
 
-            //Act
-            var result = await _ratingController.GetODFactors();
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(ODList, okResult.Value);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+        [Test]
+        public async Task GetTableByName_WhenRT_ODPRepositoryThrowsException()
+        {
+            // Arrange
+            string tablename = "RT_ODP";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_ODPRepo.Setup(repo => repo.GetRT_ODP()).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetTableByName_ReturnsRT_TPC()
+        {
+            // Arrange
+            var data = new List<RT_TPC> { };
+            string tablename = "RT_TPC";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_TPCRepo.Setup(repo => repo.GetRT_TPC()).Returns(_mockRT_TPCRepo.ReturnsData);
+
+            // Act
+            var result = await _controller.GetTableByName(tablename) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(data, result.Value);
         }
 
         [Test]
-        public async Task GetODFactors_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetTableByName_ReturnsRT_TPCNull()
         {
-            //Arrange
-            _ODPBLMock.Setup(x => x.GetRT_ODP()).Throws(new Exception());
+            // Arrange
+            string tablename = "RT_TPC";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_TPCRepo.Setup(repo => repo.GetRT_TPC()).Returns(_mockRT_TPCRepo.ReturnsNull);
 
-            //Act
-            var result = await _ratingController.GetODFactors();
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
         [Test]
-        public async Task UpdateODPById_Returns_OkResult()
+        public async Task GetTableByName_WhenRT_TPCRepositoryThrowsException()
         {
-            //Arrange
-            var NCBL = new RT_ODP();
-            int id = 1;
-            decimal factor = new decimal();
-            _ODPBLMock.Setup(x => x.UpdateRT_ODPById(id, factor)).ReturnsAsync(NCBL);
+            // Arrange
+            string tablename = "RT_TPC";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_TPCRepo.Setup(repo => repo.GetRT_TPC()).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _ratingController.UpdateODPById(id, factor);
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(NCBL, okResult.Value);
-        }
-
-        [Test]
-        public async Task UpdateODPById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
-        {
-            //Arrange
-            int id = 1;
-            decimal factor = new decimal();
-            _ODPBLMock.Setup(x => x.UpdateRT_ODPById(id, factor)).Throws(new Exception());
-
-            //Act
-            var result = await _ratingController.UpdateODPById(id, factor);
-
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
         [Test]
-        public async Task GetLLPFactors_Returns_OkResult()
+        public async Task GetTableByName_ReturnsRT_THEFT()
         {
-            //Arrange
-            var LLPList = new List<RT_LLP>();
-            _LLPBLMock.Setup(x => x.GetRT_LLP()).ReturnsAsync(LLPList);
+            // Arrange
+            var data = new List<RT_THEFT> { };
+            string tablename = "RT_THEFT";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_THEFTRepo.Setup(repo => repo.GetRT_THEFT()).Returns(_mockRT_THEFTRepo.ReturnsData);
 
-            //Act
-            var result = await _ratingController.GetLLPFactors();
+            // Act
+            var result = await _controller.GetTableByName(tablename) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(LLPList, okResult.Value);
+            // Assert
+            Assert.AreEqual(data, result.Value);
         }
 
         [Test]
-        public async Task GetLLPFactors_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetTableByName_ReturnsRT_THEFTNull()
         {
-            //Arrange
-            _LLPBLMock.Setup(x => x.GetRT_LLP()).Throws(new Exception());
+            // Arrange
+            string tablename = "RT_THEFT";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_THEFTRepo.Setup(repo => repo.GetRT_THEFT()).Returns(_mockRT_THEFTRepo.ReturnsNull);
 
-            //Act
-            var result = await _ratingController.GetLLPFactors();
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
         [Test]
-        public async Task UpdateLLPById_Returns_OkResult()
+        public async Task GetTableByName_WhenRT_THEFTRepositoryThrowsException()
         {
-            //Arrange
-            var LLPL = new RT_LLP();
-            int id = 1;
-            decimal factor = new decimal();
-            _LLPBLMock.Setup(x => x.UpdateRT_LLPById(id, factor)).ReturnsAsync(LLPL);
+            // Arrange
+            string tablename = "RT_THEFT";
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).Returns(_RatingService.GetTableByName);
+            _IRT_THEFTRepo.Setup(repo => repo.GetRT_THEFT()).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _ratingController.UpdateLLPById(id, factor);
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(LLPL, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
-
         [Test]
-        public async Task UpdateLLPById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetTableByNameAndId_ReturnsRT_GST()
         {
-            //Arrange
-            int id = 1;
-            decimal factor = new decimal();
-            _LLPBLMock.Setup(x => x.UpdateRT_LLPById(id, factor)).Throws(new Exception());
+            // Arrange
+            var data = new List<RT_GST> { };
+            string tablename = "RT_GST";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_GSTRepo.Setup(repo => repo.GetRT_GSTById(id)).Returns(_mockRT_GSTRepo.ReturnsData);
 
-            //Act
-            var result = await _ratingController.UpdateLLPById(id, factor);
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual(data, result.Value);
         }
 
         [Test]
-        public async Task GetTPCPFactors_Returns_OkResult()
+        public async Task GetTableByNameAndId_ReturnsRT_GSTNull()
         {
-            //Arrange
-            var TPCPList = new List<RT_TPC>();
-            _TPCBLMock.Setup(x => x.GetRT_TPC()).ReturnsAsync(TPCPList);
+            // Arrange
+            string tablename = "RT_GST";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_GSTRepo.Setup(repo => repo.GetRT_GSTById(id)).Returns(_mockRT_GSTRepo.ReturnsNull);
 
-            //Act
-            var result = await _ratingController.GetTPCPFactors();
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(TPCPList, okResult.Value);
-        }
-
-
-        [Test]
-        public async Task GetTPCPFactors_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
-        {
-            //Arrange
-            _TPCBLMock.Setup(x => x.GetRT_TPC()).Throws(new Exception());
-
-            //Act
-            var result = await _ratingController.GetTPCPFactors();
-
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
         [Test]
-        public async Task UpdateTPCById_Returns_OkResult()
+        public async Task GetTableByNameAndId_WhenRT_GSTRepositoryThrowsException()
         {
-            //Arrange
-            var NCBL = new RT_TPC();
-            int id = 1;
-            decimal factor = new decimal();
-            _TPCBLMock.Setup(x => x.UpdateRT_TPCById(id, factor)).ReturnsAsync(NCBL);
+            // Arrange
+            string tablename = "RT_GST";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_GSTRepo.Setup(repo => repo.GetRT_GSTById(id)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _ratingController.UpdateTPCById(id, factor);
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(NCBL, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
-
         [Test]
-        public async Task UpdateTPCById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetTableByNameAndId_ReturnsRT_NCB()
         {
-            //Arrange
-            int id = 1;
-            decimal factor = new decimal();
-            _TPCBLMock.Setup(x => x.UpdateRT_TPCById(id, factor)).Throws(new Exception());
+            // Arrange
+            var data = new List<RT_NCB> { };
+            string tablename = "RT_NCB";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_NCBRepo.Setup(repo => repo.GetRT_NCBById(id)).Returns(_mockRT_NCBRepo.ReturnsData);
 
-            //Act
-            var result = await _ratingController.UpdateTPCById(id, factor);
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual(data, result.Value);
         }
 
         [Test]
-        public async Task GetTheftFactors_Returns_OkResult()
+        public async Task GetTableByNameAndId_ReturnsRT_NCBNull()
         {
-            //Arrange
-            var TheftList = new List<RT_THEFT>();
-            _TheftBLMock.Setup(x => x.GetRT_THEFT()).ReturnsAsync(TheftList);
+            // Arrange
+            string tablename = "RT_NCB";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_NCBRepo.Setup(repo => repo.GetRT_NCBById(id)).Returns(_mockRT_NCBRepo.ReturnsNull);
 
-            //Act
-            var result = await _ratingController.GetTheftFactors();
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(TheftList, okResult.Value);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+        [Test]
+        public async Task GetTableByNameAndId_WhenRT_NCBRepositoryThrowsException()
+        {
+            // Arrange
+            string tablename = "RT_NCB";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_NCBRepo.Setup(repo => repo.GetRT_NCBById(id)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetTableByNameAndId_ReturnsRT_LLP()
+        {
+            // Arrange
+            var data = new List<RT_LLP> { };
+            string tablename = "RT_LLP";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_LLPRepo.Setup(repo => repo.GetRT_LLPById(id)).Returns(_mockRT_LLPRepo.ReturnsData);
+
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(data, result.Value);
         }
 
         [Test]
-        public async Task GetTheftFactors_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetTableByNameAndId_ReturnsRT_LLPNull()
         {
-            //Arrange
-            _TheftBLMock.Setup(x => x.GetRT_THEFT()).Throws(new Exception());
+            // Arrange
+            string tablename = "RT_LLP";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_LLPRepo.Setup(repo => repo.GetRT_LLPById(id)).Returns(_mockRT_LLPRepo.ReturnsNull);
 
-            //Act
-            var result = await _ratingController.GetTheftFactors();
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+        [Test]
+        public async Task GetTableByNameAndId_WhenRT_LLPRepositoryThrowsException()
+        {
+            // Arrange
+            string tablename = "RT_LLP";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_LLPRepo.Setup(repo => repo.GetRT_LLPById(id)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetTableByNameAndId_ReturnsRT_ODP()
+        {
+            // Arrange
+            var data = new List<RT_ODP> { };
+            string tablename = "RT_ODP";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_ODPRepo.Setup(repo => repo.GetRT_ODPById(id)).Returns(_mockRT_ODPRepo.ReturnsData);
+
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(data, result.Value);
         }
 
         [Test]
-        public async Task UpdateTheftById_Returns_OkResult()
+        public async Task GetTableByNameAndId_ReturnsRT_ODPNull()
         {
-            //Arrange
-            var THEFTL = new RT_THEFT();
-            int id = 1;
-            decimal factor = new decimal();
-            _TheftBLMock.Setup(x => x.UpdateRT_THEFTById(id, factor)).ReturnsAsync(THEFTL);
+            // Arrange
+            string tablename = "RT_ODP";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_ODPRepo.Setup(repo => repo.GetRT_ODPById(id)).Returns(_mockRT_ODPRepo.ReturnsNull);
 
-            //Act
-            var result = await _ratingController.UpdateTheftById(id, factor);
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(THEFTL, okResult.Value);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+        [Test]
+        public async Task GetTableByNameAndId_WhenRT_ODPRepositoryThrowsException()
+        {
+            // Arrange
+            string tablename = "RT_ODP";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_ODPRepo.Setup(repo => repo.GetRT_ODPById(id)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetTableByNameAndId_ReturnsRT_TPC()
+        {
+            // Arrange
+            var data = new List<RT_TPC> { };
+            string tablename = "RT_TPC";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_TPCRepo.Setup(repo => repo.GetRT_TPCById(id)).Returns(_mockRT_TPCRepo.ReturnsData);
+
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(data, result.Value);
         }
 
         [Test]
-        public async Task UpdateTheftById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetTableByNameAndId_ReturnsRT_TPCNull()
         {
-            //Arrange
-            int id = 1;
-            decimal factor = new decimal();
-            _TheftBLMock.Setup(x => x.UpdateRT_THEFTById(id, factor)).Throws(new Exception());
+            // Arrange
+            string tablename = "RT_TPC";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_TPCRepo.Setup(repo => repo.GetRT_TPCById(id)).Returns(_mockRT_TPCRepo.ReturnsNull);
 
-            //Act
-            var result = await _ratingController.UpdateTheftById(id, factor);
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+        [Test]
+        public async Task GetTableByNameAndId_WhenRT_TPCRepositoryThrowsException()
+        {
+            // Arrange
+            string tablename = "RT_TPC";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_TPCRepo.Setup(repo => repo.GetRT_TPCById(id)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetTableByNameAndId_ReturnsRT_THEFT()
+        {
+            // Arrange
+            var data = new List<RT_THEFT> { };
+            string tablename = "RT_THEFT";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_THEFTRepo.Setup(repo => repo.GetRT_THEFTById(id)).Returns(_mockRT_THEFTRepo.ReturnsData);
+
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(data, result.Value);
         }
 
         [Test]
-        public async Task GetGSTFactors_Returns_OkResult()
+        public async Task GetTableByNameAndId_ReturnsRT_THEFTNull()
         {
-            //Arrange
-            var GSTList = new List<RT_GST>();
-            _GstBLMock.Setup(x => x.GetRT_GST()).ReturnsAsync(GSTList);
+            // Arrange
+            string tablename = "RT_THEFT";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_THEFTRepo.Setup(repo => repo.GetRT_THEFTById(id)).Returns(_mockRT_THEFTRepo.ReturnsNull);
 
-            //Act
-            var result = await _ratingController.GetGSTFactors();
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(GSTList, okResult.Value);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
-
         [Test]
-        public async Task GetGSTFactors_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetTableByNameAndId_WhenRT_THEFTRepositoryThrowsException()
         {
-            //Arrange
-            _GstBLMock.Setup(x => x.GetRT_GST()).Throws(new Exception());
+            // Arrange
+            string tablename = "RT_THEFT";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByNameAndId(tablename,id)).Returns(_RatingService.GetTableByNameAndId);
+            _IRT_THEFTRepo.Setup(repo => repo.GetRT_THEFTById(id)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _ratingController.GetGSTFactors();
+            // Act
+            var result = await _controller.GetTableByNameAndId(tablename,id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
-
         [Test]
-        public async Task UpdateGstById_Returns_OkResult()
+        public async Task GetTableByName_WhenServiceThrowsException()
         {
-            //Arrange
-            var GSTL = new RT_GST();
-            int id = 1;
-            decimal factor = new decimal();
-            _GstBLMock.Setup(x => x.UpdateRT_GSTById(id, factor)).ReturnsAsync(GSTL);
+            // Arrange
+            string tablename = "TABLE";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _ratingController.UpdateGstById(id, factor);
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(GSTL, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
-
         [Test]
-        public async Task UpdateGstById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetTableByNameAndId_WhenServiceThrowsException()
         {
-            //Arrange
-            int id = 1;
-            decimal factor = new decimal();
-            _GstBLMock.Setup(x => x.UpdateRT_GSTById(id, factor)).Throws(new Exception());
+            // Arrange
+            string tablename = "TABLE";
+            int id = 0;
+            _mockRatingService.Setup(service => service.GetTableByName(tablename)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _ratingController.UpdateGstById(id, factor);
+            // Act
+            var result = await _controller.GetTableByName(tablename) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
 
     }

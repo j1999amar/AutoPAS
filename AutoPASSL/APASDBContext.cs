@@ -12,7 +12,6 @@ namespace AutoPASSL
         public APASDBContext(DbContextOptions options) : base(options)
         {
         }
-        public DbSet<test> test { get; set; }
         //DbSet
         public DbSet<policy> policy { get; set; }
         public DbSet<PolicyInsured> PolicyInsured { get; set; }
@@ -23,7 +22,7 @@ namespace AutoPASSL
 
         public DbSet<insuredContact> insuredcontact { get; set; }
 
-        public DbSet<RTO> rto { get; set; }
+        public DbSet<rto> rto { get; set; }
 
         public DbSet<vehicle> vehicle { get; set; }
 
@@ -60,9 +59,7 @@ namespace AutoPASSL
         public DbSet<RT_TheftFactor> RT_TheftFactor { get; set; }
         public DbSet<metadatatables> metadatatables { get; set; }
         public DbSet<supportingdocument> supportingdocuments { get; set; }
-
         public DbSet<Master> Masters { get; set; }
-
         public void CallCreateTableStoredProcedure(string tableName, string column)
         {
             Database.ExecuteSqlRaw("call sp_CreateTableWithParams (@p0, @p1)", tableName, column);

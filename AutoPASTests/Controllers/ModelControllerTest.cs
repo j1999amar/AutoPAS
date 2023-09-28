@@ -10,85 +10,148 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoPASDML;
 using Microsoft.Extensions.Logging;
+using AutoPASAL.IRepository;
+using AutoPASAL.Services;
+using AutoPASAL;
+using AutoPASAPITests.MockRepository;
 
 namespace AutoPASAPI.Tests.Controllers
 {
     [TestFixture]
     public class ModelControllerTests
     {
-        private Mock<IModelBL> _modelBLMock;
-        private Mock<ILogger<ModelController>> _loggerMock;
-        private ModelController _modelController;
+        private ModelController _controller;
+        private Mock<IModelService> _mockModelService;
+        private Mock<ILogger<ModelController>> _mockLogger;
+        private ModelMockRepo _mockModelRepo;
+        private ModelService _ModelService;
+        private Mock<IModelRepo> _IModelRepo;
 
         [SetUp]
         public void Setup()
         {
-            _modelBLMock = new Mock<IModelBL>();
-            _loggerMock = new Mock<ILogger<ModelController>>();
-            _modelController = new ModelController(_modelBLMock.Object, _loggerMock.Object);
+            _IModelRepo = new Mock<IModelRepo>();
+            _ModelService = new ModelService(_IModelRepo.Object);
+            _mockModelRepo = new ModelMockRepo();
+            _mockModelService = new Mock<IModelService>();
+            _mockLogger = new Mock<ILogger<ModelController>>();
+            _controller = new ModelController(_mockModelService.Object, _mockLogger.Object);
         }
 
         [Test]
-        public async Task GetModelByBrand_Returns_OkResult()
+        public async Task GetAllModel_ReturnsData()
         {
-            //Arrange
-            var modelList = new List<model>();
-            var BrandId = 0;
-            _modelBLMock.Setup(x => x.GetModelByBrand(BrandId)).ReturnsAsync(modelList);
+            // Arrange
+            var model = new List<model> { };
+            _mockModelService.Setup(service => service.GetAllModel()).Returns(_ModelService.GetAllModel);
+            _IModelRepo.Setup(repo => repo.GetAllModel()).Returns(_mockModelRepo.ReturnsModel);
 
-            //Act
-            var result = await _modelController.GetModelByBrand(BrandId);
+            // Act
+            var result = await _controller.GetAllModel() as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(modelList, okResult.Value);
+            // Assert
+            Assert.AreEqual(model, result.Value);
         }
 
         [Test]
-        public async Task GetModelByBrand_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetAllModel_ReturnsNull()
         {
-            //Arrange
-            var BrandId = 0;
-            _modelBLMock.Setup(x => x.GetModelByBrand(BrandId)).Throws(new Exception());
+            // Arrange
+            _mockModelService.Setup(service => service.GetAllModel()).Returns(_ModelService.GetAllModel);
+            _IModelRepo.Setup(repo => repo.GetAllModel()).Returns(_mockModelRepo.ReturnsNull);
 
-            //Act
-            var result = await _modelController.GetModelByBrand(BrandId);
+            // Act
+            var result = await _controller.GetAllModel() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
         [Test]
-        public async Task GetAllModel_Returns_OkResult()
+        public async Task GetAllModel_WhenServiceThrowsException()
         {
-            //Arrange
-            var modelList = new List<model>();
-            _modelBLMock.Setup(x => x.GetAllModel()).ReturnsAsync(modelList);
+            // Arrange
+            _mockModelService.Setup(service => service.GetAllModel()).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _modelController.GetAllModel();
+            // Act
+            var result = await _controller.GetAllModel() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(modelList, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetAllModel_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            _mockModelService.Setup(service => service.GetAllModel()).Returns(_ModelService.GetAllModel);
+            _IModelRepo.Setup(repo => repo.GetAllModel()).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetAllModel() as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
 
         [Test]
-        public async Task GetAllModel_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetModelByBrand_ReturnsData()
         {
-            //Arrange
-            _modelBLMock.Setup(x => x.GetAllModel()).Throws(new Exception());
+            // Arrange
+            var model = new List<model> { };
+            int BrandId = 0;
+            _mockModelService.Setup(service => service.GetModelByBrand(BrandId)).Returns(_ModelService.GetModelByBrand);
+            _IModelRepo.Setup(repo => repo.GetModelByBrand(BrandId)).Returns(_mockModelRepo.ReturnsModel);
 
-            //Act
-            var result = await _modelController.GetAllModel();
+            // Act
+            var result = await _controller.GetModelByBrand(BrandId) as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual(model, result.Value);
+        }
+
+        [Test]
+        public async Task GetModelByBrand_ReturnsNull()
+        {
+            // Arrange
+            int BrandId = 0;
+            _mockModelService.Setup(service => service.GetModelByBrand(BrandId)).Returns(_ModelService.GetModelByBrand);
+            _IModelRepo.Setup(repo => repo.GetModelByBrand(BrandId)).Returns(_mockModelRepo.ReturnsNull);
+
+            // Act
+            var result = await _controller.GetModelByBrand(BrandId) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
+        }
+        [Test]
+        public async Task GetModelByBrand_WhenServiceThrowsException()
+        {
+            // Arrange
+            int BrandId = 0;
+            _mockModelService.Setup(service => service.GetModelByBrand(BrandId)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetModelByBrand(BrandId) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetModelByBrand_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            int BrandId = 0;
+            _mockModelService.Setup(service => service.GetModelByBrand(BrandId)).Returns(_ModelService.GetModelByBrand);
+            _IModelRepo.Setup(repo => repo.GetModelByBrand(BrandId)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetModelByBrand(BrandId) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
 
     }
