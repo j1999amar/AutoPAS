@@ -20,12 +20,14 @@ namespace AutoPASAPI.Tests.Controllers
     [TestFixture]
     public class BodyTypeControllerTests
     {
-        private BodyTypeController _controller;
-        private Mock<IBodyTypeService> _mockBodyTypeService;
         private Mock<ILogger<BodyTypeController>> _mockLogger;
+        private BodyTypeController _controller;
+
+        private Mock<IBodyTypeService> _mockBodyTypeService;
+        private Mock<IBodyTypeRepo> _IBodyTypeRepo;
+
         private BodyTypeMockRepo _mockBodyTypeRepo;
         private BodyTypeService _bodyTypeService;
-        private Mock<IBodyTypeRepo> _IBodyTypeRepo;
 
         [SetUp]
         public void Setup()
@@ -52,7 +54,6 @@ namespace AutoPASAPI.Tests.Controllers
             // Assert
             Assert.AreEqual(bodyTypes,result.Value);
         }
-
         [Test]
         public async Task GetAllBodyType_ReturnsNull()
         {
@@ -64,9 +65,8 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetAllBodyType() as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
-
         [Test]
         public async Task GetAllBodyType_WhenServiceThrowsException()
         {
@@ -94,6 +94,181 @@ namespace AutoPASAPI.Tests.Controllers
             Assert.IsNotNull(result);
             Assert.AreEqual(500, result.StatusCode);
         }
+        
+        
+        [Test]
+        public async Task AddBodyType_ReturnsBadRequest_WhenIdIsExists()
+        {
+            //Arrange
+            var bodyType = new bodyType();
+            _mockBodyTypeService.Setup(service=>service.IsExists(bodyType.BodyTypeId)).Returns(true);
+
+            //Act
+            var result = await _controller.AddBodyType(bodyType) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+
+        }
+        [Test]
+        public async Task AddBodyType_ReturnsOkResponse_WhenIdIsNotExistsAndAddRecord()
+        {
+            //Arrange
+            var bodyType = new bodyType();
+            _mockBodyTypeService.Setup(service => service.IsExists(bodyType.BodyTypeId)).Returns(false);
+
+            //Act
+            var result = await _controller.AddBodyType(bodyType) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+
+        }
+        [Test]
+        public async Task AddBodyType_WhenServiceThrowsException()
+        {
+            // Arrange
+            var bodyType=new bodyType();
+            _mockBodyTypeService.Setup(service => service.AddBodyType(bodyType)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.AddBodyType(bodyType) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task AddBodyType_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var bodyType = new bodyType();
+            _IBodyTypeRepo.Setup(service => service.AddBodyType(bodyType)).ThrowsAsync(new Exception());
+            _mockBodyTypeService.Setup(service => service.AddBodyType(bodyType)).ThrowsAsync(new Exception());
+            // Act
+            var result = await _controller.AddBodyType(bodyType) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+
+        [Test]
+        public async Task EditBodyType_ReturnsBadRequest_WhenIdIsNotExists()
+        {
+            //Arrange
+            var bodyType = new bodyType();
+            _mockBodyTypeService.Setup(service => service.IsExists(bodyType.BodyTypeId)).Returns(false);
+
+            //Act
+            var result = await _controller.EditBodyType(bodyType) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+
+        }
+        [Test]
+        public async Task EditBodyType_ReturnsOkRequest_WhenIdIsExists()
+        {
+            //Arrange
+            var bodyType = new bodyType();
+            _mockBodyTypeService.Setup(service => service.IsExists(bodyType.BodyTypeId)).Returns(true);
+
+            //Act
+            var result = await _controller.EditBodyType(bodyType) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+
+        }
+        [Test]
+        public async Task EditBodyType_WhenServiceThrowsException()
+        {
+            // Arrange
+            var bodyType = new bodyType();
+            _mockBodyTypeService.Setup(service => service.AddBodyType(bodyType)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.EditBodyType(bodyType) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task EditBodyType_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var bodyType = new bodyType();
+            _IBodyTypeRepo.Setup(service => service.EditBodyType(bodyType)).ThrowsAsync(new Exception());
+            _mockBodyTypeService.Setup(service => service.EditBodyType(bodyType)).ThrowsAsync(new Exception());
+            // Act
+            var result = await _controller.EditBodyType(bodyType) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+
+        [Test]
+        public async Task DeleteBodyType_ReturnsBadRequest_WhenIdIsNotExists()
+        {
+            //Arrange
+            var bodyType = new bodyType();
+            _mockBodyTypeService.Setup(service => service.IsExists(bodyType.BodyTypeId)).Returns(false);
+
+            //Act
+            var result = await _controller.DeleteBodyType(bodyType.BodyTypeId) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+
+        }
+        [Test]
+        public async Task DeleteBodyType_ReturnsOkRequest_WhenIdIsExistsAndDataDeleted()
+        {
+            //Arrange
+            var bodyType = new bodyType();
+            _mockBodyTypeService.Setup(service => service.IsExists(bodyType.BodyTypeId)).Returns(true);
+
+            //Act
+            var result = await _controller.DeleteBodyType(bodyType.BodyTypeId) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+
+        }
+        [Test]
+        public async Task DeleteBodyType_WhenServiceThrowsException()
+        {
+            // Arrange
+            var bodyType = new bodyType();
+            _mockBodyTypeService.Setup(service => service.DeleteBodyType(bodyType.BodyTypeId)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.DeleteBodyType(bodyType.BodyTypeId) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task DeleteBodyType_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var bodyType = new bodyType();
+            _IBodyTypeRepo.Setup(service => service.DeleteBodyType(bodyType.BodyTypeId)).Throws(new Exception());
+            _mockBodyTypeService.Setup(service => service.DeleteBodyType(bodyType.BodyTypeId)).Throws(new Exception());
+            // Act
+            var result = await _controller.DeleteBodyType(bodyType.BodyTypeId) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
 
 
 

@@ -66,7 +66,7 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetAllTransmissionTypes() as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
         [Test]
         public async Task GetAllTransmissionType_WhenServiceThrowsException()
@@ -126,7 +126,7 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetTransmissionTypes(ModelId, FuelId) as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
         [Test]
         public async Task GetTransmissionTypeByBrand_WhenServiceThrowsException()

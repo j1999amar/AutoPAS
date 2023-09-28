@@ -65,7 +65,7 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetAllVariant() as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
         [Test]
         public async Task GetAllVariant_WhenServiceThrowsException()
@@ -127,7 +127,7 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetVariant(ModelId, FuelId, TransmissionId) as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
         [Test]
         public async Task GetVariant_WhenServiceThrowsException()

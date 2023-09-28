@@ -65,7 +65,7 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetAllVehicleType() as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
 
         [Test]

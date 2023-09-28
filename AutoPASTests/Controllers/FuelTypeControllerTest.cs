@@ -65,7 +65,7 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetAllFuelTypes() as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
         [Test]
         public async Task GetAllFuelType_WhenServiceThrowsException()
@@ -123,7 +123,7 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetFuelTypes(ModelId) as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
         [Test]
         public async Task GetFuelTypes_WhenServiceThrowsException()
@@ -152,6 +152,183 @@ namespace AutoPASAPI.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task AddFuelType_ReturnOkResponse_WhenFuelTypeIdIsNotExsitsAndDataIsAdded()
+        {
+            //Arrange
+            var fuelType = new fueltype();
+            _mockFuelTypeService.Setup(service => service.IsExists(fuelType.FuelTypeId)).Returns(false);
+
+            //Arrange
+            var result=await _controller.AddFuelType(fuelType) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+        }
+
+        [Test]
+        public async Task AddFuelType_ReturnBadRequest_WhenFuelTypeIdIsExsitsAndDataIsNotAdded()
+        {
+            //Arrange
+            var fuelType = new fueltype();
+            _mockFuelTypeService.Setup(service => service.IsExists(fuelType.FuelTypeId)).Returns(true);
+                
+            //Arrange
+            var result = await _controller.AddFuelType(fuelType) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task AddFuelTypes_WhenServiceThrowsException()
+        {
+            // Arrange
+            var fuelType = new fueltype();
+            _mockFuelTypeService.Setup(service => service.IsExists(fuelType.FuelTypeId)).Returns(false);
+            _mockFuelTypeService.Setup(service => service.AddFuelType(fuelType)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.AddFuelType(fuelType) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task AddFuelTypes_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var fuelType = new fueltype();
+            _mockFuelTypeService.Setup(service => service.IsExists(fuelType.FuelTypeId)).Returns(false);
+            _mockFuelTypeService.Setup(service => service.AddFuelType(fuelType)).ThrowsAsync(new Exception());
+            _IFuelTypeRepo.Setup(repo => repo.AddFuelType(fuelType)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.AddFuelType(fuelType) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+
+
+
+        [Test]
+        public async Task EditFuelType_ReturnOkResponse_WhenFuelTypeIdIsExsitsAndDataUpdated()
+        {
+            //Arrange
+            var fuelType = new fueltype();
+            _mockFuelTypeService.Setup(service => service.IsExists(fuelType.FuelTypeId)).Returns(true);
+
+            //Arrange
+            var result = await _controller.EditFuelType(fuelType) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+        }
+
+        [Test]
+        public async Task EditFuelType_ReturnBadRequest_WhenFuelTypeIdIsNotExsitsAndDataIsNotUpdated()
+        {
+            //Arrange
+            var fuelType = new fueltype();
+            _mockFuelTypeService.Setup(service => service.IsExists(fuelType.FuelTypeId)).Returns(false);
+
+            //Arrange
+            var result = await _controller.EditFuelType(fuelType) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task EditFuelTypes_WhenServiceThrowsException()
+        {
+            // Arrange
+            var fuelType = new fueltype();
+            _mockFuelTypeService.Setup(service => service.IsExists(fuelType.FuelTypeId)).Returns(true);
+            _mockFuelTypeService.Setup(service => service.AddFuelType(fuelType)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.AddFuelType(fuelType) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task EditFuelTypes_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var fuelType = new fueltype();
+            _mockFuelTypeService.Setup(service => service.IsExists(fuelType.FuelTypeId)).Returns(false);
+            _mockFuelTypeService.Setup(service => service.AddFuelType(fuelType)).ThrowsAsync(new Exception());
+            _IFuelTypeRepo.Setup(repo => repo.AddFuelType(fuelType)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.AddFuelType(fuelType) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task DeleteEditType_ReturnOkResponse_WhenFuelTypeIdIsExsitsAndDataIsDeleted()
+        {
+            //Arrange
+            var fuelType = new fueltype();
+            _mockFuelTypeService.Setup(service => service.IsExists(fuelType.FuelTypeId)).Returns(true);
+
+            //Act
+            var result = _controller.DeleteFuelType(fuelType.FuelTypeId) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+
+        }
+        [Test]
+        public async Task DeleteEditType_ReturnBadRequest_WhenFuelTypeIdIsNotExsitsAndDataIsNotDeleted()
+        {
+            //Arrange
+            var fuelType = new fueltype();
+            _mockFuelTypeService.Setup(service => service.IsExists(fuelType.FuelTypeId)).Returns(false);
+
+            //Act
+            var result = _controller.DeleteFuelType(fuelType.FuelTypeId) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+
+        }
+
+        [Test]
+        public async Task DeleteFuelTypes_WhenServiceThrowsException()
+        {
+            // Arrange
+            var fuelType = new fueltype();
+            _mockFuelTypeService.Setup(service => service.IsExists(fuelType.FuelTypeId)).Returns(true);
+            _mockFuelTypeService.Setup(service => service.DeleteFuelType(fuelType.FuelTypeId)).Throws(new Exception());
+
+            // Act
+            var result =  _controller.DeleteFuelType(fuelType.FuelTypeId) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task DeleteFuelTypes_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var fuelType = new fueltype();
+            _mockFuelTypeService.Setup(service => service.IsExists(fuelType.FuelTypeId)).Returns(true);
+            _mockFuelTypeService.Setup(service => service.DeleteFuelType(fuelType.FuelTypeId)).Throws(new Exception());
+            _IFuelTypeRepo.Setup(repo => repo.DeleteFuelType(fuelType.FuelTypeId)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.AddFuelType(fuelType) as ObjectResult;
+
+            // Assert
             Assert.AreEqual(500, result.StatusCode);
         }
     }

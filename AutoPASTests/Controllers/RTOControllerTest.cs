@@ -66,7 +66,7 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetAllRTO(id) as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
 
         [Test]
@@ -124,7 +124,7 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetAllRTOState() as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
 
         [Test]
@@ -182,7 +182,7 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetRTOCityByState(test) as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
 
         [Test]
@@ -242,7 +242,7 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetRTONameByCity(test) as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
 
         [Test]
@@ -302,7 +302,7 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetCity(id) as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
 
         [Test]
@@ -332,6 +332,175 @@ namespace AutoPASAPI.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task AddRTO_ReturnOkResponse_WhenRTOIdIsNotExsitsAndDataAdded()
+        {
+            //Arrange
+            var rto = new rto();
+            _mockRTOService.Setup(service=>service.IsExists(rto.RTOId)).Returns(false);
+
+            //Act
+            var result=await _controller.AddRTO(rto) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200,result.StatusCode);
+        }
+
+        [Test]
+        public async Task AddRTO_ReturnBadRequest_WhenRTOIdIsExsitsAndDataNotAdded()
+        {
+            //Arrange
+            var rto = new rto();
+            _mockRTOService.Setup(service => service.IsExists(rto.RTOId)).Returns(true);
+
+            //Act
+            var result = await _controller.AddRTO(rto) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task AddRTO_WhenServiceThrowsException()
+        {
+            // Arrange
+            var rto = new rto();
+            _mockRTOService.Setup(service => service.AddRTO(rto)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.AddRTO(rto) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task AddRTO_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var rto = new rto();
+            _mockRTOService.Setup(service => service.AddRTO(rto)).Throws(new Exception());
+            _IRTORepo.Setup(service => service.AddRTO(rto)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.AddRTO(rto) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+
+        [Test]
+        public async Task EditRTO_ReturnOkResponse_WhenRTOIdIsExsitsAndDataUpdated()
+        {
+            //Arrange
+            var rto = new rto();
+            _mockRTOService.Setup(service => service.IsExists(rto.RTOId)).Returns(true);
+
+            //Act
+            var result = await _controller.EditRTO(rto) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+        }
+
+        [Test]
+        public async Task EditRTO_ReturnBadRequest_WhenRTOIdIsNotExsitsAndDataNotUpdated()
+        {
+            //Arrange
+            var rto = new rto();
+            _mockRTOService.Setup(service => service.IsExists(rto.RTOId)).Returns(false);
+
+            //Act
+            var result = await _controller.EditRTO(rto) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task EditRTO_WhenServiceThrowsException()
+        {
+            // Arrange
+            var rto = new rto();
+            _mockRTOService.Setup(service => service.EditRTO(rto)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.EditRTO(rto) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task EditRTO_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var rto = new rto();
+            _mockRTOService.Setup(service => service.EditRTO(rto)).Throws(new Exception());
+            _IRTORepo.Setup(service => service.EditRTO(rto)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.EditRTO(rto) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task DeleteRTO_ReturnOkResponse_WhenRTOIdIsExsitsAndDataDeleted()
+        {
+            //Arrange
+            var rto = new rto();
+            _mockRTOService.Setup(service => service.IsExists(rto.RTOId)).Returns(true);
+
+            //Act
+            var result =  _controller.DeleteRTO(rto.RTOId) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+        }
+
+        [Test]
+        public async Task DeleteRTO_ReturnBadRequest_WhenRTOIdIsNotExsitsAndDataNotDeleted()
+        {
+            //Arrange
+            var rto = new rto();
+            _mockRTOService.Setup(service => service.IsExists(rto.RTOId)).Returns(false);
+
+            //Act
+            var result =  _controller.DeleteRTO(rto.RTOId) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task DeleteRTO_WhenServiceThrowsException()
+        {
+            // Arrange
+            var rto = new rto();
+            _mockRTOService.Setup(service => service.DeleteRTO(rto.RTOId)).Throws(new Exception());
+
+            // Act
+            var result =  _controller.DeleteRTO(rto.RTOId) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task DeleteRTO_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var rto = new rto();
+            _mockRTOService.Setup(service => service.DeleteRTO(rto.RTOId)).Throws(new Exception());
+            _IRTORepo.Setup(service => service.DeleteRTO(rto.RTOId)).Throws(new Exception());
+
+            // Act
+            var result = _controller.DeleteRTO(rto.RTOId) as ObjectResult;
+
+            // Assert
             Assert.AreEqual(500, result.StatusCode);
         }
     }

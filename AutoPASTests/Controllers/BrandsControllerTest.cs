@@ -54,7 +54,6 @@ namespace AutoPASAPI.Tests.Controllers
             Assert.IsNotNull(result);
             Assert.AreEqual(brands, result.Value);
         }
-
         [Test]
         public async Task GetAllBrand_ReturnsNull()
         {
@@ -67,9 +66,8 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetAllBrand() as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
-
         [Test]
         public async Task GetAllBrand_WhenServiceThrowsException()
         {
@@ -113,7 +111,6 @@ namespace AutoPASAPI.Tests.Controllers
             Assert.IsNotNull(result);
             Assert.AreEqual(brands, result.Value);
         }
-
         [Test]
         public async Task GetBrandByVehicleType_ReturnsNull()
         {
@@ -127,9 +124,8 @@ namespace AutoPASAPI.Tests.Controllers
             var result = await _controller.GetBrandByVehicleType(VehicleType) as ObjectResult;
 
             // Assert
-            Assert.AreEqual("Returns Null", result.Value);
+            Assert.AreEqual(null, result.Value);
         }
-
         [Test]
         public async Task GetBrandByVehicleType_WhenServiceThrowsException()
         {
@@ -143,7 +139,7 @@ namespace AutoPASAPI.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(500, result.StatusCode);
-        }
+        }        
         [Test]
         public async Task GetBrandByVehicleType_WhenRepositoryThrowsException()
         {
@@ -161,20 +157,250 @@ namespace AutoPASAPI.Tests.Controllers
         }
 
         [Test]
-        public async Task asd()
+        public async Task AddBrand_ReturnOkResponse_WhenBrandIdIsNotExsitsAndDataAdded()
+        {
+            //Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(false);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(true);
+
+            //Act
+            var result = await _controller.AddBrands(brand) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+
+        }
+        [Test]
+        public async Task AddBrand_ReturnBadRequest_WhenBrandIdIsExisitsAndDataIsNotAdded()
+        {
+            //Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(true);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(true);
+
+            //Act
+            var result = await _controller.AddBrands(brand) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+
+        }
+        [Test]
+        public async Task AddBrand_ReturnOkResponse_WhenVehicleTypeIsNotExists()
+        {
+            //Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(false);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(true);
+
+            //Act
+            var result = await _controller.AddBrands(brand) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+
+        }
+        [Test]
+        public async Task AddBrand_ReturnBadRequest_WhenVehicleTypeIsNotExists()
+        {
+            //Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(false);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(false);
+
+            //Act
+            var result = await _controller.AddBrands(brand) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+
+        }
+        [Test]
+        public async Task AddBrand_WhenServiceThrowsException()
         {
             // Arrange
-            int VehicleType = 0;
-            _mockBrandsService.Setup(service => service.GetBrandByVehicleType(VehicleType)).Returns(_brandsService.GetBrandByVehicleType);
-            _IBrandsRepo.Setup(repo => repo.GetBrandByVehicleType(VehicleType)).ThrowsAsync(new Exception());
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.AddBrands(brand)).ThrowsAsync(new Exception());
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(false);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(true);
 
             // Act
-            var result = await _controller.GetBrandByVehicleType(VehicleType) as ObjectResult;
+            var result = await _controller.AddBrands(brand) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task AddBrand_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var brand=new Brands();
+            _mockBrandsService.Setup(service => service.AddBrands(brand)).ThrowsAsync(new Exception());
+            _IBrandsRepo.Setup(repo => repo.AddBrands(brand)).ThrowsAsync(new Exception());
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(false);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(true);
+
+            // Act
+            var result = await _controller.AddBrands(brand) as ObjectResult;
 
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(500, result.StatusCode);
         }
 
+
+
+
+        [Test]
+        public async Task Edit_ReturnOkResponse_WhenBrandIdIsExsitsAndDataUpdated()
+        {
+            //Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(true);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(true);
+
+            //Act
+            var result = await _controller.EditBrands(brand) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+
+        }
+        [Test]
+        public async Task EditBrand_ReturnBadRequest_WhenBrandIdIsNotExisitsAndDataIsNotUpdated()
+        {
+            //Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(false);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(true);
+
+            //Act
+            var result = await _controller.EditBrands(brand) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+
+        }
+        [Test]
+        public async Task EditBrand_ReturnOkResponse_WhenVehicleTypeIsExistsAndDataIsUpdated()
+        {
+            //Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(true);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(true);
+
+            //Act
+            var result = await _controller.EditBrands(brand) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+
+        }
+        [Test]
+        public async Task EditBrand_ReturnBadRequest_WhenVehicleTypeIsNotExists()
+        {
+            //Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(true);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(false);
+
+            //Act
+            var result = await _controller.EditBrands(brand) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+
+        }
+        [Test]
+        public async Task EditBrand_WhenServiceThrowsException()
+        {
+            // Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.EditBrands(brand)).ThrowsAsync(new Exception());
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(true);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(true);
+
+            // Act
+            var result = await _controller.EditBrands(brand) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task EditBrand_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.EditBrands(brand)).ThrowsAsync(new Exception());
+            _IBrandsRepo.Setup(repo => repo.EditBrands(brand)).ThrowsAsync(new Exception());
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(true);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(true);
+
+            // Act
+            var result = await _controller.EditBrands(brand) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task DeleteBrand_OkResponse_WhenBrandIsDeleted()
+        {
+            //Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(true);
+
+            //Act
+            var result=_controller.DeleteBrands(brand.BrandId) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+
+        }
+        [Test]
+        public async Task DeleteBrand_BadRequest_WhenBrandIsNotDeleted()
+        {
+            //Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(false);
+
+            //Act
+            var result = _controller.DeleteBrands(brand.BrandId) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+
+        }
+        [Test]
+        public async Task DeleteBrand_WhenServiceThrowsException()
+        {
+            // Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.EditBrands(brand)).ThrowsAsync(new Exception());
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(true);
+            _mockBrandsService.Setup(service => service.vehicleTypeIdIsExists(brand.VehicleTypeId)).Returns(true);
+
+            // Act
+            var result = await _controller.EditBrands(brand) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task DeleteBrand_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var brand = new Brands();
+            _mockBrandsService.Setup(service => service.EditBrands(brand)).ThrowsAsync(new Exception());
+            _IBrandsRepo.Setup(repo => repo.EditBrands(brand)).ThrowsAsync(new Exception());
+            _mockBrandsService.Setup(service => service.IsExists(brand.BrandId)).Returns(true);
+
+            // Act
+            var result = await _controller.EditBrands(brand) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
     }
 }

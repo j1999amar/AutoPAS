@@ -1372,7 +1372,8 @@
       "AutoPASAL/1.0.0": {
         "dependencies": {
           "AutoPASBL": "1.0.0",
-          "AutoPASDML": "1.0.0"
+          "AutoPASDML": "1.0.0",
+          "Newtonsoft.Json": "9.0.1"
         },
         "runtime": {
           "AutoPASAL.dll": {}
@@ -1442,6 +1443,7 @@
           "Microsoft.EntityFrameworkCore.Relational": "7.0.2",
           "Microsoft.Extensions.Logging.Log4Net.AspNetCore": "6.1.0",
           "MySqlConnector": "2.3.0-beta.1",
+          "Newtonsoft.Json": "9.0.1",
           "Pomelo.EntityFrameworkCore.MySql": "7.0.0",
           "log4net": "2.0.15"
         },
