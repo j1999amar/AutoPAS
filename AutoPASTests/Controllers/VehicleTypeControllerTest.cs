@@ -96,5 +96,173 @@ namespace AutoPASAPI.Tests.Controllers
             Assert.AreEqual(500, result.StatusCode);
         }
 
+        [Test]
+        public async Task AddVehicleType_WhenVehicleTypeIdIsNotExsitsAndDataIsAdded()
+        {
+            //Arrange
+            var vehicleType = new vehicleType();
+            _mockVehicleTypeService.Setup(service => service.IsExists(vehicleType.VehicleTypeId)).Returns(false);
+
+            //Act 
+            var result = await _controller.AddVehicleType(vehicleType) as ObjectResult;
+
+            Assert.AreEqual(200,result.StatusCode);
+        }
+
+        [Test]
+        public async Task AddVehicleType_WhenVehicleTypeIdIsExsitsAndDataIsNotAdded()
+        {
+            //Arrange
+            var vehicleType = new vehicleType();
+            _mockVehicleTypeService.Setup(service => service.IsExists(vehicleType.VehicleTypeId)).Returns(true);
+
+            //Act 
+            var result = await _controller.AddVehicleType(vehicleType) as ObjectResult;
+
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task AddVehicleType_WhenServiceThrowsException()
+        {
+            // Arrange
+            var vehicleType = new vehicleType();
+
+            _mockVehicleTypeService.Setup(service => service.AddVehicleType(vehicleType)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.AddVehicleType(vehicleType) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task AddVehicleType_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var vehicleType = new vehicleType();
+            _mockVehicleTypeService.Setup(service => service.AddVehicleType(vehicleType)).Returns(_VehicleTypeService.AddVehicleType);
+            _IVehicleTypeRepo.Setup(service => service.AddVehicleType(vehicleType)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.AddVehicleType(vehicleType) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task EditVehicleType_WhenVehicleTypeIdIsExsitsAndDataIsUpdated()
+        {
+            //Arrange
+            var vehicleType = new vehicleType();
+            _mockVehicleTypeService.Setup(service => service.IsExists(vehicleType.VehicleTypeId)).Returns(true);
+
+            //Act 
+            var result = await _controller.EditVehicleType(vehicleType) as ObjectResult;
+
+            Assert.AreEqual(200, result.StatusCode);
+        }
+
+        [Test]
+        public async Task EditVehicleType_WhenVehicleTypeIdIsNotExsitsAndDataIsNotUpdated()
+        {
+            //Arrange
+            var vehicleType = new vehicleType();
+            _mockVehicleTypeService.Setup(service => service.IsExists(vehicleType.VehicleTypeId)).Returns(false);
+
+            //Act 
+            var result = await _controller.EditVehicleType(vehicleType) as ObjectResult;
+
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+       
+        public async Task EditVehicleType_WhenServiceThrowsException()
+        {
+            // Arrange
+            var vehicleType = new vehicleType();
+            _mockVehicleTypeService.Setup(service => service.IsExists(vehicleType.VehicleTypeId)).Returns(true);
+            _mockVehicleTypeService.Setup(service => service.EditVehicleType(vehicleType)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.EditVehicleType(vehicleType) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task EditVehicleType_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var vehicleType = new vehicleType();
+            _mockVehicleTypeService.Setup(service => service.IsExists(vehicleType.VehicleTypeId)).Returns(true);
+            _mockVehicleTypeService.Setup(service => service.EditVehicleType(vehicleType)).Returns(_VehicleTypeService.EditVehicleType);
+            _IVehicleTypeRepo.Setup(service => service.EditVehicleType(vehicleType)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.EditVehicleType(vehicleType) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+
+        [Test]
+        public async Task DeleteVehicleType_WhenVehicleTypeIdIsExsitsAndDataIsDeleted()
+        {
+            //Arrange
+            var vehicleType = new vehicleType();
+            _mockVehicleTypeService.Setup(service => service.IsExists(vehicleType.VehicleTypeId)).Returns(true);
+
+            //Act 
+            var result =  _controller.DeleteVehicleType(vehicleType.VehicleTypeId) as ObjectResult;
+
+            Assert.AreEqual(200, result.StatusCode);
+        }
+
+        [Test]
+        public async Task DeleteVehicleType_WhenVehicleTypeIdIsNotExsitsAndDataIsNotDeleted()
+        {
+            //Arrange
+            var vehicleType = new vehicleType();
+            _mockVehicleTypeService.Setup(service => service.IsExists(vehicleType.VehicleTypeId)).Returns(false);
+
+            //Act 
+            var result =  _controller.DeleteVehicleType(vehicleType.VehicleTypeId) as ObjectResult;
+
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task DeleteVehicleType_WhenServiceThrowsException()
+        {
+            // Arrange
+            var vehicleType = new vehicleType();
+            _mockVehicleTypeService.Setup(service => service.IsExists(vehicleType.VehicleTypeId)).Returns(true);
+            _mockVehicleTypeService.Setup(service => service.DeleteVehicleType(vehicleType.VehicleTypeId)).Throws(new Exception());
+
+            // Act
+            var result =  _controller.DeleteVehicleType(vehicleType.VehicleTypeId) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task DeleteVehicleType_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var vehicleType = new vehicleType();
+            _mockVehicleTypeService.Setup(service => service.IsExists(vehicleType.VehicleTypeId)).Returns(true);
+            _mockVehicleTypeService.Setup(service => service.DeleteVehicleType(vehicleType.VehicleTypeId)).Returns(_VehicleTypeService.DeleteVehicleType);
+            _IVehicleTypeRepo.Setup(service => service.DeleteVehicleType(vehicleType.VehicleTypeId)).Throws(new Exception());
+
+            // Act
+            var result =  _controller.DeleteVehicleType(vehicleType.VehicleTypeId) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
     }
 }

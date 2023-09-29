@@ -159,6 +159,177 @@ namespace AutoPASAPI.Tests.Controllers
             Assert.IsNotNull(result);
             Assert.AreEqual(500, result.StatusCode);
         }
+        [Test]
+        public async Task AddTransmissionType_ReturnOkReponse_WhenAddTransmissionTypeIdIsNotExsitsAndDataIsAdded()
+        {
+            //Arrange
+            var transmission = new transmissiontype();
+            _mockTransmissionTypeService.Setup(service=>service.IsExists(transmission.TransmissionTypeId)).Returns(false);
 
+            //Act
+            var result = await _controller.AddTransmissionType(transmission) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+        }
+
+        [Test]
+        public async Task AddTransmissionType_ReturnBadRequest_WhenAddTransmissionTypeIdIsExsitsAndDataIsNotAdded()
+        {
+            //Arrange
+            var transmission = new transmissiontype();
+            _mockTransmissionTypeService.Setup(service => service.IsExists(transmission.TransmissionTypeId)).Returns(true);
+
+            //Act
+            var result = await _controller.AddTransmissionType(transmission) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task TransmissionType_WhenServiceThrowsException()
+        {
+            // Arrange
+            var transmission = new transmissiontype();
+
+            _mockTransmissionTypeService.Setup(service => service.AddTransmissionType(transmission)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.AddTransmissionType(transmission) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task AddTransmissionType_WhenRepositoryThrowsException()
+        {
+            // Arrange
+           var transmission = new transmissiontype();
+            _mockTransmissionTypeService.Setup(service => service.AddTransmissionType(transmission)).Returns(_TransmissionTypeService.AddTransmissionType);
+            _ITransmissionTypeRepo.Setup(repo => repo.AddTransmissionType(transmission)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.AddTransmissionType(transmission) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task EditTransmissionType_ReturnOkReponse_WhenEditTransmissionTypeIdIsExsitsAndDataIsUpdated()
+        {
+            //Arrange
+            var transmission = new transmissiontype();
+            _mockTransmissionTypeService.Setup(service => service.IsExists(transmission.TransmissionTypeId)).Returns(true);
+
+            //Act
+            var result = await _controller.EditTransmissionType(transmission) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+        }
+        [Test]
+        public async Task EditTransmissionType_ReturnBadRequest_WhenEditTransmissionTypeIdIsExsitsAndDataIsNotUpdated()
+        {
+            //Arrange
+            var transmission = new transmissiontype();
+            _mockTransmissionTypeService.Setup(service => service.IsExists(transmission.TransmissionTypeId)).Returns(false);
+
+            //Act
+            var result = await _controller.EditTransmissionType(transmission) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task EditTransmissionType_WhenServiceThrowsException()
+        {
+            // Arrange
+            var transmission = new transmissiontype();
+
+            _mockTransmissionTypeService.Setup(service => service.EditTransmissionType(transmission)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.EditTransmissionType(transmission) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task EditTransmissionType_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var transmission = new transmissiontype();
+            _mockTransmissionTypeService.Setup(service => service.EditTransmissionType(transmission)).Returns(_TransmissionTypeService.EditTransmissionType);
+            _ITransmissionTypeRepo.Setup(repo => repo.EditTransmissionType(transmission)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.EditTransmissionType(transmission) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+
+        [Test]
+        public async Task DeleteTransmissionType_ReturnOkReponse_WhenDeleteTransmissionTypeIdIsExsitsAndDataIsDeleted()
+        {
+            //Arrange
+            var transmission = new transmissiontype();
+            _mockTransmissionTypeService.Setup(service => service.IsExists(transmission.TransmissionTypeId)).Returns(true);
+
+            //Act
+            var result =  _controller.DeleteTransmissionType(transmission.TransmissionTypeId) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+        }
+        [Test]
+        public async Task DeleteTransmissionType_ReturnBadRequest_WhenDeleteTransmissionTypeIdIsExsitsAndDataIsNotDeleted()
+        {
+            //Arrange
+            var transmission = new transmissiontype();
+            _mockTransmissionTypeService.Setup(service => service.IsExists(transmission.TransmissionTypeId)).Returns(false);
+
+            //Act
+            var result =  _controller.DeleteTransmissionType(transmission.TransmissionTypeId) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task DeleteTransmissionType_WhenServiceThrowsException()
+        {
+            // Arrange
+            var transmission = new transmissiontype();
+
+            _mockTransmissionTypeService.Setup(service => service.DeleteTransmissionType(transmission.TransmissionTypeId)).Throws(new Exception());
+
+            // Act
+            var result =  _controller.DeleteTransmissionType(transmission.TransmissionTypeId) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task DeleteTransmissionType_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var transmission = new transmissiontype();
+            _mockTransmissionTypeService.Setup(service => service.DeleteTransmissionType(transmission.TransmissionTypeId)).Returns(_TransmissionTypeService.DeleteTransmissionType);
+            _ITransmissionTypeRepo.Setup(repo => repo.DeleteTransmissionType(transmission.TransmissionTypeId)).Throws(new Exception());
+
+            // Act
+            var result =  _controller.DeleteTransmissionType(transmission.TransmissionTypeId) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
     }
 }

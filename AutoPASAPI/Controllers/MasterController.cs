@@ -9,8 +9,8 @@ namespace AutoPASAPI.Controllers
     public class MasterController : Controller
     {
         private readonly IMasterService _masterService;
-        private readonly ILogger<BrandsController> _logger;
-        public MasterController(IMasterService masterService, ILogger<BrandsController> logger)
+        private readonly ILogger<MasterController> _logger;
+        public MasterController(IMasterService masterService, ILogger<MasterController> logger)
         {
             _masterService = masterService;
             _logger = logger;

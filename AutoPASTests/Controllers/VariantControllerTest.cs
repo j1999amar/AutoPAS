@@ -15,6 +15,7 @@ using AutoPASAL.IRepository;
 using AutoPASAL.Services;
 using AutoPASAL;
 using AutoPASAPITests.MockRepository;
+using AutoPASSL.Repository;
 
 namespace AutoPASAPI.Tests.Controllers
 {
@@ -162,6 +163,175 @@ namespace AutoPASAPI.Tests.Controllers
             Assert.IsNotNull(result);
             Assert.AreEqual(500, result.StatusCode);
         }
+
+        [Test]
+        public async Task AddVariant_ReturnOkReponse_WhenAddVariantIdIsNotExsitsAndDataIsAdded()
+        {
+            //Arrange
+            var variant = new variant();
+            _mockVariantService.Setup(service => service.IsExists(variant.VariantId)).Returns(false);
+
+            //Act
+            var result = await _controller.AddVariant(variant) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+        }
+
+        [Test]
+        public async Task AddVariant_ReturnBadRequest_WhenAddVariantIdIsExsitsAndDataIsNotAdded()
+        {
+            //Arrange
+            var variant = new variant();
+            _mockVariantService.Setup(service => service.IsExists(variant.VariantId)).Returns(true);
+
+            //Act
+            var result = await _controller.AddVariant(variant) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task AddVariant_WhenServiceThrowsException()
+        {
+            // Arrange
+            var variant = new variant();
+            _mockVariantService.Setup(service => service.AddVariant(variant)).ThrowsAsync(new Exception());
+            // Act
+            var result = await _controller.AddVariant(variant) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task AddVariant_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var variant = new variant();
+
+            _mockVariantService.Setup(service => service.AddVariant(variant)).Returns(_VariantService.AddVariant);
+            _IVariantRepo.Setup(repo => repo.AddVariant(variant)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.AddVariant(variant) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task EditVariant_ReturnOkReponse_WhenEditVariantIdIsExsitsAndDataIsUpdated()
+        {
+            //Arrange
+            var variant = new variant();
+            _mockVariantService.Setup(service => service.IsExists(variant.VariantId)).Returns(false);
+
+            //Act
+            var result = await _controller.EditVariant(variant) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task EditVariant_ReturnBadRequest_WhenEditVariantIdIsNotExsitsAndDataIsNotUpdated()
+        {
+            //Arrange
+            var variant = new variant();
+            _mockVariantService.Setup(service => service.IsExists(variant.VariantId)).Returns(false);
+
+            //Act
+            var result = await _controller.EditVariant(variant) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task EditVariant_WhenServiceThrowsException()
+        {
+            // Arrange
+            var variant = new variant();
+            _mockVariantService.Setup(service => service.EditVariant(variant)).ThrowsAsync(new Exception());
+            // Act
+            var result = await _controller.EditVariant(variant) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task EditVariant_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var variant = new variant();
+            _mockVariantService.Setup(service => service.EditVariant(variant)).Returns(_VariantService.EditVariant);
+            _IVariantRepo.Setup(repo => repo.EditVariant(variant)).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.EditVariant(variant) as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task DeleteVaraint_ReturnOkResponse_WhenDeleteVaraintIdIsExsitsAndDataIsDeleted()
+        {
+            //Arrande
+            var variant = new variant();
+            _mockVariantService.Setup(service => service.IsExists(variant.VariantId)).Returns(true);
+
+            //Act
+            var result= _controller.DeleteVariant(variant.VariantId) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(200, result.StatusCode);
+        }
+
+        [Test]
+        public async Task DeleteVaraint_ReturnBadRequest_WhenDeleteVaraintIdIsNotExsitsAndDataIsNotDeleted()
+        {
+            //Arrande
+            var variant = new variant();
+            _mockVariantService.Setup(service => service.IsExists(variant.VariantId)).Returns(false);
+
+            //Act
+            var result = _controller.DeleteVariant(variant.VariantId) as ObjectResult;
+
+            //Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
+        [Test]
+        public async Task DeleteVariant_WhenServiceThrowsException()
+        {
+            // Arrange
+            var variant = new variant();
+            _mockVariantService.Setup(service => service.DeleteVariant(variant.VariantId)).Throws(new Exception());
+            // Act
+            var result = _controller.DeleteVariant(variant.VariantId) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task DeleteVariant_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            var variant = new variant();
+            _mockVariantService.Setup(service => service.DeleteVariant(variant.VariantId)).Returns(_VariantService.DeleteVariant);
+            _IVariantRepo.Setup(repo => repo.DeleteVariant(variant.VariantId)).Throws(new Exception());
+
+            // Act
+            var result =  _controller.DeleteVariant(variant.VariantId) as ObjectResult;
+
+            // Assert
+            Assert.AreEqual(500, result.StatusCode);
+        }
+
 
     }
 }
