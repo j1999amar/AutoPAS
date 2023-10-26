@@ -1,0 +1,80 @@
+2023-10-26 11:52:29,132 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: https://localhost:59363
+2023-10-26 11:52:29,191 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:59364
+2023-10-26 11:52:29,210 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2023-10-26 11:52:29,214 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2023-10-26 11:52:29,221 [1] INFO Microsoft.Hosting.Lifetime - Content root path: D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\
+2023-10-26 11:53:56,430 [12] WARN Microsoft.EntityFrameworkCore.Query - The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-10-26 11:53:56,438 [12] WARN Microsoft.EntityFrameworkCore.Query - The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-10-26 11:53:56,914 [6] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (166ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`PolicyId`, `p`.`AppUserId`, `p`.`CGST`, `p`.`EligibleForNCB`, `p`.`IGST`, `p`.`PaymentType`, `p`.`PolicyEffectiveDt`, `p`.`PolicyExpirationDt`, `p`.`PolicyNumber`, `p`.`QuoteNumber`, `p`.`RateDt`, `p`.`ReceiptNumber`, `p`.`SGST`, `p`.`Status`, `p`.`Term`, `p`.`TotalFees`, `p`.`TotalPremium`
+FROM `policy` AS `p`
+LIMIT @__p_1 OFFSET @__p_0
+2023-10-26 11:53:56,914 [15] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (166ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `m`.`Name`, `m`.`Description`, `m`.`Fields`
+FROM `master_table_list` AS `m`
+2023-10-26 11:53:57,300 [6] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `policy` AS `p`
+2023-10-26 11:53:59,087 [17] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (26ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+2023-10-26 11:54:02,148 [27] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `m`.`Name`, `m`.`Description`, `m`.`Fields`
+FROM `master_table_list` AS `m`
+2023-10-26 11:54:07,292 [31] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+2023-10-26 11:54:13,237 [6] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+2023-10-26 11:54:16,338 [10] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+2023-10-26 11:54:18,410 [30] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+2023-10-26 11:54:29,188 [27] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+2023-10-26 11:54:30,920 [31] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `m`.`Name`, `m`.`Description`, `m`.`Fields`
+FROM `master_table_list` AS `m`
+2023-10-26 11:54:35,841 [15] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (55ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BrandId`, `b`.`Brand`, `b`.`Description`, `b`.`IsActive`, `b`.`SortOrder`, `b`.`VehicleTypeId`
+FROM `brand` AS `b`
+2023-10-26 11:55:00,179 [30] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (8ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `brand` AS `b`
+    WHERE `b`.`BrandId` = @__id_0)
+2023-10-26 11:55:00,209 [30] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (19ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `vehicleType` AS `v`
+    WHERE `v`.`VehicleTypeId` = @__id_0)
+2023-10-26 11:55:00,336 [13] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (13ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = Boolean), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+UPDATE `brand` SET `Brand` = @p0, `Description` = @p1, `IsActive` = @p2, `SortOrder` = @p3, `VehicleTypeId` = @p4
+WHERE `BrandId` = @p5;
+SELECT ROW_COUNT();
+2023-10-26 11:55:01,961 [16] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BrandId`, `b`.`Brand`, `b`.`Description`, `b`.`IsActive`, `b`.`SortOrder`, `b`.`VehicleTypeId`
+FROM `brand` AS `b`
+2023-10-26 11:55:08,733 [11] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `brand` AS `b`
+    WHERE `b`.`BrandId` = @__id_0)
+2023-10-26 11:55:08,737 [11] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `vehicleType` AS `v`
+    WHERE `v`.`VehicleTypeId` = @__id_0)
+2023-10-26 11:55:08,751 [26] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = Boolean), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+UPDATE `brand` SET `Brand` = @p0, `Description` = @p1, `IsActive` = @p2, `SortOrder` = @p3, `VehicleTypeId` = @p4
+WHERE `BrandId` = @p5;
+SELECT ROW_COUNT();
+2023-10-26 11:55:10,490 [32] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BrandId`, `b`.`Brand`, `b`.`Description`, `b`.`IsActive`, `b`.`SortOrder`, `b`.`VehicleTypeId`
+FROM `brand` AS `b`

@@ -1,0 +1,50 @@
+2023-09-29 13:49:43,097 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: https://localhost:59363
+2023-09-29 13:49:43,109 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:59364
+2023-09-29 13:49:43,116 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2023-09-29 13:49:43,119 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2023-09-29 13:49:43,121 [1] INFO Microsoft.Hosting.Lifetime - Content root path: D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\
+2023-09-29 13:49:58,593 [19] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (32ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `m`.`Name`, `m`.`Description`, `m`.`Fields`
+FROM `master_table_list` AS `m`
+2023-09-29 13:50:02,083 [13] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+2023-09-29 13:50:15,237 [20] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (57ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `bodyType` AS `b`
+    WHERE `b`.`BodyTypeId` = @__id_0)
+2023-09-29 13:50:15,244 [20] INFO AutoPASAPI.Controllers.BodyTypeController - Error in function AddBodyType Id is already exists
+2023-09-29 13:50:31,344 [18] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `bodyType` AS `b`
+    WHERE `b`.`BodyTypeId` = @__id_0)
+2023-09-29 13:50:31,488 [21] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (DbType = Boolean)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `bodyType` (`BodyTypeId`, `BodyType`, `Description`, `IsActive`)
+VALUES (@p0, @p1, @p2, @p3);
+2023-09-29 13:50:33,784 [19] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+2023-09-29 13:50:38,512 [20] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+2023-09-29 13:50:40,384 [20] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `bodyType` AS `b`
+    WHERE `b`.`BodyTypeId` = @__id_0)
+2023-09-29 13:50:40,412 [20] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+WHERE `b`.`BodyTypeId` = @__p_0
+LIMIT 1
+2023-09-29 13:50:40,437 [20] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+DELETE FROM `bodyType`
+WHERE `BodyTypeId` = @p0;
+SELECT ROW_COUNT();
+2023-09-29 13:50:42,357 [18] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `m`.`Name`, `m`.`Description`, `m`.`Fields`
+FROM `master_table_list` AS `m`
