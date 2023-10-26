@@ -42,5 +42,26 @@ namespace AutoPASAL
             var city = _rtoRepo.GetCity(Id);
             return city;
         }
+
+        public Task<rto> AddRTO(rto rto)
+        {
+            return _rtoRepo.AddRTO(rto);
+        
+        }
+
+        public bool IsExists(int id)
+        {
+            return _rtoRepo.IsExists(id);         
+        }
+
+        public Task<rto> EditRTO(rto rto)
+        {
+            return _rtoRepo.EditRTO(rto);
+        }
+
+        public bool DeleteRTO(int id)
+        {
+            return _rtoRepo.DeleteRTO(id);
+        }
     }
 }

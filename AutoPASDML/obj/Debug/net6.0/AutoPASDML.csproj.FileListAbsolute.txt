@@ -1,0 +1,42 @@
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\bin\Debug\net6.0\AutoPASDML.deps.json
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\bin\Debug\net6.0\AutoPASDML.runtimeconfig.json
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\bin\Debug\net6.0\AutoPASDML.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\bin\Debug\net6.0\AutoPASDML.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.csproj.AssemblyReference.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.GeneratedMSBuildEditorConfig.editorconfig
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.AssemblyInfoInputs.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.AssemblyInfo.cs
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.csproj.CoreCompileInputs.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\refint\AutoPASDML.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.genruntimeconfig.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\ref\AutoPASDML.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\bin\Debug\net6.0\AutoPASDML.deps.json
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\bin\Debug\net6.0\AutoPASDML.runtimeconfig.json
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\bin\Debug\net6.0\AutoPASDML.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\bin\Debug\net6.0\AutoPASDML.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.csproj.AssemblyReference.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.AssemblyInfoInputs.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.AssemblyInfo.cs
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.csproj.CoreCompileInputs.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\refint\AutoPASDML.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.genruntimeconfig.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\ref\AutoPASDML.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\bin\Debug\net6.0\AutoPASDML.deps.json
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\bin\Debug\net6.0\AutoPASDML.runtimeconfig.json
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\bin\Debug\net6.0\AutoPASDML.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\bin\Debug\net6.0\AutoPASDML.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.csproj.AssemblyReference.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.GeneratedMSBuildEditorConfig.editorconfig
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.AssemblyInfoInputs.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.AssemblyInfo.cs
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.csproj.CoreCompileInputs.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\refint\AutoPASDML.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\AutoPASDML.genruntimeconfig.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASDML\obj\Debug\net6.0\ref\AutoPASDML.dll

@@ -21,6 +21,7 @@ namespace AutoPASSL.Repository
         public async Task<List<policy>> GetAllPolicies()
         {
             var policies = await _context.policy.ToListAsync();
+            if (policies == null) return null;
             return policies;
         }
         public async Task<List<policy>> GetPoliciesInRange(int startIndex, int count)
@@ -29,7 +30,7 @@ namespace AutoPASSL.Repository
                 .Skip(startIndex)
                 .Take(count)
                 .ToListAsync();
-
+            if (policies == null) return null;
             return policies;
         }
 
@@ -50,6 +51,7 @@ namespace AutoPASSL.Repository
         {
             SessionVariables.PolicyId = Id;
             var pol = await _context.policy.Where(x => x.PolicyId == Id).ToListAsync();
+            if (pol == null) return null;
             return pol;
         }
         public async Task<policy?> UpdatePolicyNCB(int NCB)
@@ -85,7 +87,12 @@ namespace AutoPASSL.Repository
             {
                 return pol.EligibleForNCB;
             }
-            return 0;
+            return 10;
+        }
+        public async Task<List<policy>?> GetPolicyByPolicyNumber(string policynumber)
+        {
+            var pol = await _context.policy.Where(x => x.PolicyNumber.ToString() == policynumber).ToListAsync();
+            return pol;
         }
     }
 }

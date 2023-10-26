@@ -27,5 +27,31 @@ namespace AutoPASAL
             var mod = _modelRepo.GetAllModel();
             return mod;
         }
+
+        public Task<model> AddModels(model models)
+        {
+            return _modelRepo.AddModels(models);
+        }
+
+        public bool IsExists(int id)
+        {
+            return _modelRepo.IsExists(id);
+        }
+
+        public bool brandIdIsExists(int id)
+        {
+            return _modelRepo.brandIdIsExists(id);
+        }
+
+        public Task<model> EditModels(model models)
+        {
+            return _modelRepo.EditModels(models);
+        }
+
+        public bool DeleteModels(int id)
+        {
+            return _modelRepo.DeleteModels(id);
+
+        }
     }
 }

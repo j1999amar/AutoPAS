@@ -11,5 +11,9 @@ namespace AutoPASAL.IRepository
     {
         Task<List<variant>?> GetAllVariant();
         Task<List<variant>?> GetVariant(int ModelId, int FuelId, int TransmissionId);
+        Task<variant> AddVariant(variant variant);
+        Task<variant> EditVariant(variant variant);
+        public bool DeleteVariant(int id);
+        public bool IsExists(int id);
     }
 }

@@ -1,0 +1,63 @@
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASSL.deps.json
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASSL.runtimeconfig.json
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASSL.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASSL.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASAL.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASBL.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASDML.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASAL.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASBL.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASDML.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.csproj.AssemblyReference.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.GeneratedMSBuildEditorConfig.editorconfig
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.AssemblyInfoInputs.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.AssemblyInfo.cs
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.csproj.CoreCompileInputs.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.csproj.CopyComplete
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\refint\AutoPASSL.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.genruntimeconfig.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\ref\AutoPASSL.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASSL.deps.json
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASSL.runtimeconfig.json
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASSL.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASSL.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASAL.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASBL.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASDML.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASAL.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASBL.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASDML.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.csproj.AssemblyReference.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.AssemblyInfoInputs.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.AssemblyInfo.cs
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.csproj.CoreCompileInputs.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.csproj.CopyComplete
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\refint\AutoPASSL.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.genruntimeconfig.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\ref\AutoPASSL.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASSL.deps.json
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASSL.runtimeconfig.json
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASSL.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASSL.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASAL.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASBL.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASDML.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASAL.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASBL.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\bin\Debug\net6.0\AutoPASDML.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.csproj.AssemblyReference.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.GeneratedMSBuildEditorConfig.editorconfig
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.AssemblyInfoInputs.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.AssemblyInfo.cs
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.csproj.CoreCompileInputs.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.csproj.CopyComplete
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\refint\AutoPASSL.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\AutoPASSL.genruntimeconfig.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASSL\obj\Debug\net6.0\ref\AutoPASSL.dll

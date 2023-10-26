@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoPASBL;
 using AutoPASAL.Services;
 using AutoPASSL;
+using System.Net;
 
 namespace AutoPASAPI.Controllers
 {
@@ -57,7 +58,13 @@ namespace AutoPASAPI.Controllers
         {
             try
             {
-                return Ok(await _insuredcontactService.GetInsuredById(Id));
+                var ins = await _insuredcontactService.GetInsuredById(Id);
+                if (ins == null)
+                {
+                     return BadRequest("Returns Null");
+                }
+                return Ok(ins);
+                
             }
             catch (Exception ex)
             {
@@ -70,11 +77,33 @@ namespace AutoPASAPI.Controllers
         {
             try
             {
-                return Ok(await _insuredcontactService.GetContactById(Id));
+                var con = await _insuredcontactService.GetContactById(Id);
+                if (con == null)
+                {
+                    return BadRequest("Returns Null");
+                }
+                return Ok(con);
             }
             catch (Exception ex)
             {
                 _logger.LogInformation("Error in function AddInsuredContact");
+                return StatusCode(500, ex);
+            }
+        }
+        [HttpGet("GetInsuredContactByPolicyNumber/{policynumber}")]
+        public async Task<IActionResult> GetInsuredContactByPolicyNumber(string policynumber)
+        {
+            try
+            {
+                var inscon = await _insuredcontactService.GetInsuredContactByPolicyNumber(policynumber);
+                if (inscon == null)
+                {
+                    return BadRequest("Returns Null");
+                }
+                return Ok(inscon);
+            }
+            catch (Exception ex)
+            {
                 return StatusCode(500, ex);
             }
         }

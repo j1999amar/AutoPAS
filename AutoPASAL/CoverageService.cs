@@ -13,6 +13,22 @@ namespace AutoPASAL
         {
             _coverageRepo= coverageRepo;
         }
+
+        public Task<coverages> AddCoverages(coverages coverages)
+        {
+            return _coverageRepo.AddCoverages(coverages);
+        }
+
+        public bool DeleteCoverage(int id)
+        {
+            return _coverageRepo.DeleteCoverage(id);
+        }
+
+        public Task<coverages> EditCoverage(coverages coverages)
+        {
+            return _coverageRepo.EditCoverage(coverages);
+        }
+
         public Task<List<coverages>> GetAllCoverages()
         {
             var cov = _coverageRepo.GetAllCoverages();
@@ -73,6 +89,11 @@ namespace AutoPASAL
 
             return premiumRating;
         
+        }
+
+        public bool IsExists(int id)
+        {
+            return _coverageRepo.IsExists(id);
         }
     }
 }

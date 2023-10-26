@@ -7,6 +7,7 @@ using AutoPASAL;
 using AutoPASAL.IRepository;
 using AutoPASDML;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AutoPASSL.Repository
 {
@@ -33,6 +34,38 @@ namespace AutoPASSL.Repository
             brand = await _context.brand.ToListAsync();
             if (brand == null) return null;
             return brand;
+        }
+
+        public async Task<Brands> AddBrands(Brands brands)
+        {
+            await _context.brand.AddAsync(brands);
+            var brandIsAdded= await _context.SaveChangesAsync();
+            return brandIsAdded>0?brands:null;
+        }
+
+        public bool IsExists(int id)
+        {
+            return _context.brand.Any(x=>x.BrandId == id);
+        }
+
+        public bool vehicleTypeIdIsExists(int id)
+        {
+            return _context.vehicleType.Any(x => x.VehicleTypeId == id);
+        }
+
+        public async Task<Brands> EditBrands(Brands brands)
+        {
+             _context.brand.Entry(brands).State = EntityState.Modified;
+            var change = await _context.SaveChangesAsync();
+            return change > 0 ? brands : null;
+        }
+
+        public bool DeleteBrand(int id)
+        {
+            var brands = _context.brand.Find(id);
+            _context.brand.Remove(brands);
+            var change = _context.SaveChanges();
+            return change > 0 ? true : false;
         }
     }
 }

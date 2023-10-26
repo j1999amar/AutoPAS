@@ -10,5 +10,9 @@ namespace AutoPASAL.IRepository
     public interface IVehicleTypeRepo
     {
         Task<List<vehicleType>> GetAllVehicleType();
+        Task<vehicleType> AddVehicleType(vehicleType vehicleType);
+        Task<vehicleType> EditVehicleType(vehicleType vehicleType);
+        public bool DeleteVehicleType(int id);
+        public bool IsExists(int id);
     }
 }

@@ -17,5 +17,6 @@ namespace AutoPASAL.IRepository
         Task<policy?> UpdatePolicyNCB(int NCB);
         Task<policy?> UpdatePolicyById(Guid Id, policy objPolicy);
         Task<int> GetNCBById(Guid Id);
+        Task<List<policy>?> GetPolicyByPolicyNumber(string policynumber);
     }
 }

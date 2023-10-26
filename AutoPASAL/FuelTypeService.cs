@@ -27,5 +27,25 @@ namespace AutoPASAL
         {
             return await _fuelTypeRepo.GetAllFuelTypes();
         }
+
+        public async Task<fueltype> AddFuelType(fueltype fuelType)
+        {
+            return await _fuelTypeRepo.AddFuelType(fuelType);
+        }
+
+        public  bool IsExists(int id)
+        {
+            return  _fuelTypeRepo.IsExists(id);
+        }
+
+        public Task<fueltype> EditFuelType(fueltype fuelType)
+        {
+            return _fuelTypeRepo.EditFuelType(fuelType);
+        }
+
+        public bool DeleteFuelType(int id)
+        {
+            return _fuelTypeRepo.DeleteFuelType(id);
+        }
     }
 }

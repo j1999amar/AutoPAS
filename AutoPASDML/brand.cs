@@ -15,7 +15,7 @@ namespace AutoPASDML
         public string? Brand { get; set; }
         public string? Description { get; set; }
         public int SortOrder { get; set; }
-        public int IsActive { get; set; }
+        public bool IsActive { get; set; }
 
     }
 }

@@ -56,5 +56,12 @@ namespace AutoPASAL
             var obj = _vehicleRepo.UpdateVehicleById(Id, objVehicle);
             return obj;
         }
+
+        //Customer Portal:
+        public Task<object> GetVehicleDetailsByPolicyNumber(int policyNumber)
+        {
+            var obj = _vehicleRepo.GetVehicleDetailsByPolicyNumber(policyNumber);
+            return obj;
+        }
     }
 }

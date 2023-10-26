@@ -80,7 +80,7 @@ public class Program
 
         container.Register<IPolicyVehicleService, PolicyVehicleService>();
         builder.Services.AddScoped<IPolicyVehicleService, PolicyVehicleService>();
-
+          
         container.Register<IRT_GSTService, RT_GSTService>();
         builder.Services.AddScoped<IRT_GSTService, RT_GSTService>();
 
@@ -120,14 +120,11 @@ public class Program
         container.Register<IVehicleTypeService, VehicleTypeService>();
         builder.Services.AddScoped<IVehicleTypeService, VehicleTypeService>();
 
+        container.Register<IDynamicRateTableService, DynamicRateTableService>();
+        builder.Services.AddScoped<IDynamicRateTableService, DynamicRateTableService>();
+
         container.Register<IRatingService, RatingService>();
-        builder.Services.AddScoped<IRatingService, RatingService>();
-
-        container.Register<ItestService, testService>();
-        builder.Services.AddScoped<ItestService, testService>();
-
-        container.Register<ItestRepo, testRepo>();
-        builder.Services.AddScoped<ItestRepo, testRepo>();//insert
+        builder.Services.AddScoped<IRatingService, RatingService>();//insert
 
         container.Register<IBodyTypeRepo, BodyTypeRepo>();
         builder.Services.AddScoped<IBodyTypeRepo, BodyTypeRepo>();
@@ -200,13 +197,23 @@ public class Program
 
         builder.Services.AddScoped<ICSVService, CSVService>();
 
+        builder.Services.AddScoped<IJSONService, JSONService>();
+
         builder.Services.AddScoped<DynamicRateTableService>();
 
 
         container.Register<ISupportingDocumentBL, SupportingDocumentBL>();
         builder.Services.AddScoped<ISupportingDocumentBL, SupportingDocumentBL>();
 
-        
+        container.Register<IMasterService, MasterService>();
+        builder.Services.AddScoped<IMasterService, MasterService>();
+
+        container.Register<IMasterRepo, MasterRepo>();
+        builder.Services.AddScoped<IMasterRepo, MasterRepo>();
+
+
+
+
         //INSERT
 
         var app = builder.Build();

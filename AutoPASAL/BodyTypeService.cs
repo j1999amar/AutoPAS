@@ -21,5 +21,23 @@ namespace AutoPASAL
         {
             return await _bodyTypeRepo.GetAllBodyType();
         }
+        public async Task<bodyType> AddBodyType(bodyType bodyType)
+        {
+            return await _bodyTypeRepo.AddBodyType(bodyType);
+        }
+        public  bool IsExists(int id)
+        {
+            return  _bodyTypeRepo.IsExists(id);
+        }
+
+        public Task<bodyType> EditBodyType(bodyType bodyType)
+        {
+            return _bodyTypeRepo.EditBodyType(bodyType);
+        }
+
+        public bool DeleteBodyType(int id)
+        {
+            return _bodyTypeRepo.DeleteBodyType(id);
+        }
     }
 }

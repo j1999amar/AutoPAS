@@ -10,5 +10,12 @@ namespace AutoPASAL.IRepository
     public interface IBodyTypeRepo
     {
         Task<List<bodyType>?> GetAllBodyType();
+        Task<bodyType> AddBodyType(bodyType bodyType);
+        Task<bodyType> EditBodyType(bodyType bodyType);
+        public bool DeleteBodyType(int id);
+
+        public bool IsExists(int id);
+
+
     }
 }

@@ -1,0 +1,339 @@
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\log4net.config
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\appsettings.json
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.staticwebassets.runtime.json
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.exe
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.deps.json
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.runtimeconfig.json
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\CsvHelper.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Humanizer.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\log4net.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.Mvc.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.Razor.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.Helpers.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.WebPages.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Mono.TextTemplating.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\MySqlConnector.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\SimpleInjector.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\SimpleInjector.Integration.Web.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\SimpleInjector.Integration.Web.Mvc.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.CodeDom.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Collections.Immutable.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Reflection.Metadata.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Security.Permissions.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Text.Json.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ja\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAL.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASBL.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASDML.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASSL.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAL.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASBL.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASSL.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASDML.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.csproj.AssemblyReference.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.AssemblyInfoInputs.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.AssemblyInfo.cs
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.csproj.CoreCompileInputs.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.MvcApplicationPartsAssemblyInfo.cs
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.MvcApplicationPartsAssemblyInfo.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets\msbuild.AutoPASAPI.Microsoft.AspNetCore.StaticWebAssets.props
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.AutoPASAPI.props
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.AutoPASAPI.props
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.AutoPASAPI.props
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets.pack.json
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets.build.json
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets.development.json
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\scopedcss\bundle\AutoPASAPI.styles.css
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.csproj.CopyComplete
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\refint\AutoPASAPI.dll
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.pdb
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.genruntimeconfig.cache
+D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\ref\AutoPASAPI.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\log4net.config
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\appsettings.json
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.staticwebassets.runtime.json
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.exe
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.deps.json
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.runtimeconfig.json
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\CsvHelper.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Humanizer.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\log4net.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.Mvc.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.Razor.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.Helpers.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.WebPages.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\MySqlConnector.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\SimpleInjector.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\SimpleInjector.Integration.Web.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\SimpleInjector.Integration.Web.Mvc.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Collections.Immutable.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Reflection.Metadata.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAL.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASBL.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASDML.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASSL.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAL.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASBL.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASSL.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASDML.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.csproj.AssemblyReference.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.AssemblyInfoInputs.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.AssemblyInfo.cs
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.csproj.CoreCompileInputs.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets\msbuild.AutoPASAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.AutoPASAPI.props
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.AutoPASAPI.props
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.AutoPASAPI.props
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\scopedcss\bundle\AutoPASAPI.styles.css
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.csproj.CopyComplete
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\refint\AutoPASAPI.dll
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.pdb
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.genruntimeconfig.cache
+C:\Users\amarnath.CHN\Downloads\autopasapi (3)\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\ref\AutoPASAPI.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\log4net.config
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\appsettings.json
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.staticwebassets.runtime.json
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.exe
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.deps.json
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.runtimeconfig.json
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAPI.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\CsvHelper.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Humanizer.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\log4net.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.Mvc.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.Razor.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.Helpers.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Web.WebPages.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Mono.TextTemplating.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\MySqlConnector.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\SimpleInjector.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\SimpleInjector.Integration.Web.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\SimpleInjector.Integration.Web.Mvc.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.CodeDom.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Collections.Immutable.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Reflection.Metadata.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Security.Permissions.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\System.Text.Json.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ja\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAL.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASBL.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASDML.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASSL.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASAL.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASBL.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASSL.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\bin\Debug\net6.0\AutoPASDML.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.csproj.AssemblyReference.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.AssemblyInfoInputs.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.AssemblyInfo.cs
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.csproj.CoreCompileInputs.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.MvcApplicationPartsAssemblyInfo.cs
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.MvcApplicationPartsAssemblyInfo.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets\msbuild.AutoPASAPI.Microsoft.AspNetCore.StaticWebAssets.props
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.AutoPASAPI.props
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.AutoPASAPI.props
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.AutoPASAPI.props
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets.pack.json
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets.build.json
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\staticwebassets.development.json
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\scopedcss\bundle\AutoPASAPI.styles.css
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.csproj.CopyComplete
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\refint\AutoPASAPI.dll
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.pdb
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\AutoPASAPI.genruntimeconfig.cache
+D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\obj\Debug\net6.0\ref\AutoPASAPI.dll

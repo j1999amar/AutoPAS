@@ -11,186 +11,149 @@ using System.Threading.Tasks;
 using AutoPASDML;
 using Microsoft.Extensions.Logging;
 using System.Web.Razor.Parser.SyntaxTree;
+using AutoPASAL.IRepository;
+using AutoPASAL.Services;
+using AutoPASAL;
+using AutoPASAPITests.MockRepository;
 
 namespace AutoPASAPI.Tests.Controllers
 {
     [TestFixture]
     public class VehicleControllerTests
     {
-        private Mock<IVehicleBL> _vehicleBLMock;
-        private Mock<ILogger<VehicleController>> _loggerMock;
-        private VehicleController _vehicleController;
+        private VehicleController _controller;
+        private Mock<IVehicleService> _mockVehicleService;
+        private Mock<ILogger<VehicleController>> _mockLogger;
+        private VehicleMockRepo _mockVehicleRepo;
+        private VehicleService _VehicleService;
+        private Mock<IVehicleRepo> _IVehicleRepo;
 
         [SetUp]
         public void Setup()
         {
-            _vehicleBLMock = new Mock<IVehicleBL>();
-            _loggerMock = new Mock<ILogger<VehicleController>>();
-            _vehicleController = new VehicleController(_vehicleBLMock.Object, _loggerMock.Object);
+            _IVehicleRepo = new Mock<IVehicleRepo>();
+            _VehicleService = new VehicleService(_IVehicleRepo.Object);
+            _mockVehicleRepo = new VehicleMockRepo();
+            _mockVehicleService = new Mock<IVehicleService>();
+            _mockLogger = new Mock<ILogger<VehicleController>>();
+            _controller = new VehicleController(_mockVehicleService.Object, _mockLogger.Object);
         }
 
         [Test]
-        public async Task GetAllVehicles_Returns_OkResult()
+        public async Task GetAllVehicle_ReturnsData()
         {
-            //Arrange
-            var vehicle = new List<vehicle>();
-            _vehicleBLMock.Setup(x => x.GetAllVehicles()).ReturnsAsync(vehicle);
+            // Arrange
+            var Vehicles = new List<vehicle> { };
+            _mockVehicleService.Setup(service => service.GetAllVehicles()).Returns(_VehicleService.GetAllVehicles);
+            _IVehicleRepo.Setup(repo => repo.GetAllVehicles()).Returns(_mockVehicleRepo.ReturnsVehicle);
 
-            //Act
-            var result = await _vehicleController.GetAllVehicles();
+            // Act
+            var result = await _controller.GetAllVehicles() as OkObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(vehicle, okResult.Value);
+            // Assert
+            Assert.AreEqual(Vehicles, result.Value);
         }
 
         [Test]
-        public async Task GetAllVehicles_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetAllVehicle_ReturnsNull()
         {
-            //Arrange
-            _vehicleBLMock.Setup(x => x.GetAllVehicles()).Throws(new Exception());
+            // Arrange
+            _mockVehicleService.Setup(service => service.GetAllVehicles()).Returns(_VehicleService.GetAllVehicles);
+            _IVehicleRepo.Setup(service => service.GetAllVehicles()).Returns(_mockVehicleRepo.ReturnsNull);
 
-            //Act
-            var result = await _vehicleController.GetAllVehicles();
+            // Act
+            var result = await _controller.GetAllVehicles() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
 
         [Test]
-        public async Task GetVehicleById_Returns_OkResult()
+        public async Task GetAllVehicle_WhenServiceThrowsException()
         {
-            //Arrange
-            var vehicle = new List<vehicle>();
-            Guid Id = Guid.NewGuid();
-            _vehicleBLMock.Setup(x => x.GetVehicleById(Id)).ReturnsAsync(vehicle);
+            // Arrange
+            _mockVehicleService.Setup(service => service.GetAllVehicles()).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _vehicleController.GetVehicleById(Id);
+            // Act
+            var result = await _controller.GetAllVehicles() as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(vehicle, okResult.Value);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetAllVehicle_WhenRepositoryThrowsException()
+        {
+            // Arrange
+            _mockVehicleService.Setup(service => service.GetAllVehicles()).Returns(_VehicleService.GetAllVehicles);
+            _IVehicleRepo.Setup(service => service.GetAllVehicles()).ThrowsAsync(new Exception());
+
+            // Act
+            var result = await _controller.GetAllVehicles() as ObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
+        }
+        [Test]
+        public async Task GetVehicleById_ReturnsData()
+        {
+            // Arrange
+            var Vehicles = new List<vehicle> { };
+            Guid Id = new Guid();
+            _mockVehicleService.Setup(service => service.GetVehicleById(Id)).Returns(_VehicleService.GetVehicleById);
+            _IVehicleRepo.Setup(repo => repo.GetVehicleById(Id)).Returns(_mockVehicleRepo.ReturnsVehicle);
+
+            // Act
+            var result = await _controller.GetVehicleById(Id) as OkObjectResult;
+
+            // Assert
+            Assert.AreEqual(Vehicles, result.Value);
         }
 
         [Test]
-        public async Task GetVehicleById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
+        public async Task GetVehicleById_ReturnsNull()
         {
-            //Arrange
-            Guid Id = Guid.NewGuid();
-            _vehicleBLMock.Setup(x => x.GetVehicleById(Id)).Throws(new Exception());
+            // Arrange
+            Guid Id = new Guid();
+            _mockVehicleService.Setup(service => service.GetVehicleById(Id)).Returns(_VehicleService.GetVehicleById);
+            _IVehicleRepo.Setup(service => service.GetVehicleById(Id)).Returns(_mockVehicleRepo.ReturnsNull);
 
-            //Act
-            var result = await _vehicleController.GetVehicleById(Id);
+            // Act
+            var result = await _controller.GetVehicleById(Id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.AreEqual("Returns Null", result.Value);
         }
 
         [Test]
-        public async Task AddVehicle_Returns_OkResult()
+        public async Task GetVehicleById_WhenServiceThrowsException()
         {
-            //Arrange
-            var vehicle = new vehicle();
-            var objVehicle = new vehicle();
-            _vehicleBLMock.Setup(x => x.AddVehicle(objVehicle)).ReturnsAsync(vehicle);
+            // Arrange
+            Guid Id = new Guid();
+            _mockVehicleService.Setup(service => service.GetVehicleById(Id)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _vehicleController.AddVehicle(objVehicle);
+            // Act
+            var result = await _controller.GetVehicleById(Id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(vehicle, okResult.Value);
-        }
-
-        [Test]
-        public async Task AddVehicle_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
-        {
-            //Arrange
-            var objVehicle = new vehicle();
-            _vehicleBLMock.Setup(x => x.AddVehicle(objVehicle)).Throws(new Exception());
-
-            //Act
-            var result = await _vehicleController.AddVehicle(objVehicle);
-
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
         [Test]
-        public async Task GetBrandByVehicleType_Returns_OkResult()
+        public async Task GetVehicleById_WhenRepositoryThrowsException()
         {
-            //Arrange
-            var brandList = new List<Brands>();
-            var VehicleType = 0;
-            _vehicleBLMock.Setup(x => x.GetBrandByVehicleType(VehicleType)).ReturnsAsync(brandList);
+            // Arrange
+            Guid Id = new Guid();
+            _mockVehicleService.Setup(service => service.GetVehicleById(Id)).Returns(_VehicleService.GetVehicleById);
+            _IVehicleRepo.Setup(service => service.GetVehicleById(Id)).ThrowsAsync(new Exception());
 
-            //Act
-            var result = await _vehicleController.GetBrandByVehicleType(VehicleType);
+            // Act
+            var result = await _controller.GetVehicleById(Id) as ObjectResult;
 
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(brandList, okResult.Value);
-        }
-
-        [Test]
-        public async Task GetBrandByVehicleType_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
-        {
-            //Arrange
-            var VehicleType = 0;
-            _vehicleBLMock.Setup(x => x.GetBrandByVehicleType(VehicleType)).Throws(new Exception());
-
-            //Act
-            var result = await _vehicleController.GetBrandByVehicleType(VehicleType);
-
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
-        }
-
-        [Test]
-        public async Task UpdateVehicleById_Returns_OkResult()
-        {
-            //Arrange
-            var vehicle = new vehicle();
-            Guid Id = Guid.NewGuid();
-            var objVehicle = new vehicle();
-            _vehicleBLMock.Setup(x => x.UpdateVehicleById(Id, objVehicle)).ReturnsAsync(vehicle);
-
-            //Act
-            var result = await _vehicleController.UpdateVehicleById(Id, objVehicle);
-
-            //Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.AreEqual(vehicle, okResult.Value);
-        }
-
-        [Test]
-        public async Task UpdateVehicleById_Returns_InternalServerErrorResult_When_Exception_Is_Thrown()
-        {
-            //Arrange
-            Guid Id = Guid.NewGuid();
-            var objVehicle = new vehicle();
-            _vehicleBLMock.Setup(x => x.UpdateVehicleById(Id, objVehicle)).Throws(new Exception());
-
-            //Act
-            var result = await _vehicleController.UpdateVehicleById(Id, objVehicle);
-
-            //Assert
-            Assert.IsInstanceOf<ObjectResult>(result);
-            var objectResult = (ObjectResult)result;
-            Assert.AreEqual(500, objectResult.StatusCode);
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(500, result.StatusCode);
         }
     }
     

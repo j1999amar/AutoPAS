@@ -1,0 +1,54 @@
+2023-09-18 14:27:00,121 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: https://localhost:59363
+2023-09-18 14:27:00,188 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:59364
+2023-09-18 14:27:00,222 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2023-09-18 14:27:00,249 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2023-09-18 14:27:00,268 [1] INFO Microsoft.Hosting.Lifetime - Content root path: D:\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\
+2023-09-18 14:28:29,033 [7] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (53ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+2023-09-18 14:28:43,609 [14] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (46ms) [Parameters=[@__PolicyId_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`PolicyId`, `p`.`EligibleForNCB`, `v`.`VehicleId`, `v`.`IDV`, `v`.`YearOfManufacture`, `v`.`ExShowroomPrice`
+FROM `policy` AS `p`
+INNER JOIN `PolicyVehicle` AS `p0` ON `p`.`PolicyId` = `p0`.`PolicyId`
+INNER JOIN `vehicle` AS `v` ON `p0`.`VehicleId` = `v`.`VehicleId`
+WHERE `p`.`PolicyId` = @__PolicyId_0
+LIMIT 1
+2023-09-18 14:29:47,223 [9] WARN Microsoft.EntityFrameworkCore.Query - The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-09-18 14:29:47,230 [9] WARN Microsoft.EntityFrameworkCore.Query - The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-09-18 14:29:47,253 [12] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (8ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`PolicyId`, `p`.`AppUserId`, `p`.`CGST`, `p`.`EligibleForNCB`, `p`.`IGST`, `p`.`PaymentType`, `p`.`PolicyEffectiveDt`, `p`.`PolicyExpirationDt`, `p`.`PolicyNumber`, `p`.`QuoteNumber`, `p`.`RateDt`, `p`.`ReceiptNumber`, `p`.`SGST`, `p`.`Status`, `p`.`Term`, `p`.`TotalFees`, `p`.`TotalPremium`
+FROM `policy` AS `p`
+LIMIT @__p_1 OFFSET @__p_0
+2023-09-18 14:29:47,484 [17] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (14ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `policy` AS `p`
+2023-09-18 14:29:50,478 [17] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (88ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `m`.`Id`, `m`.`Description`, `m`.`Fields`, `m`.`Title`
+FROM `metadatatables` AS `m`
+2023-09-18 14:29:53,880 [8] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `m`.`Id`, `m`.`Description`, `m`.`Fields`, `m`.`Title`
+FROM `metadatatables` AS `m`
+2023-09-18 14:30:36,730 [19] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (82ms) [Parameters=[p0='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+CALL sp_CheckTableObjectExists(@p0)
+2023-09-18 14:30:36,858 [19] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (104ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+call sp_CreateTableWithParams (@p0, @p1)
+2023-09-18 14:30:36,871 [19] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (6ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+call sp_InsertTableValues (@p0, @p1, @p2)
+2023-09-18 14:30:36,877 [19] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (3ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+call sp_InsertTableValues (@p0, @p1, @p2)
+2023-09-18 14:30:37,181 [20] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 255), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `metadatatables` (`Id`, `Description`, `Fields`, `Title`)
+VALUES (@p0, @p1, @p2, @p3);
+2023-09-18 14:31:12,525 [17] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[p0='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+CALL sp_CheckTableObjectExists(@p0)
+2023-09-18 14:31:12,550 [17] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (21ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+call sp_CreateTableWithParams (@p0, @p1)
+2023-09-18 14:31:12,560 [17] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+call sp_InsertTableValues (@p0, @p1, @p2)
+2023-09-18 14:31:12,567 [17] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+call sp_InsertTableValues (@p0, @p1, @p2)
+2023-09-18 14:31:12,723 [13] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 255), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `metadatatables` (`Id`, `Description`, `Fields`, `Title`)
+VALUES (@p0, @p1, @p2, @p3);

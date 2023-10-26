@@ -1,6 +1,7 @@
 ﻿using AutoPASAL.IRepository;
 using AutoPASDML;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,33 @@ namespace AutoPASSL.Repository
             var city = await _context.rto.Where(x => x.State == state).ToListAsync();
             var cities = city.OrderBy(x => x.RTOId == rtoid ? 0 : 1).ToList();
             return cities;
+        }
+
+        public async Task<rto> AddRTO(rto rto)
+        {
+            await _context.rto.AddAsync(rto);
+            var rtoIsAdded=await _context.SaveChangesAsync();
+            return rtoIsAdded > 0 ? rto : null;        
+        }
+
+        public bool IsExists(int id)
+        {
+            return _context.rto.Any(x=>x.RTOId == id);
+        }
+
+        public async Task<rto> EditRTO(rto rto)
+        {
+            _context.rto.Entry(rto).State = EntityState.Modified;
+            var change = await _context.SaveChangesAsync();
+            return change > 0 ? rto : null;
+        }
+
+        public bool DeleteRTO(int id)
+        {
+            var rto = _context.rto.Find(id);
+            _context.rto.Remove(rto);
+            var change =  _context.SaveChanges();
+            return change > 0 ? true : false;
         }
     }
 }

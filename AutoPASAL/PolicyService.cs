@@ -57,5 +57,10 @@ namespace AutoPASAL
             var ncb = _policyRepo.GetNCBById(Id);
             return ncb;
         }
+        public Task<List<policy>?> GetPolicyByPolicyNumber(string policynumber)
+        {
+            var pol = _policyRepo.GetPolicyByPolicyNumber(policynumber);
+            return pol;
+        }
     }
 }

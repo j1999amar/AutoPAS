@@ -4,6 +4,8 @@ using AutoPASBL.Interface;
 using AutoPASBL;
 using Microsoft.EntityFrameworkCore;
 using AutoPASAL.Services;
+using AutoPASAL;
+using AutoPASDML;
 
 namespace AutoPASAPI.Controllers
 {
@@ -32,6 +34,80 @@ namespace AutoPASAPI.Controllers
                 _logger.LogInformation("Error in function GetAllVehicleType");
                 return StatusCode(500, ex);
             }
+        }
+
+        //Add VehicleType 
+        [HttpPost("AddVehicleType")]
+        public async Task<IActionResult> AddVehicleType([FromBody] vehicleType vehicleType)
+        {
+            try
+            {
+
+                if (!_vehicletypeservice.IsExists(vehicleType.VehicleTypeId))
+                {
+                    return Ok(await _vehicletypeservice.AddVehicleType(vehicleType));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function Add Vehicle Type. Id is already exists");
+                    return StatusCode(500, "Add Vehicle type Id is already exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Add Vehicle Type");
+                return StatusCode(500, ex);
+            }
+
+        }
+
+        //Edit VehicleType 
+        [HttpPut("EditVehicleType")]
+        public async Task<IActionResult> EditVehicleType([FromBody] vehicleType vehicleType)
+        {
+            try
+            {
+
+                if (_vehicletypeservice.IsExists(vehicleType.VehicleTypeId))
+                {
+                    return Ok(await _vehicletypeservice.EditVehicleType(vehicleType));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  Vehicle Type. Id is not exists");
+                    return StatusCode(500, " Vehicle type Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Edit Vehicle Type");
+                return StatusCode(500, ex);
+            }
+
+        }
+        //Delete VehicleType 
+        [HttpDelete("DeleteVehicleType/{id}")]
+        public IActionResult DeleteVehicleType([FromRoute] int id)
+        {
+            try
+            {
+
+                if (_vehicletypeservice.IsExists(id))
+                {
+                    return Ok( _vehicletypeservice.DeleteVehicleType(id));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  Vehicle Type. Id is not exists");
+                    return StatusCode(500, " Vehicle type Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function  Vehicle Type");
+                return StatusCode(500, "Data is not deleteable due to constraints");
+            }
+
         }
 
     }

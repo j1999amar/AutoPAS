@@ -1,4 +1,5 @@
-﻿using AutoPASAL.Services;
+﻿using AutoPASAL;
+using AutoPASAL.Services;
 using AutoPASBL;
 using AutoPASBL.Interface;
 using AutoPASDML;
@@ -24,7 +25,12 @@ namespace AutoPASAPI.Controllers
         {
             try
             {
-                return Ok(await _vehicleService.GetAllVehicles());
+                var veh = await _vehicleService.GetAllVehicles();
+                if (veh == null)
+                {
+                    return BadRequest("Returns Null");
+                }
+                return Ok(veh);
             }
             catch (Exception ex)
             {
@@ -38,7 +44,12 @@ namespace AutoPASAPI.Controllers
         {
             try
             {
-                return Ok(await _vehicleService.GetVehicleById(Id));
+                var veh = await _vehicleService.GetVehicleById(Id);
+                if (veh == null)
+                {
+                    return BadRequest("Returns Null");
+                }
+                return Ok(veh);
             }
             catch (Exception ex)
             {
@@ -129,6 +140,27 @@ namespace AutoPASAPI.Controllers
             catch (Exception ex)
             {
                 _logger.LogInformation("Error in function UpdatePolicyById");
+                return StatusCode(500, ex);
+            }
+        }
+
+
+        //Customer Portal Url to be shared to Other team : Get Vehicle Details By PolicyNumber
+        [HttpGet("PolicyVehicle/{policyNumber}")]
+        public async Task<IActionResult> GetVehicleDetailsByPolicyNumber([FromRoute] int policyNumber)
+        {
+            try
+            {
+                var veh = await _vehicleService.GetVehicleDetailsByPolicyNumber(policyNumber);
+                if (veh == null)
+                {
+                    return BadRequest("Returns Null");
+                }
+                return Ok(veh);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function GetVehicleDetailsByPolicyNumber");
                 return StatusCode(500, ex);
             }
         }

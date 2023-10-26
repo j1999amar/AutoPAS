@@ -47,11 +47,13 @@ namespace AutoPASSL.Repository
         public async Task<List<metadatatables>> GetTableList()
         {
             var table = await _context.metadatatables.ToListAsync();
+            if (table == null) return null;
             return table;
         }
         public async Task<List<metadatatables>> GetTableListById(string id)
         {
             var table = await _context.metadatatables.Where(x => x.Id == id).ToListAsync();
+            if (table == null) return null;
             return table;
         }
         public async Task<metadatatables> UpdateTableListById(metadatatables obj, string id)

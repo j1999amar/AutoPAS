@@ -17,5 +17,9 @@ namespace AutoPASAL.IRepository
         Task<List<Brands>> GetBrandByVehicleType(int Id);
         Task<vehicle> AddVehicle(vehicle objVehicle);
         Task<vehicle> UpdateVehicleById(Guid Id, vehicle objVehicle);
+
+
+        //Customer Portal:
+        Task<object> GetVehicleDetailsByPolicyNumber(int policyNumber);
     }
 }

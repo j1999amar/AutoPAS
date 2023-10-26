@@ -21,10 +21,9 @@ namespace AutoPASAL
         private readonly IRT_ODPRepo _rt_odpRepo;
         private readonly IRT_TPCRepo _rt_tpcRepo;
         private readonly IRT_THEFTRepo _rt_theftRepo;
-        private readonly ItestRepo _testRepo;
         //insert1
 
-        public RatingService(IRT_GSTRepo rt_gstRepo, IRT_LLPRepo rt_llpRepo, IRT_NCBRepo rt_ncbRepo, IRT_ODPRepo rt_odpRepo, IRT_THEFTRepo rt_theftRepo, IRT_TPCRepo rt_tpcRepo, ItestRepo testRepo/*insert2*/)
+        public RatingService(IRT_GSTRepo rt_gstRepo, IRT_LLPRepo rt_llpRepo, IRT_NCBRepo rt_ncbRepo, IRT_ODPRepo rt_odpRepo, IRT_THEFTRepo rt_theftRepo, IRT_TPCRepo rt_tpcRepo/*insert2*/)
         {
             _rt_gstRepo = rt_gstRepo;
             _rt_llpRepo = rt_llpRepo;
@@ -32,7 +31,6 @@ namespace AutoPASAL
             _rt_odpRepo = rt_odpRepo;
             _rt_theftRepo = rt_theftRepo;
             _rt_tpcRepo = rt_tpcRepo;
-            _testRepo = testRepo;
             //insert3
         }
         public async Task<object> GetTableByName(string tablename)
@@ -61,10 +59,6 @@ namespace AutoPASAL
             else if (tablename == "RT_TPC")
             {
                 obj = await _rt_tpcRepo.GetRT_TPC();
-            }
-            else if (tablename == "test")
-            {
-                obj = await _testRepo.Gettest();
             }
             //insert4
             return obj;
@@ -96,10 +90,6 @@ namespace AutoPASAL
             {
                 obj = await _rt_tpcRepo.GetRT_TPCById(id);
             }
-            else if (tablename == "test")
-            {
-                obj = await _testRepo.GettestById(id);
-            }
             //insert5
             return obj;
         }
@@ -129,10 +119,6 @@ namespace AutoPASAL
             else if (tablename == "RT_TPC")
             {
                 obj = await _rt_tpcRepo.UpdateRT_TPCById(JsonSerializer.Deserialize<RT_TPC>(body.GetRawText()));
-            }
-            else if (tablename == "test")
-            {
-                obj = await _testRepo.UpdatetestById(JsonSerializer.Deserialize<test>(body.GetRawText()));
             }
             //insert6
             return obj;
@@ -164,10 +150,6 @@ namespace AutoPASAL
             {
                 obj = await _rt_tpcRepo.AddRT_TPCEntry(JsonSerializer.Deserialize<RT_TPC>(body.GetRawText()));
             }
-            else if (tablename == "test")
-            {
-                obj = await _testRepo.AddtestEntry(JsonSerializer.Deserialize<test>(body.GetRawText()));
-            }
             //insert7
             return obj;
         }
@@ -197,10 +179,6 @@ namespace AutoPASAL
             else if (tablename == "RT_TPC")
             {
                 obj = await _rt_tpcRepo.DeleteRT_TPCEntry(id);
-            }
-            else if (tablename == "test")
-            {
-                obj = await _testRepo.DeletetestEntry(id);
             }
             //insert8
             return obj;

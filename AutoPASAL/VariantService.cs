@@ -16,6 +16,24 @@ namespace AutoPASAL
         {
             _variantRepo = variantRepo;
         }
+
+        public Task<variant> AddVariant(variant variant)
+        {
+            return _variantRepo.AddVariant(variant);
+        }
+
+        public bool DeleteVariant(int id)
+        {
+            return _variantRepo.DeleteVariant(id);
+
+        }
+
+        public Task<variant> EditVariant(variant variant)
+        {
+            return _variantRepo.EditVariant(variant);
+
+        }
+
         public Task<List<variant>?> GetAllVariant()
         {
             var vari= _variantRepo.GetAllVariant();
@@ -25,6 +43,11 @@ namespace AutoPASAL
         {
             var vari=_variantRepo.GetVariant(ModelId, FuelId, TransmissionId);
             return vari;
+        }
+
+        public bool IsExists(int id)
+        {
+            return _variantRepo.IsExists(id);
         }
     }
 }

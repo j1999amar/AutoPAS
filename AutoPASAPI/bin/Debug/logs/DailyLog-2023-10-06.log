@@ -1,0 +1,29 @@
+2023-10-06 11:41:47,174 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: https://localhost:59363
+2023-10-06 11:41:47,207 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:59364
+2023-10-06 11:41:47,223 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2023-10-06 11:41:47,227 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2023-10-06 11:41:47,229 [1] INFO Microsoft.Hosting.Lifetime - Content root path: D:\INS\AUTOPAS\AutoPASAPI\autopasapi\AutoPAS\AutoPASAPI\
+2023-10-06 11:42:31,619 [7] WARN Microsoft.EntityFrameworkCore.Query - The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-10-06 11:42:31,634 [7] WARN Microsoft.EntityFrameworkCore.Query - The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-10-06 11:42:32,980 [14] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (336ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`PolicyId`, `p`.`AppUserId`, `p`.`CGST`, `p`.`EligibleForNCB`, `p`.`IGST`, `p`.`PaymentType`, `p`.`PolicyEffectiveDt`, `p`.`PolicyExpirationDt`, `p`.`PolicyNumber`, `p`.`QuoteNumber`, `p`.`RateDt`, `p`.`ReceiptNumber`, `p`.`SGST`, `p`.`Status`, `p`.`Term`, `p`.`TotalFees`, `p`.`TotalPremium`
+FROM `policy` AS `p`
+LIMIT @__p_1 OFFSET @__p_0
+2023-10-06 11:42:33,182 [6] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (23ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `m`.`Name`, `m`.`Description`, `m`.`Fields`
+FROM `master_table_list` AS `m`
+2023-10-06 11:42:33,833 [20] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `policy` AS `p`
+2023-10-06 11:43:57,229 [29] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+2023-10-06 11:44:22,282 [31] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `m`.`Name`, `m`.`Description`, `m`.`Fields`
+FROM `master_table_list` AS `m`
+2023-10-06 11:45:20,018 [37] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `b`.`BodyTypeId`, `b`.`BodyType`, `b`.`Description`, `b`.`IsActive`
+FROM `bodyType` AS `b`
+2023-10-06 11:45:26,755 [32] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `m`.`Name`, `m`.`Description`, `m`.`Fields`
+FROM `master_table_list` AS `m`

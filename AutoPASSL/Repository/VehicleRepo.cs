@@ -102,5 +102,49 @@ namespace AutoPASSL.Repository
             }
             return veh;
         }
+
+        //Customer Portal:
+        public async Task<object> GetVehicleDetailsByPolicyNumber(int policyNumber)
+        {
+            var result = await (from p in _context.policy
+                                join pv in _context.PolicyVehicle on p.PolicyId equals pv.PolicyId
+                                join v in _context.vehicle on pv.VehicleId equals v.VehicleId
+                                join vt in _context.vehicleType on v.VehicleTypeid equals vt.VehicleTypeId
+                                join r in _context.rto on v.RTOId equals r.RTOId
+                                join b in _context.brand on v.BrandId equals b.BrandId
+                                join m in _context.model on v.ModelId equals m.ModelId
+                                join va in _context.variant on v.VariantId equals va.VariantId
+                                join bt in _context.bodyType on v.BodyTypeId equals bt.BodyTypeId
+                                join ft in _context.fueltype on v.FuelTypeId equals ft.FuelTypeId
+                                join tt in _context.transmissiontype on v.TransmissionTypeId equals tt.TransmissionTypeId
+                                where p.PolicyNumber == policyNumber
+                                select new
+                                {
+                                    //p, pv,v,
+                                    p.PolicyNumber,
+                                    vt.VehicleType,
+                                    r.RTOName,
+                                    r.City,
+                                    r.State,
+                                    v.RegistrationNumber,
+                                    v.DateOfPurchase,
+                                    b.Brand,
+                                    m.ModelName,
+                                    va.Variant,
+                                    bt.BodyType,
+                                    ft.FuelType,
+                                    tt.TransmissionType,
+                                    v.Color,
+                                    v.ChasisNumber,
+                                    v.EngineNumber,
+                                    v.CubicCapacity,
+                                    v.SeatingCapacity,
+                                    v.YearOfManufacture,
+                                    v.IDV,
+                                    v.ExShowroomPrice,
+                                }).ToListAsync();
+            return result;
+
+        }
     }
 }

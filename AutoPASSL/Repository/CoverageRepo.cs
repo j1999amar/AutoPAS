@@ -11,6 +11,7 @@ using AutoPASAL.IRepository;
 using AutoPASAL.DTO_Model;
 using AutoPASAL;
 using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AutoPASSL.Repository
 {
@@ -104,6 +105,33 @@ namespace AutoPASSL.Repository
                 RT_THEFT_Factor = rt_theft.factor,
                 GST_Factor = rt_gst.factor,
             };
+        }
+
+        public async Task<coverages> AddCoverages(coverages coverages)
+        {
+            await _context.coverages.AddAsync(coverages);
+            var coveragesIsAdded=await _context.SaveChangesAsync();
+            return coveragesIsAdded > 0 ? coverages : null;
+        }
+
+        public bool IsExists(int id)
+        {
+            return _context.coverages.Any(x=>x.CoverageId == id);
+        }
+
+        public async Task<coverages> EditCoverage(coverages coverages)
+        {
+            _context.coverages.Entry(coverages).State = EntityState.Modified;
+            var change = await _context.SaveChangesAsync();
+            return change > 0 ? coverages : null;
+        }
+
+        public bool DeleteCoverage(int id)
+        {
+            var coverages = _context.coverages.Find(id);
+            _context.coverages.Remove(coverages);
+            var change =  _context.SaveChanges();
+            return change > 0 ? true : false;
         }
     }
 }

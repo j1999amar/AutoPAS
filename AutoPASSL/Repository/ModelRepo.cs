@@ -1,6 +1,7 @@
 ﻿using AutoPASAL.IRepository;
 using AutoPASDML;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,42 @@ namespace AutoPASSL.Repository
             model = await _context.model.ToListAsync();
             if (model == null) return null;
             return model;
+        }
+
+        public async Task<model> AddModels(model models)
+        {
+            await _context.model.AddAsync(models);
+            var modelIsAdded=await _context.SaveChangesAsync();
+            return modelIsAdded>0? models : null;
+        }
+
+        public bool IsExists(int id)
+        {
+            return _context.model.Any(x=>x.ModelId == id);
+        }
+
+        public bool brandIdIsExists(int id)
+        {
+            return _context.brand.Any(x => x.BrandId == id);
+
+        }
+
+        public async Task<model> EditModels(model models)
+        {
+            _context.model.Entry(models).State = EntityState.Modified;
+            var change = await _context.SaveChangesAsync();
+            return change > 0 ? models : null;
+        }
+
+        public bool DeleteModels(int id)
+        {
+                var models = _context.model.Find(id);
+                _context.model.Remove(models);
+                var change = _context.SaveChanges();
+                return change > 0 ? true : false;
+        
+          
+            
         }
     }
 }

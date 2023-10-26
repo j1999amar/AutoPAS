@@ -2,6 +2,8 @@
 using AutoPASAL.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AutoPASAL;
+using AutoPASDML;
 
 namespace AutoPASAPI.Controllers
 {
@@ -91,5 +93,79 @@ namespace AutoPASAPI.Controllers
             }
         }
 
+        //Add RTO 
+        [HttpPost("AddRTO")]
+        public async Task<IActionResult> AddRTO([FromBody] rto rto)
+        {
+            try
+            {
+
+                if (!_rtoService.IsExists(rto.RTOId))
+                {
+                    return Ok(await _rtoService.AddRTO(rto));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function Add RTO Id is already exists");
+                    return StatusCode(500, "Add RTO Id is already exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Add RTO");
+                return StatusCode(500, ex);
+            }
+
+        }
+
+        //Edit RTO 
+        [HttpPut("EditRTO")]
+        public async Task<IActionResult> EditRTO([FromBody] rto rto)
+        {
+            try
+            {
+
+                if (_rtoService.IsExists(rto.RTOId))
+                {
+                    return Ok(await _rtoService.EditRTO(rto));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  RTO Id is not exists");
+                    return StatusCode(500, " RTO Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Edit RTO");
+                return StatusCode(500, ex);
+            }
+
+        }
+
+        //Delete RTO 
+        [HttpDelete("DeleteRTO/{id}")]
+        public IActionResult DeleteRTO([FromRoute] int id)
+        {
+            try
+            {
+
+                if (_rtoService.IsExists(id))
+                {
+                    return Ok( _rtoService.DeleteRTO(id));
+                }
+                else
+                {
+                    _logger.LogInformation("Error in function  RTO Id is not exists");
+                    return StatusCode(500, " RTO Id is not exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error in function Edit RTO");
+                return StatusCode(500, ex);
+            }
+
+        }
     }
 }

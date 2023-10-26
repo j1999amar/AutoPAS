@@ -14,5 +14,9 @@ namespace AutoPASAL.IRepository
         Task<List<rto>?> GetRTONameByCity(string city);
         Task<List<rto>?> GetAllRTO(Guid Id);
         Task<List<rto>?> GetCity(Guid Id);
+        Task<rto> AddRTO(rto rto);
+        Task<rto> EditRTO(rto rto);
+        public bool DeleteRTO(int id);
+        public bool IsExists(int id);
     }
 }
